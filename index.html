@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he">
+<head>
+  <meta charset="utf-8" />
+  <title>נטליה – הבוט המדבר</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body style="font-family:Arial; padding:24px; direction:rtl; background:#f7f7f7;">
+
+  <h1>🎤 נטליה – דברו איתי</h1>
+  <p>לחצו על המיקרופון ודברו איתי בלייב.</p>
+
+  <!-- אינדיקציה שהדמות מדברת -->
+  <div style="display:flex;align-items:center;gap:12px;margin:16px 0;">
+    <div id="pulse" style="width:16px;height:16px;border-radius:999px;background:#999;"></div>
+    <div id="status">מוכנה לשיחה</div>
+  </div>
+
+  <!-- כאן נדביק את הקוד של Retell בהמשך -->
+  <div id="retell-container"></div>
+
+  <script>
+    function setSpeaking(isSpeaking){
+      const p = document.getElementById('pulse');
+      const s = document.getElementById('status');
+      if(isSpeaking){
+        p.style.background = "#16a34a";
+        p.style.boxShadow = "0 0 0 12px rgba(22,163,74,.3)";
+        s.textContent = "נטליה מדברת…";
+      } else {
+        p.style.background = "#999";
+        p.style.boxShadow = "none";
+        s.textContent = "מקשיבה…";
+      }
+    }
+
+    function bindToAudio(a){
+      if(!a) return false;
+      a.addEventListener('playing', () => setSpeaking(true));
+      a.addEventListener('pause', () => setSpeaking(false));
+      a.addEventListener('ended', () => setSpeaking(false));
+      return true;
+    }
+
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries++;
+      const audio = document.querySelector('audio');
+      if(bindToAudio(audio)) clearInterval(timer);
+      if(tries > 40) clearInterval(timer);
+    }, 500);
+  </script>
+
+</body>
+</html>
