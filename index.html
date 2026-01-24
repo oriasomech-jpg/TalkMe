@@ -9,42 +9,44 @@
     :root{
       --bg:#070707;
       --bg2:#0b0b0b;
-      --panel:rgba(255,255,255,.06);
-      --panel2:rgba(255,255,255,.035);
+      --panel:rgba(255,255,255,.07);
+      --panel2:rgba(255,255,255,.04);
       --line:rgba(255,255,255,.12);
       --text:#ffffff;
       --muted:rgba(255,255,255,.72);
       --green:#00ff88;
       --green2:#00cc6e;
-      --radius:16px;
-      --shadow: 0 10px 40px rgba(0,0,0,.55);
+      --radius:18px;
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --shadow2: 0 10px 26px rgba(0,0,0,.35);
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
       background:
-        radial-gradient(900px 360px at 20% -10%, rgba(0,255,136,.18), transparent 60%),
-        radial-gradient(900px 360px at 90% 10%, rgba(0,255,136,.10), transparent 55%),
+        radial-gradient(1000px 420px at 15% -10%, rgba(0,255,136,.20), transparent 60%),
+        radial-gradient(1000px 420px at 90% 10%, rgba(0,255,136,.12), transparent 55%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
       overflow-x:hidden;
     }
 
     .container{
-      max-width:1100px;
+      max-width:1120px;
       margin:0 auto;
       padding:0 16px;
     }
 
-    /* Top bar (like the first) */
+    /* Top bar */
     .topbar{
       position:sticky;
       top:0;
       z-index:50;
       background: rgba(0,0,0,.72);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
     .topbarInner{
@@ -63,22 +65,23 @@
       min-width:0;
     }
     .brand img{
-      height:34px;
+      height:36px;
       width:auto;
       display:block;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.55));
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.65));
       animation: glowPulse 2.8s ease-in-out infinite;
+      transform: translateZ(0);
     }
     @keyframes glowPulse {
-      0%   { filter: drop-shadow(0 0 4px rgba(0,255,136,.22)); opacity: .92; }
-      50%  { filter: drop-shadow(0 0 14px rgba(0,255,136,.58)); opacity: 1; }
-      100% { filter: drop-shadow(0 0 4px rgba(0,255,136,.22)); opacity: .92; }
+      0%   { filter: drop-shadow(0 0 5px rgba(0,255,136,.20)); opacity: .92; }
+      50%  { filter: drop-shadow(0 0 16px rgba(0,255,136,.60)); opacity: 1; }
+      100% { filter: drop-shadow(0 0 5px rgba(0,255,136,.20)); opacity: .92; }
     }
 
     .brandText{
       display:flex;
       flex-direction:column;
-      line-height:1.2;
+      line-height:1.15;
       min-width:0;
     }
     .brandText b{
@@ -86,6 +89,7 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      font-size:14px;
     }
     .brandText span{
       font-size:12px;
@@ -110,33 +114,56 @@
       border-radius:999px;
       font-size:13px;
       color:var(--muted);
+      position:relative;
+      overflow:hidden;
     }
     .chip b{color:var(--green)}
+    .chip:after{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(500px 120px at 20% 0%, rgba(0,255,136,.10), transparent 60%);
+      pointer-events:none;
+      opacity:.8;
+    }
 
-    /* single main button */
+    /* Single main button (nicer) */
     .btn{
+      position:relative;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding: 11px 14px;
-      border-radius: 12px;
+      padding: 12px 16px;
+      border-radius: 14px;
       text-decoration:none;
-      font-weight:800;
+      font-weight:900;
       border:1px solid transparent;
       transition:.2s;
       user-select:none;
       white-space:nowrap;
-      background: var(--green);
+      background: linear-gradient(180deg, var(--green), var(--green2));
       color:#000;
-      box-shadow: 0 8px 24px rgba(0,255,136,.18);
+      box-shadow: 0 10px 26px rgba(0,255,136,.20);
+      overflow:hidden;
     }
-    .btn:hover{ background: var(--green2); transform: translateY(-1px); }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:before{
+      content:"";
+      position:absolute;
+      width:160px;
+      height:160px;
+      left:-80px;
+      top:-80px;
+      background: radial-gradient(circle, rgba(255,255,255,.35), transparent 60%);
+      transform: translateX(-40px);
+      transition: .35s;
+      opacity:.25;
+    }
+    .btn:hover:before{ transform: translateX(220px); opacity:.35; }
 
     /* Hero */
-    .hero{
-      padding: 44px 0 28px;
-    }
+    .hero{ padding: 44px 0 28px; }
     .heroGrid{
       display:grid;
       grid-template-columns: 1.35fr .65fr;
@@ -149,22 +176,28 @@
     }
 
     .heroCard{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 28px;
+      padding: 30px;
       position:relative;
       overflow:hidden;
+      transform: translateY(10px);
+      opacity:0;
+      animation: riseIn .55s ease-out forwards;
     }
     .heroCard:before{
       content:"";
       position:absolute;
       inset:-2px;
-      background: radial-gradient(600px 220px at 30% 0%, rgba(0,255,136,.20), transparent 60%);
+      background: radial-gradient(700px 260px at 28% 0%, rgba(0,255,136,.22), transparent 60%);
       pointer-events:none;
     }
     .heroContent{position:relative}
+    @keyframes riseIn{
+      to{ transform: translateY(0); opacity:1; }
+    }
 
     .kicker{
       display:inline-flex;
@@ -182,11 +215,12 @@
       background: var(--green);
       box-shadow: 0 0 0 6px rgba(0,255,136,.12);
     }
+
     h1{
       margin:14px 0 10px;
-      font-size: 40px;
+      font-size: 42px;
       letter-spacing:.2px;
-      line-height:1.15;
+      line-height:1.12;
     }
     @media (max-width:520px){ h1{font-size:32px} }
 
@@ -194,8 +228,13 @@
       margin:0;
       color:var(--muted);
       font-size:18px;
-      line-height:1.7;
+      line-height:1.75;
       max-width: 62ch;
+    }
+
+    .accent{
+      color: var(--green);
+      font-weight:900;
     }
 
     .sideCard{
@@ -208,9 +247,12 @@
       flex-direction:column;
       justify-content:space-between;
       min-height: 100%;
+      transform: translateY(10px);
+      opacity:0;
+      animation: riseIn .55s ease-out .10s forwards;
     }
     .sideCard h3{margin:0 0 10px; font-size:18px}
-    .sideCard p{margin:0; color:var(--muted); line-height:1.6}
+    .sideCard p{margin:0; color:var(--muted); line-height:1.65}
     .stats{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -227,9 +269,7 @@
     .stat span{color:var(--muted); font-size:12px}
 
     /* Products */
-    .section{
-      padding: 6px 0 44px;
-    }
+    .section{ padding: 6px 0 44px; }
     .sectionHead{
       display:flex;
       align-items:flex-end;
@@ -238,16 +278,8 @@
       margin-bottom: 14px;
       flex-wrap:wrap;
     }
-    .sectionHead h2{
-      margin:0;
-      font-size:22px;
-      letter-spacing:.2px;
-    }
-    .sectionHead p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
+    .sectionHead h2{ margin:0; font-size:22px; letter-spacing:.2px; }
+    .sectionHead p{ margin:0; color:var(--muted); font-size:14px; }
 
     .products{
       display:grid;
@@ -258,21 +290,58 @@
     @media (max-width: 520px){ .products{grid-template-columns: 1fr;} }
 
     .product{
+      position:relative;
       background: rgba(255,255,255,.04);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 16px;
       transition:.2s;
-      box-shadow: 0 8px 24px rgba(0,0,0,.35);
-      min-height: 130px;
+      box-shadow: var(--shadow2);
+      min-height: 132px;
       cursor: pointer;
+      overflow:hidden;
+      opacity:0;
+      transform: translateY(8px);
+      animation: cardIn .45s ease-out forwards;
     }
-    .product:hover{
-      border-color: rgba(0,255,136,.55);
-      transform: translateY(-3px) scale(1.01);
+    .product:nth-child(1){animation-delay:.05s}
+    .product:nth-child(2){animation-delay:.08s}
+    .product:nth-child(3){animation-delay:.11s}
+    .product:nth-child(4){animation-delay:.14s}
+    .product:nth-child(5){animation-delay:.17s}
+    .product:nth-child(6){animation-delay:.20s}
+    .product:nth-child(7){animation-delay:.23s}
+    .product:nth-child(8){animation-delay:.26s}
+
+    @keyframes cardIn{ to{opacity:1; transform: translateY(0);} }
+
+    .product:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(500px 160px at 10% 0%, rgba(0,255,136,.13), transparent 60%);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .product:after{
+      content:"";
+      position:absolute;
+      width:160px; height:160px;
+      right:-80px; top:-80px;
+      background: radial-gradient(circle, rgba(255,255,255,.25), transparent 60%);
+      opacity:.12;
+      pointer-events:none;
+      transition:.25s;
     }
 
+    .product:hover{
+      border-color: rgba(0,255,136,.62);
+      transform: translateY(-3px) scale(1.01);
+    }
+    .product:hover:after{ opacity:.20; }
+
     .pTop{
+      position:relative;
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
@@ -291,6 +360,7 @@
       white-space:nowrap;
     }
     .pMeta{
+      position:relative;
       margin:0;
       color: var(--muted);
       font-size: 12px;
@@ -322,6 +392,11 @@
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
+    }
+
+    /* Accessibility / reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important;}
     }
   </style>
 </head>
@@ -357,10 +432,10 @@
         <div class="heroCard">
           <div class="heroContent">
             <div class="kicker"><span class="dot"></span> פתוחים עכשיו • שירות מהיר</div>
-            <h1>אלכוהול עד הדלת —<br>מחירים שלא תמצא יותר זול</h1>
+            <h1>אלכוהול עד הדלת —<br><span class="accent">הכי זול בקריות</span></h1>
             <p class="lead">
               מזמינים בקלות דרך וואטסאפ ומקבלים משלוח מהיר בקרית מוצקין והקריות.
-              בלי עומס, בלי תפריטים מסובכים.
+              פשוט, נקי, ומקצועי.
             </p>
           </div>
         </div>
@@ -368,7 +443,7 @@
         <div class="sideCard">
           <div>
             <h3>מה תקבלו?</h3>
-            <p>מחיר חד, שירות אנושי, תגובה מהירה — וזהו.</p>
+            <p>מחיר חד, שירות אנושי, תגובה מהירה — בלי חפירות ובלי תפריטים.</p>
 
             <div class="stats">
               <div class="stat">
@@ -401,7 +476,7 @@
       <div class="sectionHead">
         <div>
           <h2>מוצרים פופולריים</h2>
-          <p>לחץ על מוצר כדי לפתוח הזמנה בוואטסאפ</p>
+          <p>לחץ על מוצר כדי לפתוח הזמנה בוואטסאפ (עם טקסט מוכן)</p>
         </div>
       </div>
 
@@ -503,13 +578,11 @@
       window.open(url, "_blank");
     }
 
-    // כפתור וואטסאפ למעלה – פותח הודעה כללית
+    // כפתור וואטסאפ למעלה – הודעה כללית
     const waTop = document.getElementById("waTop");
-    const generalText =
-      "שלום, אני רוצה לבצע הזמנה. אפשר מחירון מעודכן וזמן משלוח?";
+    const generalText = "שלום, אני רוצה לבצע הזמנה. אפשר מחירון מעודכן וזמן משלוח?";
     waTop.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(generalText)}`;
 
-    // שנה שנה אוטומטית בפוטר
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 
