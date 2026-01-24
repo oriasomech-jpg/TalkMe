@@ -28,29 +28,20 @@ body{
   color:var(--text);
 }
 
+.container{max-width:1120px;margin:auto;padding:0 16px}
+
 /* TOPBAR */
 .topbar{
-  position:sticky;
-  top:0;
+  position:sticky;top:0;z-index:20;
   background:rgba(0,0,0,.7);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
 .topbarInner{
-  max-width:1100px;
-  margin:auto;
-  padding:14px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:14px 0;flex-wrap:wrap;
 }
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+.brand{display:flex;align-items:center;gap:10px}
 .brand img{
   height:36px;
   animation:glow 3s ease-in-out infinite;
@@ -77,52 +68,53 @@ body{
 
 /* HERO */
 .hero{
-  max-width:1100px;
-  margin:auto;
-  padding:40px 16px;
+  padding:36px 0;
+}
+.heroGrid{
   display:grid;
   grid-template-columns:1.3fr .7fr;
   gap:18px;
 }
-@media(max-width:900px){.hero{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .heroGrid{grid-template-columns:1fr}
+}
 
 .card{
   background:rgba(255,255,255,.05);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:28px;
+  padding:26px;
   box-shadow:var(--shadow);
 }
-h1{margin:0 0 10px;font-size:38px}
+h1{margin:0 0 10px;font-size:36px}
 .lead{color:var(--muted);line-height:1.7}
 
 .sideCard h3{margin-top:0}
 
-/* PROMO */
+/* XL PROMO */
 .promo{
-  margin-top:14px;
+  margin-top:16px;
   border:1px solid rgba(0,255,136,.4);
   border-radius:14px;
-  padding:12px;
-  cursor:pointer;
+  padding:14px;
   background:linear-gradient(180deg,rgba(0,255,136,.15),rgba(255,255,255,.02));
-  transition:.2s;
 }
-.promo:hover{transform:scale(1.02)}
-.promoTitle{font-weight:900}
+.promoTitle{font-weight:900;font-size:16px}
 .promoText{font-size:13px;color:var(--muted)}
 
 /* PRODUCTS */
 .products{
-  max-width:1100px;
-  margin:auto;
-  padding:0 16px 40px;
+  padding:0 0 40px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:14px;
 }
-@media(max-width:900px){.products{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.products{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .products{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .products{grid-template-columns:1fr}
+}
 
 .product{
   background:rgba(255,255,255,.04);
@@ -147,29 +139,13 @@ footer{
   font-size:13px;
   color:var(--muted);
 }
-
-/* Toast */
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,.7);
-  border:1px solid rgba(255,255,255,.15);
-  padding:10px 14px;
-  border-radius:999px;
-  font-size:13px;
-  opacity:0;
-  transition:.3s;
-}
-.toast.show{opacity:1}
 </style>
 </head>
 
 <body>
 
 <div class="topbar">
-  <div class="topbarInner">
+  <div class="container topbarInner">
     <div class="brand">
       <img src="logo,png.png" alt="לוגו">
       <div class="brandText">
@@ -182,36 +158,40 @@ footer{
 </div>
 
 <section class="hero">
-  <div class="card">
-    <h1>אלכוהול עד הדלת</h1>
-    <p class="lead">המחירים הכי זולים בקריות · משלוח מהיר · הזמנה פשוטה בוואטסאפ</p>
-  </div>
+  <div class="container heroGrid">
+    <div class="card">
+      <h1>אלכוהול עד הדלת</h1>
+      <p class="lead">המחירים הכי זולים בקריות · משלוח מהיר · הזמנה פשוטה בוואטסאפ</p>
+    </div>
 
-  <div class="card sideCard">
-    <h3>מה תקבלו?</h3>
-    <p class="lead">מחיר חד, שירות מהיר וחוויית הזמנה פשוטה.</p>
+    <div class="card sideCard">
+      <h3>מה תקבלו?</h3>
+      <p class="lead">מחיר חד, שירות מהיר וחוויית הזמנה פשוטה.</p>
 
-    <!-- PROMO XL -->
-    <div class="promo" onclick="orderXL()">
-      <div class="promoTitle">🎉 קומבינציה XL למסיבה</div>
-      <div class="promoText">חבילה גדולה + משלוח מהיר — פרטים בוואטסאפ</div>
+      <div class="promo">
+        <div class="promoTitle">🎉 קומבינציה XL למסיבה</div>
+        <div class="promoText">חבילה גדולה + משלוח מהיר — פרטים בוואטסאפ</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="products">
+<section class="container products">
   <div class="product" onclick="order('גולדסטאר 500 מ״ל','₪12')">
     <div class="pTop"><b>גולדסטאר 500 מ״ל</b><span class="pPrice">₪12</span></div>
     <div class="pMeta">קר במלאי</div>
   </div>
+
   <div class="product" onclick="order('היינקן 330 מ״ל','₪10')">
     <div class="pTop"><b>היינקן 330 מ״ל</b><span class="pPrice">₪10</span></div>
     <div class="pMeta">פחית</div>
   </div>
-  <div class="product" onclick="order('אבסולוט וודקה 700 מ״ל','₪89')">
+
+  <div class="product" onclick="order('אבסולוט וודקה','₪89')">
     <div class="pTop"><b>אבסולוט וודקה</b><span class="pPrice">₪89</span></div>
-    <div class="pMeta">פופולרי</div>
+    <div class="pMeta">700 מ״ל</div>
   </div>
+
   <div class="product" onclick="order('ג׳וני ווקר רד','₪99')">
     <div class="pTop"><b>ג׳וני ווקר רד</b><span class="pPrice">₪99</span></div>
     <div class="pMeta">וויסקי</div>
@@ -222,30 +202,15 @@ footer{
 © <span id="year"></span> משהו משהו · קרית מוצקין
 </footer>
 
-<div class="toast" id="toast">פותח וואטסאפ להזמנה…</div>
-
 <script>
 /* 🔴 שנה כאן למספר שלך */
-const PHONE = "9725XXXXXXXXX"; // לדוגמה: 972501234567
+const PHONE = "9725XXXXXXXXX";
 
 const waTop = document.getElementById("waTop");
 waTop.href = `https://wa.me/${PHONE}?text=${encodeURIComponent("שלום, אני רוצה להזמין אלכוהול 🙂")}`;
 
-const toast = document.getElementById("toast");
-function showToast(){
-  toast.classList.add("show");
-  setTimeout(()=>toast.classList.remove("show"),1200);
-}
-
 function order(name,price){
-  showToast();
-  const text = `שלום, אני רוצה להזמין:\n${name} (${price})`;
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`,"_blank");
-}
-
-function orderXL(){
-  showToast();
-  const text = "שלום, אני רוצה פרטים על קומבינציה XL למסיבה 🎉";
+  const text = `שלום, אני רוצה להזמין: ${name} (${price})`;
   window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`,"_blank");
 }
 
@@ -254,4 +219,3 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 </body>
 </html>
-
