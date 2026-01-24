@@ -1,391 +1,209 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>משהו משהו | קיוסק</title>
-  <meta name="description" content="הזמנת משקאות בקלות – איסוף מהיר או משלוח. משהו משהו קיוסק." />
+  <title>משהו משהו | משלוחי אלכוהול קרית מוצקין</title>
 
   <style>
     :root{
-      --bg:#070a08;
-      --panel: rgba(255,255,255,.06);
-      --line: rgba(255,255,255,.10);
-      --text:#f3fff7;
-      --muted: rgba(243,255,247,.65);
-      --green:#26d07c;      /* ירוק לוגו */
-      --green2:#6dffb1;     /* ירוק בהיר */
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --r: 18px;
-      --r2: 26px;
+      --bg:#0b0b0b;
+      --panel:#111;
+      --panel2:#0f0f0f;
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.75);
+      --line:#222;
+      --green:#00ff88;
+      --green2:#00cc6e;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
     body{
       margin:0;
       font-family: Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 80% 0%, rgba(38,208,124,.16), transparent 60%),
-        radial-gradient(700px 420px at 10% 10%, rgba(109,255,177,.10), transparent 62%),
-        linear-gradient(180deg, #040605 0%, var(--bg) 60%, #040605 100%);
+      background: var(--bg);
+      color: var(--text);
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:980px;margin:0 auto;padding:0 18px}
 
-    /* Top bar */
-    .top{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(7,10,8,.72);
-      border-bottom:1px solid var(--line);
+    /* Header with logo */
+    .header{
+      background:#000;
+      padding: 18px 16px;
+      text-align:center;
+      border-bottom: 2px solid var(--green);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
-    .topRow{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:12px;
+    .logo{
+      max-width: 360px;
+      width: 90%;
+      height: auto;
+      display:block;
+      margin: 0 auto;
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.2px}
-  .logoImg{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  object-fit: contain;
-  padding:4px;
-  background: rgba(0,0,0,.25);
-  border:1px solid rgba(255,255,255,.12);
-}
 
-    }
-    .brand small{display:block; color:var(--muted); font-weight:800; letter-spacing:0; margin-top:2px}
-    .pill{
-      border:1px solid rgba(38,208,124,.35);
-      background: rgba(38,208,124,.10);
-      color: #c8ffe5;
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:900;
-      font-size:12px;
-      white-space:nowrap;
+    /* Layout helpers */
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 16px;
     }
 
     /* Hero */
-    .hero{padding:26px 0 12px}
-    .card{
-      border:1px solid var(--line);
-      background: var(--panel);
-      border-radius: var(--r2);
-      box-shadow: var(--shadow);
-      padding:18px;
+    .hero{
+      padding: 64px 0 42px;
+      text-align:center;
+      background: linear-gradient(180deg, #000, #111);
     }
-    h1{margin:0 0 8px; font-size:28px}
-    .sub{margin:0; color:var(--muted); line-height:1.6}
-    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .btn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      padding:12px 14px;
-      border-radius: 16px;
-      font-weight:1000;
-      cursor:pointer;
-      transition:.2s;
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    .hero h2{
+      font-size: 40px;
+      margin: 0 0 12px;
+      letter-spacing: .3px;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10)}
-    .btn.primary{
-      border:none;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      color:#072012;
-      box-shadow: 0 16px 40px rgba(38,208,124,.22);
+    .hero p{
+      margin: 0 auto;
+      max-width: 720px;
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.6;
     }
 
-    /* Layout */
+    .ctaRow{
+      margin-top: 26px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-block;
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration:none;
+      transition: .25s;
+      border: 1px solid transparent;
+    }
+    .btnPrimary{
+      background: var(--green);
+      color:#000;
+    }
+    .btnPrimary:hover{ background: var(--green2); }
+    .btnGhost{
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line);
+    }
+    .btnGhost:hover{ border-color: var(--green); }
+
+    /* Section title */
+    .section{
+      padding: 44px 0;
+    }
+    .sectionTitle{
+      margin: 0 0 18px;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+    .sectionSub{
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height:1.6;
+    }
+
+    /* Cards grid */
     .grid{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:12px;
-      margin-top:12px;
-      align-items:start;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
     }
-    @media (max-width: 920px){
-      .grid{grid-template-columns:1fr}
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+      .hero h2{ font-size: 34px; }
+    }
+    @media (max-width: 520px){
+      .grid{ grid-template-columns: 1fr; }
+      .hero h2{ font-size: 30px; }
     }
 
-    /* Menu */
-    .sectionTitle{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
-      margin: 0 0 10px;
-    }
-    .sectionTitle b{font-size:16px}
-    .sectionTitle span{color:var(--muted); font-weight:900; font-size:12px}
-
-    .menu{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:10px;
-    }
-    @media (max-width: 520px){ .menu{grid-template-columns:1fr} }
-
-    .item{
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.18);
-      border-radius: var(--r);
-      padding:12px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .item b{display:block; font-size:14px}
-    .item small{display:block; color:var(--muted); margin-top:3px; font-weight:800}
-    .price{font-weight:1000; white-space:nowrap}
-    .qty{
-      display:flex; align-items:center; gap:8px;
-      margin-top:10px;
-    }
-    .qbtn{
-      width:34px; height:34px;
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
       border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      font-weight:1000;
-      cursor:pointer;
+      padding: 22px;
+      transition: .25s;
+      min-height: 130px;
     }
-    .qval{min-width:22px; text-align:center; font-weight:1000}
+    .card:hover{
+      border-color: var(--green);
+      transform: translateY(-4px);
+    }
+    .card h3{
+      margin:0 0 8px;
+      color: var(--green);
+      font-size: 18px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.5;
+      font-size: 15px;
+    }
 
-    /* Order box */
-    .field{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      outline:none;
-      font-size:14px;
-      margin-top:10px;
-    }
-    textarea.field{min-height:90px; resize:vertical}
-    .note{color:var(--muted); font-size:12px; line-height:1.6; margin:10px 0 0}
-    .totRow{
-      display:flex; justify-content:space-between; align-items:center;
-      margin-top:12px;
-      padding-top:12px;
-      border-top:1px solid var(--line);
-      gap:10px;
-    }
-    .totRow b{font-size:16px}
-    .footer{
-      padding:18px 0 40px;
-      color:var(--muted);
+    /* Delivery strip */
+    .delivery{
+      background:#000;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 34px 0;
       text-align:center;
-      font-size:12px;
     }
-    .age{
-      display:flex; gap:10px; align-items:flex-start;
-      margin-top:10px;
-      color:rgba(243,255,247,.75);
-      font-weight:900;
-      font-size:12px;
+    .delivery h3{
+      margin:0 0 10px;
+      font-size: 22px;
     }
-    .age input{transform: scale(1.2); margin-top:2px}
+    .pillRow{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .pill{
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: var(--muted);
+      font-size: 14px;
+      background: var(--panel2);
+    }
+    .pill b{ color: var(--green); }
+
+    /* Footer */
+    footer{
+      background:#000;
+      padding: 20px 16px;
+      text-align:center;
+      color: rgba(255,255,255,.6);
+      font-size: 13px;
+    }
   </style>
 </head>
 
 <body>
-<img class="logoImg" src="Gemini_Generated_Image_j93ojn93ojn93o.png" alt="לוגו הקיוסק" />
-    <div class="wrap">
-      <div class="topRow">
-        <div class="brand">
-          <img class="logoImg" src="logo.png" alt="לוגו משהו משהו" />
 
-          <div>
-            <div>משהו משהו</div>
-            <small>קיוסק • הזמנה מהירה</small>
-          </div>
-        </div>
-        <div class="pill">איסוף / משלוח</div>
-      </div>
-    </div>
-  </div>
+  <!-- TOP LOGO -->
+  <header class="header">
+    <img src="logo.png" class="logo" alt="משהו משהו לוגו">
+  </header>
 
-  <div class="wrap hero">
-    <div class="card">
-      <h1>מזמינים בקלות. מגיעים מהר.</h1>
-      <p class="sub">בחר מהתפריט, הוסף כמות, כתוב כתובת/הערות — ולחץ “שלח הזמנה בוואטסאפ”.</p>
-      <div class="row">
-        <button class="btn primary" onclick="document.getElementById('orderBox').scrollIntoView({behavior:'smooth'})">🛒 להזמנה</button>
-        <a class="btn" href="tel:+9725XXXXXXXX">📞 להתקשר</a>
-      </div>
-    </div>
-
-    <div class="grid">
-      <!-- MENU -->
-      <div class="card">
-        <div class="sectionTitle">
-          <b>תפריט אלכוהול</b>
-          <span>מחירים לדוגמה — תשנה מה שתרצה</span>
-        </div>
-
-        <div class="menu" id="menu"></div>
-
-        <p class="note">* אלכוהול מגיל 18+. ייתכן שתידרש הצגת ת״ז בעת מסירה/איסוף.</p>
-      </div>
-
-      <!-- ORDER -->
-      <div class="card" id="orderBox">
-        <div class="sectionTitle">
-          <b>פרטי הזמנה</b>
-          <span>פחות לחצנים, הכי פשוט</span>
-        </div>
-
-        <input class="field" id="fullName" placeholder="שם מלא" />
-        <input class="field" id="phone" placeholder="טלפון" />
-        <select class="field" id="fulfillment">
-          <option value="איסוף מהקיוסק">איסוף מהקיוסק</option>
-          <option value="משלוח">משלוח</option>
-        </select>
-        <input class="field" id="address" placeholder="כתובת למשלוח (אם משלוח)" />
-        <textarea class="field" id="notes" placeholder="הערות (קומה/קוד/קרח/כוסות וכו׳)"></textarea>
-
-        <label class="age">
-          <input type="checkbox" id="ageConfirm" />
-          אני מאשר/ת שאני מעל גיל 18 ורשאי/ת לרכוש אלכוהול.
-        </label>
-
-        <div class="totRow">
-          <div>סה״כ</div>
-          <b>₪ <span id="total">0</span></b>
-        </div>
-
-        <button class="btn primary" style="width:100%; margin-top:12px;" onclick="sendWhatsApp()">
-          💬 שלח הזמנה בוואטסאפ
-        </button>
-
-        <p class="note">
-          שעות פעילות לדוגמה: א׳–ה׳ 10:00–02:00, ו׳ 10:00–04:00, שבת 12:00–04:00<br/>
-          כתובת לדוגמה: רחוב ___, עיר ___
-        </p>
-      </div>
-    </div>
-
-    <div class="footer">
-      © <span id="year"></span> משהו משהו • קיוסק
-    </div>
-  </div>
-
-  <script>
-    // ✅ החלף למספר הוואטסאפ שלך בפורמט בינלאומי: 9725XXXXXXXX
-    const WHATSAPP_NUMBER = "9725XXXXXXXX";
-
-    // מוצרים לדוגמה (תוכל לערוך/להוסיף)
-    const ITEMS = [
-      { id: 1, name: "וודקה 700ml", price: 89 },
-      { id: 2, name: "וויסקי 700ml", price: 149 },
-      { id: 3, name: "ג׳ין 700ml", price: 139 },
-      { id: 4, name: "טקילה 700ml", price: 159 },
-      { id: 5, name: "בירה שישייה", price: 42 },
-      { id: 6, name: "יין אדום", price: 59 },
-    ];
-
-    const state = {
-      qty: Object.fromEntries(ITEMS.map(i => [i.id, 0]))
-    };
-
-    const menuEl = document.getElementById("menu");
-    const totalEl = document.getElementById("total");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    function money(n){ return Number(n).toFixed(0); }
-
-    function render(){
-      menuEl.innerHTML = ITEMS.map(i => `
-        <div class="item">
-          <div>
-            <b>${i.name}</b>
-            <small>מחיר: ₪ ${money(i.price)}</small>
-            <div class="qty">
-              <button class="qbtn" onclick="changeQty(${i.id}, -1)">−</button>
-              <div class="qval" id="q-${i.id}">${state.qty[i.id]}</div>
-              <button class="qbtn" onclick="changeQty(${i.id}, 1)">+</button>
-            </div>
-          </div>
-          <div class="price">₪ ${money(i.price)}</div>
-        </div>
-      `).join("");
-
-      totalEl.textContent = money(calcTotal());
-    }
-
-    function changeQty(id, delta){
-      state.qty[id] = Math.max(0, (state.qty[id] || 0) + delta);
-      const q = document.getElementById(`q-${id}`);
-      if(q) q.textContent = state.qty[id];
-      totalEl.textContent = money(calcTotal());
-    }
-
-    function calcTotal(){
-      let sum = 0;
-      for(const i of ITEMS){
-        sum += i.price * (state.qty[i.id] || 0);
-      }
-      return sum;
-    }
-
-    function buildOrderLines(){
-      const lines = [];
-      for(const i of ITEMS){
-        const q = state.qty[i.id] || 0;
-        if(q > 0){
-          lines.push(`• ${i.name} × ${q} = ₪ ${money(i.price * q)}`);
-        }
-      }
-      return lines;
-    }
-
-    function sendWhatsApp(){
-      const ageOk = document.getElementById("ageConfirm").checked;
-      if(!ageOk){
-        alert("כדי לבצע הזמנה של אלכוהול צריך לאשר גיל 18+.");
-        return;
-      }
-
-      const lines = buildOrderLines();
-      if(lines.length === 0){
-        alert("בחר לפחות פריט אחד להזמנה 🙂");
-        return;
-      }
-
-      const name = document.getElementById("fullName").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const fulfillment = document.getElementById("fulfillment").value;
-      const address = document.getElementById("address").value.trim();
-      const notes = document.getElementById("notes").value.trim();
-      const total = calcTotal();
-
-      const msg =
-`היי, אני רוצה להזמין מהאתר (משהו משהו):
-
-${lines.join("\n")}
-
-סה״כ: ₪ ${money(total)}
-
-שם: ${name || "-"}
-טלפון: ${phone || "-"}
-סוג: ${fulfillment}
-כתובת: ${address || "-"}
-
-הערות: ${notes || "-"}
-
-* מאשר/ת גיל 18+`;
-
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-      window.open(url, "_blank");
-    }
-
-    render();
-  </script>
-</body>
-</html>
-
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h2>משלוחי אלכוהול עד הבית 🍾</h2>
+      <p>
+        קנייה מהירה ונקייה בלי עומס כפתורים. וויסקי | וודקה | יין | בירה —
+        משלוחים בקרית מוצקין והקריות.
+     
