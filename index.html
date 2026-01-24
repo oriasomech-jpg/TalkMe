@@ -281,6 +281,76 @@ footer{
   *{animation:none !important; transition:none !important;}
   .toast{display:none;}
 }
+
+/* ===========================
+   ✅ Added: 18+ notice + Open Now button
+   =========================== */
+
+/* 18+ Notice */
+.ageNotice{
+  position:sticky;
+  top:64px; /* מתחת לטופבר */
+  z-index:49;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.ageNoticeInner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 0;
+  color:rgba(255,255,255,.82);
+  font-size:13px;
+  line-height:1.4;
+}
+.ageNoticeInner b{color:var(--green)}
+.ageClose{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.86);
+  border-radius:999px;
+  padding:8px 10px;
+  cursor:pointer;
+  transition:.2s;
+  font-weight:900;
+}
+.ageClose:hover{transform:translateY(-1px); border-color:rgba(0,255,136,.45)}
+.ageNotice[hidden]{display:none}
+
+/* Open Now button (status) */
+.statusBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:900;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.92);
+  transition:.2s;
+  box-shadow: 0 10px 26px rgba(0,0,0,.25);
+}
+.statusBtn:hover{transform:translateY(-1px); border-color:rgba(0,255,136,.55)}
+.statusDot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 6px rgba(0,255,136,.10);
+  flex:0 0 auto;
+}
+.statusBtn.closed .statusDot{
+  background:rgba(255,255,255,.35);
+  box-shadow:none;
+}
+.statusBtn small{
+  font-size:12px;
+  color:rgba(255,255,255,.72);
+  font-weight:800;
+}
 </style>
 </head>
 
@@ -296,7 +366,27 @@ footer{
           <span>קיוסק משלוחי אלכוהול • קריות</span>
         </div>
       </div>
+
+      <!-- ✅ Added: Open Now button ליד הלוגו -->
+      <a class="statusBtn" id="openNowBtn" href="#" role="button" aria-label="סטטוס פתוח עכשיו">
+        <span class="statusDot" aria-hidden="true"></span>
+        <span>
+          <span id="openNowText">פתוח עכשיו</span><br>
+          <small id="openNowSub">לחצו להזמנה</small>
+        </span>
+      </a>
+
       <a class="btn" id="waTop" href="#" target="_blank" rel="noopener">להזמנה בוואצפ</a>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Added: הודעת גיל 18+ -->
+<div class="ageNotice" id="ageNotice">
+  <div class="container">
+    <div class="ageNoticeInner">
+      <div>מכירת אלכוהול <b>מגיל 18+</b> בלבד. שתייה מופרזת מסכנת חיים.</div>
+      <button class="ageClose" id="ageClose" type="button" aria-label="סגור הודעת גיל 18+">הבנתי</button>
     </div>
   </div>
 </div>
@@ -523,7 +613,69 @@ footer{
   startStockTicker();
 
   document.getElementById('y').textContent = new Date().getFullYear();
+
+  /* ===========================
+     ✅ Added: 18+ notice + Open Now button logic
+     =========================== */
+
+  // 18+ Notice dismiss
+  const ageNotice = document.getElementById("ageNotice");
+  const ageClose = document.getElementById("ageClose");
+  try{
+    if(localStorage.getItem("ageNoticeDismissed") === "1"){
+      ageNotice.hidden = true;
+    }
+  }catch(e){}
+  ageClose.addEventListener("click", ()=>{
+    ageNotice.hidden = true;
+    try{ localStorage.setItem("ageNoticeDismissed","1"); }catch(e){}
+  });
+
+  // Open Now button (editable hours)
+  // שנה כאן שעות פעילות (בפורמט 24 שעות). דוגמה: פתוח 18:00 עד 02:00 -> OPEN_FROM_HOUR=18, OPEN_TO_HOUR=2
+  const OPEN_FROM_HOUR = 18; // <- ערוך לפי העסק
+  const OPEN_TO_HOUR   = 2;  // <- ערוך לפי העסק
+
+  const openNowBtn = document.getElementById("openNowBtn");
+  const openNowText = document.getElementById("openNowText");
+  const openNowSub = document.getElementById("openNowSub");
+
+  function isOpenNow(){
+    const now = new Date();
+    const h = now.getHours();
+
+    // טווח רגיל (לדוגמה 10 עד 22)
+    if(OPEN_FROM_HOUR < OPEN_TO_HOUR){
+      return h >= OPEN_FROM_HOUR && h < OPEN_TO_HOUR;
+    }
+    // טווח שעובר חצות (לדוגמה 18 עד 2)
+    return (h >= OPEN_FROM_HOUR) || (h < OPEN_TO_HOUR);
+  }
+
+  function updateOpenNow(){
+    const open = isOpenNow();
+    if(open){
+      openNowBtn.classList.remove("closed");
+      openNowText.textContent = "פתוח עכשיו";
+      openNowSub.textContent = "לחצו להזמנה";
+    }else{
+      openNowBtn.classList.add("closed");
+      openNowText.textContent = "סגור עכשיו";
+      openNowSub.textContent = "לחצו לבדוק זמינות";
+    }
+  }
+
+  // לחיצה על הכפתור פותחת וואטסאפ כמו הכפתור הראשי
+  openNowBtn.addEventListener("click", (e)=>{
+    e.preventDefault();
+    showToast("פותח וואטסאפ…");
+    window.open(waTop.href, "_blank");
+  });
+
+  updateOpenNow();
+  setInterval(updateOpenNow, 30000);
 </script>
 
 </body>
 </html>
+
