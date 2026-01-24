@@ -1,50 +1,26 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-  <meta charset="UTF-8">
-  <title>נטליה – דברו איתי</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      text-align: center;
-      padding-top: 100px;
-    }
-    h1 {
-      font-size: 36px;
-    }
-    p {
-      font-size: 18px;
-    }
-    button {
-      background: #ff4081;
-      color: white;
-      border: none;
-      padding: 18px 36px;
-      font-size: 22px;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #e73370;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>נטליה – דברי איתי</title>
 </head>
-<body>
+<body style="font-family: Arial; direction: rtl; padding: 20px;">
 
-  <h1>🎤 נטליה – דברו איתי</h1>
-  <p>לחצו על הכפתור כדי לפתוח צ'אט</p>
+  <h2>💬 דברו עם נטליה</h2>
 
-  <button onclick="openChat()">פתחי צ'אט</button>
+  <div id="retell-widget"></div>
 
   <script>
-    function openChat() {
-      window.open(
-        "https://dashboard.retellai.com/agents/agent_4ab6d6d06eaa70b175e4202d0c",
-        "_blank"
-      );
-    }
+   window.retellConfig = {
+  publicKey: "52f571f6b0b8a4f86812f",
+  agentId: "agent_4ab6d6d06eaa70b175e4202d0c",
+  language: "he"
+};
+
+    };
   </script>
 
+  <script src="https://cdn.retellai.com/widget.js"></script>
 </body>
 </html>
