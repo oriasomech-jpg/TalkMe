@@ -44,10 +44,16 @@
       padding:14px 0; gap:12px;
     }
     .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.2px}
-    .logo{
-      width:38px; height:38px; border-radius:14px;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      box-shadow: 0 16px 40px rgba(38,208,124,.22);
+  .logoImg{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  object-fit: contain;
+  padding:4px;
+  background: rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.12);
+}
+
     }
     .brand small{display:block; color:var(--muted); font-weight:800; letter-spacing:0; margin-top:2px}
     .pill{
@@ -191,7 +197,8 @@
     <div class="wrap">
       <div class="topRow">
         <div class="brand">
-          <div class="logo"></div>
+          <img class="logoImg" src="logo.png" alt="לוגו משהו משהו" />
+
           <div>
             <div>משהו משהו</div>
             <small>קיוסק • הזמנה מהירה</small>
