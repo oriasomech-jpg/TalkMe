@@ -3,10 +3,229 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>בדיקה</title>
+  <title>סוכנות ביטוח | דמו</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#0b1220;
+      color:white;
+    }
+    header{
+      background:#101a33;
+      padding:18px;
+      text-align:center;
+      font-size:26px;
+      font-weight:bold;
+    }
+    .hero{
+      padding:40px 20px;
+      text-align:center;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:36px;
+    }
+    .hero p{
+      color:#ccc;
+      font-size:18px;
+    }
+    .buttons{
+      margin-top:20px;
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      background:#2563eb;
+      padding:14px 22px;
+      border-radius:10px;
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+    }
+    .btn.whatsapp{
+      background:#22c55e;
+    }
+    .services{
+      background:#020617;
+      padding:40px 20px;
+      text-align:center;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap:20px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .card{
+      background:#111827;
+      padding:20px;
+      border-radius:14px;
+    }
+    footer{
+      background:#020617;
+      text-align:center;
+      padding:20px;
+      color:#aaa;
+    }
+    .chatBtn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      border:none;
+      font-size:26px;
+      cursor:pointer;
+      background:#2563eb;
+      color:white;
+    }
+    .chatBox{
+      position:fixed;
+      bottom:100px;
+      right:20px;
+      width:320px;
+      max-width:90%;
+      height:420px;
+      background:#020617;
+      border-radius:14px;
+      display:none;
+      flex-direction:column;
+      overflow:hidden;
+      box-shadow:0 0 30px rgba(0,0,0,0.5);
+    }
+    .chatHeader{
+      background:#111827;
+      padding:12px;
+      text-align:center;
+      font-weight:bold;
+    }
+    .chatBody{
+      flex:1;
+      padding:10px;
+      overflow:auto;
+      font-size:14px;
+    }
+    .bubble{
+      background:#1f2933;
+      margin:6px 0;
+      padding:8px 10px;
+      border-radius:10px;
+      max-width:80%;
+    }
+    .me{ background:#2563eb; margin-left:auto; }
+    .inputRow{
+      display:flex;
+      border-top:1px solid #222;
+    }
+    .inputRow input{
+      flex:1;
+      border:none;
+      padding:10px;
+      background:#020617;
+      color:white;
+    }
+    .inputRow button{
+      border:none;
+      background:#2563eb;
+      color:white;
+      padding:10px 14px;
+      cursor:pointer;
+    }
+  </style>
 </head>
-<body style="font-family:Arial; padding:30px;">
-  <h1>האתר עובד ✅</h1>
-  <p>אם אתה רואה את זה – GitHub Pages מציג את index.html נכון.</p>
+
+<body>
+
+<header>🏦 סוכנות ביטוח – דמו</header>
+
+<section class="hero">
+  <h1>ביטוח בראש שקט</h1>
+  <p>רכב • דירה • בריאות • חיים • עסקים</p>
+
+  <div class="buttons">
+    <a class="btn" href="tel:+972500000000">📞 התקשר</a>
+    <a class="btn whatsapp" target="_blank"
+       href="https://wa.me/972500000000?text=%D7%94%D7%99%D7%99%20%D7%A9%D7%9C%D7%95%D7%9D,%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%94%D7%A6%D7%A2%D7%94%20%D7%9C%D7%91%D7%99%D7%98%D7%95%D7%97">
+       💬 וואטסאפ
+    </a>
+  </div>
+</section>
+
+<section class="services">
+  <h2>השירותים שלנו</h2>
+  <div class="grid">
+    <div class="card">🚗 ביטוח רכב</div>
+    <div class="card">🏠 ביטוח דירה</div>
+    <div class="card">🩺 ביטוח בריאות</div>
+    <div class="card">🛡️ ביטוח חיים</div>
+  </div>
+</section>
+
+<footer>
+  © 2026 סוכנות ביטוח — כל הזכויות שמורות
+</footer>
+
+<!-- CHAT -->
+<button class="chatBtn" id="chatBtn">💬</button>
+
+<div class="chatBox" id="chatBox">
+  <div class="chatHeader">בוט סוכנות הביטוח</div>
+  <div class="chatBody" id="chatBody">
+    <div class="bubble">היי 👋 איך אפשר לעזור?</div>
+  </div>
+  <div class="inputRow">
+    <input id="chatInput" placeholder="כתוב הודעה..." />
+    <button id="sendBtn">שלח</button>
+  </div>
+</div>
+
+<script>
+  const chatBtn = document.getElementById("chatBtn");
+  const chatBox = document.getElementById("chatBox");
+  const sendBtn = document.getElementById("sendBtn");
+  const chatInput = document.getElementById("chatInput");
+  const chatBody = document.getElementById("chatBody");
+
+  chatBtn.onclick = () => {
+    chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
+  };
+
+  function addBubble(text, me=false){
+    const div = document.createElement("div");
+    div.className = "bubble" + (me ? " me" : "");
+    div.textContent = text;
+    chatBody.appendChild(div);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function botReply(text){
+    text = text.toLowerCase();
+    if(text.includes("רכב")) return "מעולה 🚗 איזה שנה הרכב ואיזה כיסוי אתה מחפש?";
+    if(text.includes("דירה")) return "מצוין 🏠 אתה צריך ביטוח מבנה, תכולה או שניהם?";
+    if(text.includes("בריאות")) return "בריאות 🩺 מחפש כיסוי לניתוחים, תרופות או סיעוד?";
+    if(text.includes("חיים")) return "חיים 🛡️ מה סכום הביטוח והתקופה הרצויה?";
+    return "אשמח לדעת איזה ביטוח אתה מחפש 🙂";
+  }
+
+  sendBtn.onclick = () => {
+    const text = chatInput.value.trim();
+    if(!text) return;
+    addBubble(text,true);
+    chatInput.value = "";
+    setTimeout(()=> addBubble(botReply(text)), 400);
+  };
+
+  chatInput.addEventListener("keydown", e=>{
+    if(e.key==="Enter") sendBtn.click();
+  });
+</script>
+
 </body>
 </html>
+?v=99
