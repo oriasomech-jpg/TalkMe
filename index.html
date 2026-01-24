@@ -290,4 +290,484 @@
       display:flex; flex-direction:column;
       min-height: 100%;
     }
-    .p:hover{transform:translateY(-2px); bord
+    .p:hover{transform:translateY(-2px); border-color: rgba(215,180,91,.35)}
+    .pimg{
+      height: 220px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.35)),
+        url("product-1.jpg") center/cover no-repeat;
+    }
+    .pBody{padding:14px; display:flex; flex-direction:column; gap:10px; flex:1}
+    .pTop{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
+    .pTop b{font-size:15px}
+    .brandTag{
+      font-size:11px;
+      font-weight:1000;
+      color:#e9ddba;
+      border:1px solid rgba(215,180,91,.22);
+      background: rgba(215,180,91,.10);
+      padding:6px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+    .pDesc{color:var(--muted); font-size:13px; line-height:1.55}
+    .pBottom{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:auto;
+    }
+    .price{font-weight:1000; font-size:16px}
+    .select{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      color:var(--text);
+      border-radius: 14px;
+      padding:10px 10px;
+      font-weight:900;
+      outline:none;
+    }
+
+    /* DRAWER CART */
+    .overlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.60);
+      display:none;
+      z-index: 80;
+    }
+    .drawer{
+      position:fixed;
+      top:0; left:0;
+      width: min(420px, 92vw);
+      height: 100%;
+      background: rgba(10,12,18,.92);
+      backdrop-filter: blur(12px);
+      border-right:1px solid var(--line);
+      box-shadow: var(--shadow);
+      transform: translateX(-110%);
+      transition: .25s;
+      z-index: 90;
+      display:flex; flex-direction:column;
+    }
+    .drawer.open{transform: translateX(0)}
+    .overlay.show{display:block}
+    .dHead{
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px;
+    }
+    .dHead b{font-size:15px}
+    .dHead span{color:var(--muted); font-weight:900; font-size:12px}
+    .dBody{padding:12px; overflow:auto; flex:1}
+    .item{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 18px;
+      padding:12px;
+      display:flex; gap:10px; align-items:flex-start;
+      margin-bottom:10px;
+    }
+    .thumb{
+      width:54px; height:54px; border-radius:14px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      flex: 0 0 auto;
+      background-size: cover;
+      background-position:center;
+    }
+    .iMeta{flex:1}
+    .iMeta b{display:block; font-size:14px}
+    .iMeta small{display:block; color:var(--muted); font-weight:800; margin-top:2px}
+    .qtyRow{
+      display:flex; gap:8px; align-items:center; margin-top:8px;
+    }
+    .qtyBtn{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:1000;
+      cursor:pointer;
+    }
+    .remove{
+      border:none; background:transparent; color: rgba(255,255,255,.65);
+      cursor:pointer; font-weight:900;
+    }
+    .dFoot{
+      border-top:1px solid var(--line);
+      padding:12px;
+      display:grid; gap:10px;
+    }
+    .totalRow{display:flex; justify-content:space-between; align-items:center; gap:10px}
+    .totalRow b{font-size:16px}
+    .smallNote{color:var(--muted); font-weight:800; font-size:12px; line-height:1.5}
+    .fullBtn{
+      width:100%;
+      border:none;
+      border-radius: 18px;
+      padding:13px 14px;
+      font-weight:1000;
+      cursor:pointer;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color:#1a1407;
+      box-shadow: 0 16px 40px rgba(215,180,91,.18);
+    }
+
+    /* FOOTER */
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      padding:22px 0 60px;
+      margin-top: 14px;
+    }
+    .footRow{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap">
+      <div class="navRow">
+        <a class="brand" href="#" onclick="scrollToTop(); return false;">
+          <div class="mark"></div>
+          <div class="brandTitle">
+            <b>ORI FASHION</b>
+            <span>מותגים • קולקציות חדשות • פרימיום</span>
+          </div>
+        </a>
+
+        <div class="links">
+          <a href="#new">חדש</a>
+          <a href="#women">נשים</a>
+          <a href="#men">גברים</a>
+          <a href="#access">אקססוריז</a>
+        </div>
+
+        <div class="right">
+          <div class="search" title="חיפוש">
+            🔎
+            <input id="q" placeholder="חיפוש מוצר / מותג…" />
+          </div>
+          <button class="iconBtn cartBtn" id="openCart">🛍️ עגלה (<span id="cartCount">0</span>)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="wrap hero">
+    <div class="heroGrid">
+      <div class="heroCard">
+        <div class="badge">✨ משלוח מהיר • 🔁 החלפה קלה • 💬 שירות בוואטסאפ</div>
+        <h1>סטייל של מותגים. חוויית בוטיק אונליין.</h1>
+        <p>
+          קולקציות נבחרות לנשים ולגברים – חולצות, מכנסיים, שמלות, נעליים ואקססוריז.
+          איכות גבוהה, לוק יוקרתי, ושירות אישי שמרגיש כמו חנות אמיתית.
+        </p>
+        <div class="ctaRow">
+          <button class="btn primary" onclick="document.getElementById('new').scrollIntoView({behavior:'smooth'})">🖤 לצפייה בקולקציה החדשה</button>
+          <a class="btn" target="_blank" rel="noopener"
+             href="https://wa.me/9725XXXXXXXX?text=%D7%94%D7%99%D7%99%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F/%D7%AA%20%D7%91%D7%A4%D7%A8%D7%99%D7%98%D7%99%D7%9D%20%D7%95%D7%9E%D7%99%D7%93%D7%95%D7%AA%20%D7%9C%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D%20%D7%91%D7%90%D7%AA%D7%A8">
+            💬 ייעוץ מידות בוואטסאפ
+          </a>
+        </div>
+
+        <div class="miniRow">
+          <div class="mini"><b>איכות פרימיום</b><br>בדים נעימים וגימור יוקרתי</div>
+          <div class="mini"><b>סטייל עדכני</b><br>לוקים שמצטלמים מושלם</div>
+          <div class="mini"><b>שירות אישי</b><br>מענה מהיר לכל שאלה</div>
+        </div>
+      </div>
+
+      <!-- Right card with background image -->
+      <div class="lookCard">
+        <div class="lookContent">
+          <div class="lookTop">
+            <div>
+              <div style="font-weight:1000;font-size:14px;color:rgba(255,255,255,.9)">הקולקציה החדשה</div>
+              <div style="color:rgba(255,255,255,.65); font-weight:800; font-size:12px;margin-top:2px">Drops • Limited • Premium</div>
+            </div>
+            <div class="pill">NEW SEASON</div>
+          </div>
+          <h2>לוק יוקרתי שמרים את כל ההופעה</h2>
+          <p>
+            החלף את התמונת רקע הזו לקובץ שלך בשם <b>hero.jpg</b> (למשל: צילום חנות/דוגמן/בוטיק).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section class="wrap">
+    <div class="titleRow">
+      <h3>קטגוריות</h3>
+      <p class="muted">לחץ כדי לסנן מוצרים</p>
+    </div>
+
+    <div class="cats">
+      <div class="cat" onclick="setFilter('נשים')">
+        <div><b>נשים</b><span>שמלות, חולצות, מכנסיים, סטים</span></div>
+        <div class="tag">WOMEN</div>
+      </div>
+      <div class="cat" onclick="setFilter('גברים')">
+        <div><b>גברים</b><span>טישרטים, מכנסיים, ג׳קטים, סטים</span></div>
+        <div class="tag">MEN</div>
+      </div>
+      <div class="cat" onclick="setFilter('אקססוריז')">
+        <div><b>אקססוריז</b><span>כובעים, תיקים, נעליים, תוספות</span></div>
+        <div class="tag">ACCESS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="wrap" id="new">
+    <div class="titleRow">
+      <h3>מומלצים היום</h3>
+      <p class="muted">מחירים לדוגמה — תוכל לשנות הכל בקלות</p>
+    </div>
+    <div class="products" id="products"></div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footRow">
+        <div>© <span id="year"></span> ORI FASHION — כל הזכויות שמורות</div>
+        <div>משלוחים • החזרות • שירות בוואטסאפ</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="עגלת קניות">
+    <div class="dHead">
+      <div>
+        <b>🛍️ העגלה שלך</b><br/>
+        <span id="cartMeta">0 פריטים</span>
+      </div>
+      <button class="iconBtn" id="closeCart">סגור ✕</button>
+    </div>
+
+    <div class="dBody" id="cartItems"></div>
+
+    <div class="dFoot">
+      <div class="totalRow">
+        <div>סה״כ</div>
+        <b>₪ <span id="total">0</span></b>
+      </div>
+      <button class="fullBtn" id="checkoutBtn">סגירה בוואטסאפ</button>
+      <div class="smallNote">
+        טיפ: אם תרצה סליקה אמיתית (כרטיס/ביט/פייפאל) — אפשר לחבר אחרי שהעיצוב סגור.
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // --- CONFIG ---
+    // החלף למספר וואטסאפ שלך בפורמט בינלאומי (ישראל): 9725XXXXXXXX
+    const WHATSAPP_NUMBER = "9725XXXXXXXX";
+
+    // תמונות: אם אין לך עדיין תמונות, זה עדיין יעבוד.
+    // כדי לראות תמונות, העלה לריפו קבצים בשם:
+    // hero.jpg, product-1.jpg, product-2.jpg, product-3.jpg, product-4.jpg
+    // או החלף בקוד את img לכל מוצר.
+
+    const PRODUCTS = [
+      { id: 1, cat: "נשים", brand:"PREMIUM", name:"שמלת ערב סאטן", price: 349, sizes:["XS","S","M","L"], img:"product-1.jpg", desc:"גזרה יוקרתית, בד סאטן נעים, לוק מושלם לאירוע." },
+      { id: 2, cat: "נשים", brand:"DESIGN", name:"סט טופ + מכנס מחויט", price: 399, sizes:["S","M","L"], img:"product-2.jpg", desc:"מראה נקי ואלגנטי — בוטיק סטייל." },
+      { id: 3, cat: "גברים", brand:"URBAN", name:"טישרט פרימיום", price: 179, sizes:["S","M","L","XL"], img:"product-3.jpg", desc:"בד עבה איכותי, יושב מדויק, מתאים לכל לוק." },
+      { id: 4, cat: "גברים", brand:"SIGNATURE", name:"מכנס קארגו מעוצב", price: 289, sizes:["30","32","34","36"], img:"product-4.jpg", desc:"נוח, אופנתי, עם גימורים פרימיום." },
+      { id: 5, cat: "אקססוריז", brand:"LUX", name:"תיק צד מינימליסטי", price: 229, sizes:["ONE"], img:"product-2.jpg", desc:"תיק קטן-גדול: נכנס הכל, נראה יוקרתי." },
+      { id: 6, cat: "אקססוריז", brand:"LUX", name:"כובע קלאסי", price: 119, sizes:["ONE"], img:"product-1.jpg", desc:"טאץ' אחרון ללוק — נקי וממותג." },
+      { id: 7, cat: "נשים", brand:"PREMIUM", name:"חולצת בייסיק פרימיום", price: 149, sizes:["XS","S","M","L"], img:"product-3.jpg", desc:"בייסיק אבל יוקרתי — יושב בול ומצטלם." },
+      { id: 8, cat: "גברים", brand:"DESIGN", name:"ג׳קט קליל לערב", price: 449, sizes:["M","L","XL"], img:"product-4.jpg", desc:"שדרוג מיידי לכל הופעה — ערב/יציאה." },
+    ];
+
+    // --- STATE ---
+    let filterCat = "";
+    let query = "";
+    // cart item: {id, size, qty}
+    let cart = [];
+
+    // --- DOM ---
+    const productsEl = document.getElementById("products");
+    const qEl = document.getElementById("q");
+    const cartCountEl = document.getElementById("cartCount");
+    const cartItemsEl = document.getElementById("cartItems");
+    const totalEl = document.getElementById("total");
+    const cartMetaEl = document.getElementById("cartMeta");
+
+    const overlay = document.getElementById("overlay");
+    const drawer = document.getElementById("drawer");
+    const openCartBtn = document.getElementById("openCart");
+    const closeCartBtn = document.getElementById("closeCart");
+    const checkoutBtn = document.getElementById("checkoutBtn");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function scrollToTop(){ window.scrollTo({top:0, behavior:"smooth"}); }
+
+    function setFilter(cat){
+      filterCat = cat;
+      renderProducts();
+      document.getElementById("new").scrollIntoView({behavior:"smooth"});
+    }
+
+    qEl.addEventListener("input", () => {
+      query = qEl.value.trim().toLowerCase();
+      renderProducts();
+    });
+
+    function money(n){ return Number(n).toFixed(0); }
+
+    function productCard(p){
+      const imgStyle = `background-image:
+        linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.38)),
+        url('${p.img}')`;
+      return `
+        <div class="p">
+          <div class="pimg" style="${imgStyle}"></div>
+          <div class="pBody">
+            <div class="pTop">
+              <div>
+                <b>${p.name}</b>
+                <div class="pDesc">${p.desc}</div>
+              </div>
+              <div class="brandTag">${p.brand}</div>
+            </div>
+
+            <div class="pBottom">
+              <div class="price">₪ ${money(p.price)}</div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <select class="select" id="size-${p.id}">
+                  ${p.sizes.map(s => `<option value="${s}">${s}</option>`).join("")}
+                </select>
+                <button class="btn primary" onclick="addToCart(${p.id})">הוסף</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderProducts(){
+      const list = PRODUCTS.filter(p => {
+        const matchCat = !filterCat || p.cat === filterCat;
+        const matchQ = !query || (p.name + " " + p.brand + " " + p.cat).toLowerCase().includes(query);
+        return matchCat && matchQ;
+      });
+      productsEl.innerHTML = list.map(productCard).join("");
+    }
+
+    function addToCart(id){
+      const p = PRODUCTS.find(x => x.id === id);
+      const size = document.getElementById(`size-${id}`).value;
+      const existing = cart.find(x => x.id === id && x.size === size);
+      if(existing) existing.qty += 1;
+      else cart.push({id, size, qty: 1});
+
+      renderCart();
+      openCart();
+    }
+
+    function cartTotals(){
+      let count = 0;
+      let total = 0;
+      for(const it of cart){
+        const p = PRODUCTS.find(x => x.id === it.id);
+        count += it.qty;
+        total += p.price * it.qty;
+      }
+      return {count, total};
+    }
+
+    function renderCart(){
+      const {count, total} = cartTotals();
+      cartCountEl.textContent = count;
+      cartMetaEl.textContent = `${count} פריטים`;
+
+      if(cart.length === 0){
+        cartItemsEl.innerHTML = `<div style="color:rgba(255,255,255,.75); font-weight:900; padding:10px;">
+          העגלה ריקה. בוא/י לבחור משהו 🔥
+        </div>`;
+      } else {
+        cartItemsEl.innerHTML = cart.map(it => {
+          const p = PRODUCTS.find(x => x.id === it.id);
+          const thumbStyle = `background-image:url('${p.img}')`;
+          return `
+            <div class="item">
+              <div class="thumb" style="${thumbStyle}"></div>
+              <div class="iMeta">
+                <b>${p.name}</b>
+                <small>${p.brand} • מידה: ${it.size} • ₪ ${money(p.price)}</small>
+                <div class="qtyRow">
+                  <button class="qtyBtn" onclick="decQty(${it.id}, '${it.size}')">−</button>
+                  <b style="min-width:22px; text-align:center;">${it.qty}</b>
+                  <button class="qtyBtn" onclick="incQty(${it.id}, '${it.size}')">+</button>
+                  <button class="remove" onclick="removeItem(${it.id}, '${it.size}')">הסר</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      totalEl.textContent = money(total);
+    }
+
+    function incQty(id, size){
+      const it = cart.find(x => x.id === id && x.size === size);
+      if(it){ it.qty += 1; renderCart(); }
+    }
+    function decQty(id, size){
+      const it = cart.find(x => x.id === id && x.size === size);
+      if(!it) return;
+      it.qty -= 1;
+      if(it.qty <= 0) cart = cart.filter(x => !(x.id === id && x.size === size));
+      renderCart();
+    }
+    function removeItem(id, size){
+      cart = cart.filter(x => !(x.id === id && x.size === size));
+      renderCart();
+    }
+
+    function openCart(){
+      overlay.classList.add("show");
+      drawer.classList.add("open");
+    }
+    function closeCart(){
+      overlay.classList.remove("show");
+      drawer.classList.remove("open");
+    }
+
+    openCartBtn.addEventListener("click", openCart);
+    closeCartBtn.addEventListener("click", closeCart);
+    overlay.addEventListener("click", closeCart);
+
+    checkoutBtn.addEventListener("click", () => {
+      const {count, total} = cartTotals();
+      if(count === 0){ alert("העגלה ריקה 🙂"); return; }
+
+      const lines = cart.map(it => {
+        const p = PRODUCTS.find(x => x.id === it.id);
+        return `• ${p.name} (${p.brand}) | מידה: ${it.size} | כמות: ${it.qty} | ₪ ${money(p.price * it.qty)}`;
+      }).join("\n");
+
+      const msg =
+        `היי, אני רוצה לבצע הזמנה מהאתר:\n\n` +
+        `${lines}\n\n` +
+        `סה״כ: ₪ ${money(total)}\n` +
+        `שם מלא: \nטלפון: \nעיר/כתובת למשלוח: \n`;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank");
+    });
+
+    // init
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
+
