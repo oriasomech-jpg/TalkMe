@@ -1,2 +1,16 @@
-635f21cd-7910-4713-979f-db2dce4f7086
-2aebd1a2-cca0-4189-b999-32b0195636fc
+</body>
+<button id="talkBtn" style="font-size:20px;padding:12px 20px;">
+🎤 דברי איתי
+</button>
+
+<script type="module">
+  import Vapi from "2aebd1a2-cca0-4189-b999-32b0195636fc";
+
+  const vapi = new Vapi("PASTE_PUBLIC_KEY_HERE");
+  const assistantId = "635f21cd-7910-4713-979f-db2dce4f7086"
+;
+
+  document.getElementById("talkBtn").onclick = async () => {
+    await vapi.start(assistantId);
+  };
+</script>
