@@ -265,10 +265,11 @@
       transition:.2s;
       box-shadow: 0 8px 24px rgba(0,0,0,.35);
       min-height: 130px;
+      cursor: pointer;
     }
     .product:hover{
       border-color: rgba(0,255,136,.55);
-      transform: translateY(-3px);
+      transform: translateY(-3px) scale(1.01);
     }
 
     .pTop{
@@ -327,7 +328,7 @@
 
 <body>
 
-  <!-- TOPBAR (less buttons, logo preserved) -->
+  <!-- TOPBAR -->
   <div class="topbar">
     <div class="container">
       <div class="topbarInner">
@@ -342,8 +343,7 @@
         <div class="chipRow">
           <div class="chip">⚡ משלוח מהיר</div>
           <div class="chip">💸 <b>הכי זול</b> באזור</div>
-          <!-- רק כפתור אחד -->
-          <a class="btn" href="https://wa.me/9725XXXXXXXXX" target="_blank" rel="noopener">הזמנה בוואטסאפ</a>
+          <a class="btn" id="waTop" href="#" target="_blank" rel="noopener">הזמנה בוואטסאפ</a>
         </div>
       </div>
     </div>
@@ -401,12 +401,12 @@
       <div class="sectionHead">
         <div>
           <h2>מוצרים פופולריים</h2>
-          <p>מחירים לדוגמה — שלחו וואטסאפ למחירון מעודכן</p>
+          <p>לחץ על מוצר כדי לפתוח הזמנה בוואטסאפ</p>
         </div>
       </div>
 
       <div class="products">
-        <div class="product">
+        <div class="product" onclick="order('גולדסטאר 500 מ״ל (בקבוק)', '₪12')">
           <div class="pTop">
             <h3 class="pName">גולדסטאר 500 מ״ל (בקבוק)</h3>
             <div class="pPrice">₪12</div>
@@ -414,7 +414,7 @@
           <p class="pMeta">קר • זמין במלאי (לפי שעה)</p>
         </div>
 
-        <div class="product">
+        <div class="product" onclick="order('היינקן 330 מ״ל (פחית)', '₪10')">
           <div class="pTop">
             <h3 class="pName">היינקן 330 מ״ל (פחית)</h3>
             <div class="pPrice">₪10</div>
@@ -422,7 +422,7 @@
           <p class="pMeta">אפשר מארזים לפי בקשה</p>
         </div>
 
-        <div class="product">
+        <div class="product" onclick="order('אבסולוט וודקה 700 מ״ל', '₪89')">
           <div class="pTop">
             <h3 class="pName">אבסולוט וודקה 700 מ״ל</h3>
             <div class="pPrice">₪89</div>
@@ -430,7 +430,7 @@
           <p class="pMeta">פופולרי למסיבה</p>
         </div>
 
-        <div class="product">
+        <div class="product" onclick="order('סמירנוף 700 מ״ל', '₪79')">
           <div class="pTop">
             <h3 class="pName">סמירנוף 700 מ״ל</h3>
             <div class="pPrice">₪79</div>
@@ -438,7 +438,7 @@
           <p class="pMeta">מחיר חד • בקבוק קלאסי</p>
         </div>
 
-        <div class="product">
+        <div class="product" onclick="order('ג׳וני ווקר רד 700 מ״ל', '₪99')">
           <div class="pTop">
             <h3 class="pName">ג׳וני ווקר רד 700 מ״ל</h3>
             <div class="pPrice">₪99</div>
@@ -446,7 +446,7 @@
           <p class="pMeta">וויסקי קלאסי לערב</p>
         </div>
 
-        <div class="product">
+        <div class="product" onclick="order('ג׳ים בים 700 מ״ל', '₪109')">
           <div class="pTop">
             <h3 class="pName">ג׳ים בים 700 מ״ל</h3>
             <div class="pPrice">₪109</div>
@@ -454,7 +454,7 @@
           <p class="pMeta">בורבון איכותי במחיר טוב</p>
         </div>
 
-        <div class="product">
+        <div class="product" onclick="order('יין אדום 750 מ״ל', '₪45')">
           <div class="pTop">
             <h3 class="pName">יין אדום 750 מ״ל</h3>
             <div class="pPrice">₪45</div>
@@ -462,7 +462,7 @@
           <p class="pMeta">יבש/חצי יבש — לפי זמינות</p>
         </div>
 
-        <div class="product">
+        <div class="product" onclick="order('ערק 700 מ״ל', '₪69')">
           <div class="pTop">
             <h3 class="pName">ערק 700 מ״ל</h3>
             <div class="pPrice">₪69</div>
@@ -473,7 +473,7 @@
 
       <div class="strip">
         <b>אזורי משלוח:</b> קרית מוצקין • קרית ים • קרית ביאליק • קרית אתא • חיפה (לפי זמינות) <br>
-        <b>להזמנה:</b> לחץ על “הזמנה בוואטסאפ” למעלה.
+        <b>איך מזמינים?</b> לוחצים על מוצר או על הכפתור למעלה.
       </div>
     </div>
   </section>
@@ -488,7 +488,31 @@
   </footer>
 
   <script>
+    // שנה כאן למספר שלך בלבד (בלי +, בלי רווחים)
+    const PHONE = "9725XXXXXXXXX"; // לדוגמה: "972501234567"
+
+    function order(productName, price){
+      const text =
+        `שלום, אני רוצה להזמין:\n` +
+        `• ${productName}\n` +
+        `• מחיר באתר: ${price}\n\n` +
+        `כתובת למשלוח: \n` +
+        `שם: \n` +
+        `טלפון: `;
+      const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank");
+    }
+
+    // כפתור וואטסאפ למעלה – פותח הודעה כללית
+    const waTop = document.getElementById("waTop");
+    const generalText =
+      "שלום, אני רוצה לבצע הזמנה. אפשר מחירון מעודכן וזמן משלוח?";
+    waTop.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(generalText)}`;
+
+    // שנה שנה אוטומטית בפוטר
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
+
