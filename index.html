@@ -1,22 +1,25 @@
-<button id="talkBtn" style="font-size:20px;padding:12px 20px;">
-🎤 דברי איתי
-</button>
+<button id="talkBtn" style="font-size:20px;padding:12px 20px;">🎤 דברי איתי</button>
 
 <script src="https://unpkg.com/@vapi-ai/web/dist/index.umd.js"></script>
 <script>
-  const vapi = new Vapi("2aebd1a2-cca0-4189-b999-32b0195636fc
-");
-  const assistantId = "635f21cd-7910-4713-979f-db2dce4f7086
-";
+  // בדיקה שהספרייה נטענה
+  console.log("Vapi global:", typeof Vapi);
+
+  const PUBLIC_KEY = 2aebd1a2-cca0-4189-b999-32b0195636fc;
+  const ASSISTANT_ID = 635f21cd-7910-4713-979f-db2dce4f7086;
+
+
+  const vapi = new Vapi(PUBLIC_KEY);
 
   document.getElementById("talkBtn").addEventListener("click", async () => {
+    console.log("Clicked. Starting...");
     try {
-      console.log("Starting Vapi...");
-      await vapi.start(assistantId);
+      await vapi.start(ASSISTANT_ID);
       console.log("Started!");
     } catch (e) {
-      console.error("Vapi start error:", e);
-      alert("שגיאה בהתחלה: פתח Console (F12) ובדוק מה כתוב");
+      console.error("Start error:", e);
+      alert("נכשלה התחלה. פתח Console ותראה שגיאה אדומה");
     }
   });
 </script>
+
