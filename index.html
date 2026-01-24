@@ -1,590 +1,256 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>משהו משהו | משלוחי אלכוהול קרית מוצקין</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>משהו משהו | משלוחי אלכוהול קרית מוצקין</title>
 
-  <style>
-    :root{
-      --bg:#070707;
-      --bg2:#0b0b0b;
-      --panel:rgba(255,255,255,.07);
-      --panel2:rgba(255,255,255,.04);
-      --line:rgba(255,255,255,.12);
-      --text:#ffffff;
-      --muted:rgba(255,255,255,.72);
-      --green:#00ff88;
-      --green2:#00cc6e;
-      --radius:18px;
-      --shadow: 0 18px 50px rgba(0,0,0,.55);
-      --shadow2: 0 10px 26px rgba(0,0,0,.35);
-    }
+<style>
+:root{
+  --bg:#070707;
+  --bg2:#0b0b0b;
+  --panel:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.12);
+  --text:#fff;
+  --muted:rgba(255,255,255,.72);
+  --green:#00ff88;
+  --green2:#00cc6e;
+  --radius:18px;
+  --shadow:0 18px 50px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,Arial;
+  background:
+    radial-gradient(900px 400px at 15% -10%, rgba(0,255,136,.18), transparent 60%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-      background:
-        radial-gradient(1000px 420px at 15% -10%, rgba(0,255,136,.20), transparent 60%),
-        radial-gradient(1000px 420px at 90% 10%, rgba(0,255,136,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color:var(--text);
-      overflow-x:hidden;
-    }
+/* TOPBAR */
+.topbar{
+  position:sticky;
+  top:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbarInner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand img{
+  height:36px;
+  animation:glow 3s ease-in-out infinite;
+}
+@keyframes glow{
+  0%{filter:drop-shadow(0 0 4px rgba(0,255,136,.3))}
+  50%{filter:drop-shadow(0 0 14px rgba(0,255,136,.7))}
+  100%{filter:drop-shadow(0 0 4px rgba(0,255,136,.3))}
+}
+.brandText b{font-size:14px}
+.brandText span{font-size:12px;color:var(--muted)}
 
-    .container{
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 16px;
-    }
+.btn{
+  background:linear-gradient(180deg,var(--green),var(--green2));
+  color:#000;
+  padding:12px 16px;
+  border-radius:14px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 10px 24px rgba(0,255,136,.25);
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-2px)}
 
-    /* Top bar */
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .topbarInner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding: 14px 0;
-      flex-wrap:wrap;
-    }
+/* HERO */
+.hero{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 16px;
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:18px;
+}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
-    .brand img{
-      height:36px;
-      width:auto;
-      display:block;
-      filter: drop-shadow(0 10px 24px rgba(0,0,0,.65));
-      animation: glowPulse 2.8s ease-in-out infinite;
-      transform: translateZ(0);
-    }
-    @keyframes glowPulse {
-      0%   { filter: drop-shadow(0 0 5px rgba(0,255,136,.20)); opacity: .92; }
-      50%  { filter: drop-shadow(0 0 16px rgba(0,255,136,.60)); opacity: 1; }
-      100% { filter: drop-shadow(0 0 5px rgba(0,255,136,.20)); opacity: .92; }
-    }
+.card{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+h1{margin:0 0 10px;font-size:38px}
+.lead{color:var(--muted);line-height:1.7}
 
-    .brandText{
-      display:flex;
-      flex-direction:column;
-      line-height:1.15;
-      min-width:0;
-    }
-    .brandText b{
-      letter-spacing:.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      font-size:14px;
-    }
-    .brandText span{
-      font-size:12px;
-      color:var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
+.sideCard h3{margin-top:0}
 
-    .chipRow{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      margin-inline-start:auto;
-    }
-    .chip{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:13px;
-      color:var(--muted);
-      position:relative;
-      overflow:hidden;
-    }
-    .chip b{color:var(--green)}
-    .chip:after{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background: radial-gradient(500px 120px at 20% 0%, rgba(0,255,136,.10), transparent 60%);
-      pointer-events:none;
-      opacity:.8;
-    }
+/* PROMO */
+.promo{
+  margin-top:14px;
+  border:1px solid rgba(0,255,136,.4);
+  border-radius:14px;
+  padding:12px;
+  cursor:pointer;
+  background:linear-gradient(180deg,rgba(0,255,136,.15),rgba(255,255,255,.02));
+  transition:.2s;
+}
+.promo:hover{transform:scale(1.02)}
+.promoTitle{font-weight:900}
+.promoText{font-size:13px;color:var(--muted)}
 
-    /* Single main button (nicer) */
-    .btn{
-      position:relative;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      text-decoration:none;
-      font-weight:900;
-      border:1px solid transparent;
-      transition:.2s;
-      user-select:none;
-      white-space:nowrap;
-      background: linear-gradient(180deg, var(--green), var(--green2));
-      color:#000;
-      box-shadow: 0 10px 26px rgba(0,255,136,.20);
-      overflow:hidden;
-    }
-    .btn:hover{ transform: translateY(-1px); }
-    .btn:before{
-      content:"";
-      position:absolute;
-      width:160px;
-      height:160px;
-      left:-80px;
-      top:-80px;
-      background: radial-gradient(circle, rgba(255,255,255,.35), transparent 60%);
-      transform: translateX(-40px);
-      transition: .35s;
-      opacity:.25;
-    }
-    .btn:hover:before{ transform: translateX(220px); opacity:.35; }
+/* PRODUCTS */
+.products{
+  max-width:1100px;
+  margin:auto;
+  padding:0 16px 40px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+@media(max-width:900px){.products{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.products{grid-template-columns:1fr}}
 
-    /* Hero */
-    .hero{ padding: 44px 0 28px; }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap: 18px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .heroGrid{grid-template-columns:1fr}
-      .chipRow{justify-content:flex-start; margin-inline-start:0;}
-    }
+.product{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  cursor:pointer;
+  transition:.2s;
+}
+.product:hover{
+  transform:translateY(-3px);
+  border-color:rgba(0,255,136,.6);
+}
+.pTop{display:flex;justify-content:space-between}
+.pPrice{color:var(--green);font-weight:900}
+.pMeta{font-size:12px;color:var(--muted)}
 
-    .heroCard{
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 30px;
-      position:relative;
-      overflow:hidden;
-      transform: translateY(10px);
-      opacity:0;
-      animation: riseIn .55s ease-out forwards;
-    }
-    .heroCard:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(700px 260px at 28% 0%, rgba(0,255,136,.22), transparent 60%);
-      pointer-events:none;
-    }
-    .heroContent{position:relative}
-    @keyframes riseIn{
-      to{ transform: translateY(0); opacity:1; }
-    }
+footer{
+  border-top:1px solid var(--line);
+  text-align:center;
+  padding:18px;
+  font-size:13px;
+  color:var(--muted);
+}
 
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border: 1px solid var(--line);
-      border-radius:999px;
-      background: rgba(0,0,0,.30);
-      color: var(--muted);
-      font-size:13px;
-    }
-    .dot{
-      width:8px;height:8px;border-radius:50%;
-      background: var(--green);
-      box-shadow: 0 0 0 6px rgba(0,255,136,.12);
-    }
-
-    h1{
-      margin:14px 0 10px;
-      font-size: 42px;
-      letter-spacing:.2px;
-      line-height:1.12;
-    }
-    @media (max-width:520px){ h1{font-size:32px} }
-
-    .lead{
-      margin:0;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.75;
-      max-width: 62ch;
-    }
-
-    .accent{
-      color: var(--green);
-      font-weight:900;
-    }
-
-    .sideCard{
-      background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      min-height: 100%;
-      transform: translateY(10px);
-      opacity:0;
-      animation: riseIn .55s ease-out .10s forwards;
-    }
-    .sideCard h3{margin:0 0 10px; font-size:18px}
-    .sideCard p{margin:0; color:var(--muted); line-height:1.65}
-    .stats{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top: 16px;
-    }
-    .stat{
-      background: rgba(255,255,255,.03);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px;
-    }
-    .stat b{display:block; color:var(--green); font-size:16px; margin-bottom:4px}
-    .stat span{color:var(--muted); font-size:12px}
-
-    /* Products */
-    .section{ padding: 6px 0 44px; }
-    .sectionHead{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom: 14px;
-      flex-wrap:wrap;
-    }
-    .sectionHead h2{ margin:0; font-size:22px; letter-spacing:.2px; }
-    .sectionHead p{ margin:0; color:var(--muted); font-size:14px; }
-
-    .products{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-    @media (max-width: 980px){ .products{grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width: 520px){ .products{grid-template-columns: 1fr;} }
-
-    .product{
-      position:relative;
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 16px;
-      transition:.2s;
-      box-shadow: var(--shadow2);
-      min-height: 132px;
-      cursor: pointer;
-      overflow:hidden;
-      opacity:0;
-      transform: translateY(8px);
-      animation: cardIn .45s ease-out forwards;
-    }
-    .product:nth-child(1){animation-delay:.05s}
-    .product:nth-child(2){animation-delay:.08s}
-    .product:nth-child(3){animation-delay:.11s}
-    .product:nth-child(4){animation-delay:.14s}
-    .product:nth-child(5){animation-delay:.17s}
-    .product:nth-child(6){animation-delay:.20s}
-    .product:nth-child(7){animation-delay:.23s}
-    .product:nth-child(8){animation-delay:.26s}
-
-    @keyframes cardIn{ to{opacity:1; transform: translateY(0);} }
-
-    .product:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(500px 160px at 10% 0%, rgba(0,255,136,.13), transparent 60%);
-      opacity:.8;
-      pointer-events:none;
-    }
-    .product:after{
-      content:"";
-      position:absolute;
-      width:160px; height:160px;
-      right:-80px; top:-80px;
-      background: radial-gradient(circle, rgba(255,255,255,.25), transparent 60%);
-      opacity:.12;
-      pointer-events:none;
-      transition:.25s;
-    }
-
-    .product:hover{
-      border-color: rgba(0,255,136,.62);
-      transform: translateY(-3px) scale(1.01);
-    }
-    .product:hover:after{ opacity:.20; }
-
-    .pTop{
-      position:relative;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
-    }
-    .pName{
-      margin:0;
-      font-size: 15px;
-      line-height:1.35;
-      color: rgba(255,255,255,.92);
-    }
-    .pPrice{
-      font-weight:900;
-      color: var(--green);
-      white-space:nowrap;
-    }
-    .pMeta{
-      position:relative;
-      margin:0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height:1.6;
-    }
-
-    .strip{
-      margin-top: 18px;
-      background: rgba(0,0,0,.45);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 16px;
-      color: var(--muted);
-      line-height:1.7;
-      text-align:center;
-    }
-    .strip b{ color: var(--green); }
-
-    footer{
-      border-top: 1px solid var(--line);
-      background: rgba(0,0,0,.65);
-      padding: 18px 0;
-      color: rgba(255,255,255,.6);
-      font-size: 13px;
-    }
-    .footerInner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    /* Accessibility / reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none !important; transition:none !important;}
-    }
-  </style>
+/* Toast */
+.toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.7);
+  border:1px solid rgba(255,255,255,.15);
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:13px;
+  opacity:0;
+  transition:.3s;
+}
+.toast.show{opacity:1}
+</style>
 </head>
 
 <body>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="container">
-      <div class="topbarInner">
-        <div class="brand">
-          <img src="logo,png.png" alt="לוגו משהו משהו">
-          <div class="brandText">
-            <b>משהו משהו</b>
-            <span>קיוסק משלוחי אלכוהול • קרית מוצקין</span>
-          </div>
-        </div>
-
-        <div class="chipRow">
-          <div class="chip">⚡ משלוח מהיר</div>
-          <div class="chip">💸 <b>הכי זול</b> באזור</div>
-          <a class="btn" id="waTop" href="#" target="_blank" rel="noopener">הזמנה בוואטסאפ</a>
-        </div>
+<div class="topbar">
+  <div class="topbarInner">
+    <div class="brand">
+      <img src="logo,png.png" alt="לוגו">
+      <div class="brandText">
+        <b>משהו משהו</b>
+        <span>קיוסק משלוחי אלכוהול • קרית מוצקין</span>
       </div>
     </div>
+    <a id="waTop" class="btn" href="#">הזמנה בוואטסאפ</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="card">
+    <h1>אלכוהול עד הדלת</h1>
+    <p class="lead">המחירים הכי זולים בקריות · משלוח מהיר · הזמנה פשוטה בוואטסאפ</p>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="heroGrid">
+  <div class="card sideCard">
+    <h3>מה תקבלו?</h3>
+    <p class="lead">מחיר חד, שירות מהיר וחוויית הזמנה פשוטה.</p>
 
-        <div class="heroCard">
-          <div class="heroContent">
-            <div class="kicker"><span class="dot"></span> פתוחים עכשיו • שירות מהיר</div>
-            <h1>אלכוהול עד הדלת —<br><span class="accent">הכי זול בקריות</span></h1>
-            <p class="lead">
-              מזמינים בקלות דרך וואטסאפ ומקבלים משלוח מהיר בקרית מוצקין והקריות.
-              פשוט, נקי, ומקצועי.
-            </p>
-          </div>
-        </div>
-
-        <div class="sideCard">
-          <div>
-            <h3>מה תקבלו?</h3>
-            <p>מחיר חד, שירות אנושי, תגובה מהירה — בלי חפירות ובלי תפריטים.</p>
-
-            <div class="stats">
-              <div class="stat">
-                <b>מחירים זולים</b>
-                <span>דגש על הכי משתלם</span>
-              </div>
-              <div class="stat">
-                <b>משלוח מהיר</b>
-                <span>מוצקין והקריות</span>
-              </div>
-              <div class="stat">
-                <b>פשוט להזמין</b>
-                <span>רק וואטסאפ</span>
-              </div>
-              <div class="stat">
-                <b>זמינות גבוהה</b>
-                <span>לפי שעות פעילות</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <!-- PROMO XL -->
+    <div class="promo" onclick="orderXL()">
+      <div class="promoTitle">🎉 קומבינציה XL למסיבה</div>
+      <div class="promoText">חבילה גדולה + משלוח מהיר — פרטים בוואטסאפ</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRODUCTS -->
-  <section class="section" id="products">
-    <div class="container">
-      <div class="sectionHead">
-        <div>
-          <h2>מוצרים פופולריים</h2>
-          <p>לחץ על מוצר כדי לפתוח הזמנה בוואטסאפ (עם טקסט מוכן)</p>
-        </div>
-      </div>
+<section class="products">
+  <div class="product" onclick="order('גולדסטאר 500 מ״ל','₪12')">
+    <div class="pTop"><b>גולדסטאר 500 מ״ל</b><span class="pPrice">₪12</span></div>
+    <div class="pMeta">קר במלאי</div>
+  </div>
+  <div class="product" onclick="order('היינקן 330 מ״ל','₪10')">
+    <div class="pTop"><b>היינקן 330 מ״ל</b><span class="pPrice">₪10</span></div>
+    <div class="pMeta">פחית</div>
+  </div>
+  <div class="product" onclick="order('אבסולוט וודקה 700 מ״ל','₪89')">
+    <div class="pTop"><b>אבסולוט וודקה</b><span class="pPrice">₪89</span></div>
+    <div class="pMeta">פופולרי</div>
+  </div>
+  <div class="product" onclick="order('ג׳וני ווקר רד','₪99')">
+    <div class="pTop"><b>ג׳וני ווקר רד</b><span class="pPrice">₪99</span></div>
+    <div class="pMeta">וויסקי</div>
+  </div>
+</section>
 
-      <div class="products">
-        <div class="product" onclick="order('גולדסטאר 500 מ״ל (בקבוק)', '₪12')">
-          <div class="pTop">
-            <h3 class="pName">גולדסטאר 500 מ״ל (בקבוק)</h3>
-            <div class="pPrice">₪12</div>
-          </div>
-          <p class="pMeta">קר • זמין במלאי (לפי שעה)</p>
-        </div>
+<footer>
+© <span id="year"></span> משהו משהו · קרית מוצקין
+</footer>
 
-        <div class="product" onclick="order('היינקן 330 מ״ל (פחית)', '₪10')">
-          <div class="pTop">
-            <h3 class="pName">היינקן 330 מ״ל (פחית)</h3>
-            <div class="pPrice">₪10</div>
-          </div>
-          <p class="pMeta">אפשר מארזים לפי בקשה</p>
-        </div>
+<div class="toast" id="toast">פותח וואטסאפ להזמנה…</div>
 
-        <div class="product" onclick="order('אבסולוט וודקה 700 מ״ל', '₪89')">
-          <div class="pTop">
-            <h3 class="pName">אבסולוט וודקה 700 מ״ל</h3>
-            <div class="pPrice">₪89</div>
-          </div>
-          <p class="pMeta">פופולרי למסיבה</p>
-        </div>
+<script>
+/* 🔴 שנה כאן למספר שלך */
+const PHONE = "9725XXXXXXXXX"; // לדוגמה: 972501234567
 
-        <div class="product" onclick="order('סמירנוף 700 מ״ל', '₪79')">
-          <div class="pTop">
-            <h3 class="pName">סמירנוף 700 מ״ל</h3>
-            <div class="pPrice">₪79</div>
-          </div>
-          <p class="pMeta">מחיר חד • בקבוק קלאסי</p>
-        </div>
+const waTop = document.getElementById("waTop");
+waTop.href = `https://wa.me/${PHONE}?text=${encodeURIComponent("שלום, אני רוצה להזמין אלכוהול 🙂")}`;
 
-        <div class="product" onclick="order('ג׳וני ווקר רד 700 מ״ל', '₪99')">
-          <div class="pTop">
-            <h3 class="pName">ג׳וני ווקר רד 700 מ״ל</h3>
-            <div class="pPrice">₪99</div>
-          </div>
-          <p class="pMeta">וויסקי קלאסי לערב</p>
-        </div>
+const toast = document.getElementById("toast");
+function showToast(){
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1200);
+}
 
-        <div class="product" onclick="order('ג׳ים בים 700 מ״ל', '₪109')">
-          <div class="pTop">
-            <h3 class="pName">ג׳ים בים 700 מ״ל</h3>
-            <div class="pPrice">₪109</div>
-          </div>
-          <p class="pMeta">בורבון איכותי במחיר טוב</p>
-        </div>
+function order(name,price){
+  showToast();
+  const text = `שלום, אני רוצה להזמין:\n${name} (${price})`;
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`,"_blank");
+}
 
-        <div class="product" onclick="order('יין אדום 750 מ״ל', '₪45')">
-          <div class="pTop">
-            <h3 class="pName">יין אדום 750 מ״ל</h3>
-            <div class="pPrice">₪45</div>
-          </div>
-          <p class="pMeta">יבש/חצי יבש — לפי זמינות</p>
-        </div>
+function orderXL(){
+  showToast();
+  const text = "שלום, אני רוצה פרטים על קומבינציה XL למסיבה 🎉";
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`,"_blank");
+}
 
-        <div class="product" onclick="order('ערק 700 מ״ל', '₪69')">
-          <div class="pTop">
-            <h3 class="pName">ערק 700 מ״ל</h3>
-            <div class="pPrice">₪69</div>
-          </div>
-          <p class="pMeta">מומלץ עם קרח ולימון</p>
-        </div>
-      </div>
-
-      <div class="strip">
-        <b>אזורי משלוח:</b> קרית מוצקין • קרית ים • קרית ביאליק • קרית אתא • חיפה (לפי זמינות) <br>
-        <b>איך מזמינים?</b> לוחצים על מוצר או על הכפתור למעלה.
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="footerInner">
-        <span>© <span id="y"></span> משהו משהו • קיוסק משלוחי אלכוהול</span>
-        <span>קרית מוצקין והקריות • הכי זול באזור</span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // שנה כאן למספר שלך בלבד (בלי +, בלי רווחים)
-    const PHONE = "9725XXXXXXXXX"; // לדוגמה: "972501234567"
-
-    function order(productName, price){
-      const text =
-        `שלום, אני רוצה להזמין:\n` +
-        `• ${productName}\n` +
-        `• מחיר באתר: ${price}\n\n` +
-        `כתובת למשלוח: \n` +
-        `שם: \n` +
-        `טלפון: `;
-      const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
-      window.open(url, "_blank");
-    }
-
-    // כפתור וואטסאפ למעלה – הודעה כללית
-    const waTop = document.getElementById("waTop");
-    const generalText = "שלום, אני רוצה לבצע הזמנה. אפשר מחירון מעודכן וזמן משלוח?";
-    waTop.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(generalText)}`;
-
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
