@@ -2,84 +2,95 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8" />
-  <title>TalkMe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- 🎤 Retell Chat Widget -->
-  <script
-    id="retell-widget"
-    src="https://dashboard.retellai.com/retell-widget.js"
-    type="module"
-    data-public-key="52f571f6b0b8a4f86812f"
-    data-agent-id="agent_4ab6d6d06eaa70b175e4202d0c"
-    data-agent-version="0"
-    data-title="נטליה – בוט מדבר"
-    data-bot-name="נטליה"
-    data-color="#ec4899"
-    data-logo-url="🔴הדבק_כאן_קישור_לתמונה_של_האישה🔴"
-    data-show-ai-popup="true"
-    data-popup-message="היי 👋 אפשר לדבר איתי"
-    data-auto-open="false"
-  ></script>
+  <title>נטליה – דברו איתי</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fdf2f8, #fff);
+      font-family: Arial;
       direction: rtl;
+      background: linear-gradient(180deg,#f5f7ff,#ffffff);
       text-align: center;
     }
 
-    .container {
-      max-width: 900px;
+    .wrap {
+      max-width: 1000px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 40px 16px;
     }
 
-    .title {
+    h1 {
       font-size: 42px;
-      font-weight: bold;
-      color: #111827;
       margin-bottom: 10px;
     }
 
     .subtitle {
-      font-size: 20px;
-      color: #374151;
+      font-size: 18px;
+      color: #444;
       margin-bottom: 30px;
     }
 
     .avatar {
       width: 220px;
-      height: 220px;
       border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       margin-bottom: 20px;
     }
 
-    .hint {
+    button {
+      padding: 14px 26px;
       font-size: 16px;
-      color: #6b7280;
+      border-radius: 14px;
+      border: none;
+      background: #4f46e5;
+      color: white;
+      cursor: pointer;
+    }
+
+    #retell-root {
+      margin-top: 30px;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="title">נטליה 🎤</div>
-    <div class="subtitle">בוט מדבר – אפשר לדבר איתי בקול</div>
+  <div class="wrap">
+    <h1>🎤 דברו עם נטליה</h1>
+    <div class="subtitle">לחצו על הכפתור ואשרו מיקרופון</div>
 
-    <img
-      class="avatar"
-      src="🔴הדבק_כאן_קישור_לתמונה_של_האישה🔴"
-      alt="Natalia"
-    />
+    <!-- תמונה -->
+    <img class="avatar" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" />
 
-    <div class="hint">
-      לחץ על בועת הצ׳אט למטה כדי להתחיל לדבר איתי 👇
-    </div>
+    <br><br>
+    <button id="startBtn">התחל שיחה</button>
+
+    <div id="retell-root"></div>
   </div>
+
+  <script type="module">
+    const PUBLIC_KEY = "key_eb50e80f73b42fca72169e97cba4";
+    const AGENT_ID = "agent_4ab6d6d06eaa70b175e4202d0c";
+
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = "https://dashboard.retellai.com/retell-widget.js";
+    script.dataset.publicKey = PUBLIC_KEY;
+    script.dataset.agentId = AGENT_ID;
+    script.dataset.agentVersion = "0";
+    script.dataset.botName = "נטליה";
+    script.dataset.language = "he";
+    script.dataset.containerId = "retell-root";
+    document.head.appendChild(script);
+
+    document.getElementById("startBtn").addEventListener("click", async () => {
+      try {
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+        alert("המיקרופון אושר ✅ פתחי את הבועה והתחילי לדבר");
+      } catch {
+        alert("המיקרופון חסום ❌ יש לאפשר מיקרופון בדפדפן");
+      }
+    });
+  </script>
 </body>
 </html>
