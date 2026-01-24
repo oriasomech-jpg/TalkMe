@@ -1,209 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>משהו משהו | משלוחי אלכוהול קרית מוצקין</title>
+  <title>משהו משהו | קיוסק משלוחי אלכוהול • הכי זול בקריות</title>
 
   <style>
     :root{
-      --bg:#0b0b0b;
-      --panel:#111;
-      --panel2:#0f0f0f;
+      --bg:#070707;
+      --bg2:#0b0b0b;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.04);
+      --line:rgba(255,255,255,.12);
       --text:#ffffff;
-      --muted:rgba(255,255,255,.75);
-      --line:#222;
+      --muted:rgba(255,255,255,.72);
       --green:#00ff88;
       --green2:#00cc6e;
+      --shadow: 0 10px 40px rgba(0,0,0,.55);
+      --radius:16px;
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(900px 360px at 20% -10%, rgba(0,255,136,.18), transparent 60%),
+        radial-gradient(900px 360px at 90% 10%, rgba(0,255,136,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      overflow-x:hidden;
     }
 
-    /* Header with logo */
-    .header{
-      background:#000;
-      padding: 18px 16px;
-      text-align:center;
-      border-bottom: 2px solid var(--green);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-    .logo{
-      max-width: 360px;
-      width: 90%;
-      height: auto;
-      display:block;
-      margin: 0 auto;
-    }
-
-    /* Layout helpers */
+    a{color:inherit}
     .container{
       max-width:1100px;
       margin:0 auto;
       padding:0 16px;
     }
 
-    /* Hero */
-    .hero{
-      padding: 64px 0 42px;
-      text-align:center;
-      background: linear-gradient(180deg, #000, #111);
+    /* Top bar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
     }
-    .hero h2{
-      font-size: 40px;
-      margin: 0 0 12px;
-      letter-spacing: .3px;
-    }
-    .hero p{
-      margin: 0 auto;
-      max-width: 720px;
-      font-size: 18px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .ctaRow{
-      margin-top: 26px;
+    .topbarInner{
       display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
       gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
+      min-width:0;
+    }
+    .brand img{
+      height:34px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.55));
+    }
+    .brandText{
+      display:flex;
+      flex-direction:column;
+      line-height:1.2;
+      min-width:0;
+    }
+    .brandText b{
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brandText span{
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .chip b{color:var(--green)}
     .btn{
-      display:inline-block;
-      padding: 14px 26px;
-      border-radius: 10px;
-      font-weight: 700;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 11px 14px;
+      border-radius: 12px;
       text-decoration:none;
-      transition: .25s;
-      border: 1px solid transparent;
+      font-weight:700;
+      border:1px solid transparent;
+      transition:.2s;
+      user-select:none;
+      white-space:nowrap;
     }
     .btnPrimary{
       background: var(--green);
       color:#000;
+      box-shadow: 0 8px 24px rgba(0,255,136,.18);
     }
-    .btnPrimary:hover{ background: var(--green2); }
+    .btnPrimary:hover{background: var(--green2)}
     .btnGhost{
       background: transparent;
-      color: var(--text);
       border-color: var(--line);
+      color: var(--text);
     }
-    .btnGhost:hover{ border-color: var(--green); }
+    .btnGhost:hover{border-color: var(--green)}
+    .btnSmall{padding:10px 12px; font-size:13px; border-radius:10px}
 
-    /* Section title */
-    .section{
-      padding: 44px 0;
+    /* Hero */
+    .hero{
+      padding: 44px 0 26px;
     }
-    .sectionTitle{
-      margin: 0 0 18px;
-      font-size: 22px;
-      letter-spacing:.2px;
-    }
-    .sectionSub{
-      margin: 0 0 24px;
-      color: var(--muted);
-      line-height:1.6;
-    }
-
-    /* Cards grid */
-    .grid{
+    .heroGrid{
       display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: repeat(2, 1fr); }
-      .hero h2{ font-size: 34px; }
-    }
-    @media (max-width: 520px){
-      .grid{ grid-template-columns: 1fr; }
-      .hero h2{ font-size: 30px; }
-    }
+      grid-template-columns: 1.35fr .65fr;
+      gap: 18
 
-    .card{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 22px;
-      transition: .25s;
-      min-height: 130px;
-    }
-    .card:hover{
-      border-color: var(--green);
-      transform: translateY(-4px);
-    }
-    .card h3{
-      margin:0 0 8px;
-      color: var(--green);
-      font-size: 18px;
-    }
-    .card p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.5;
-      font-size: 15px;
-    }
-
-    /* Delivery strip */
-    .delivery{
-      background:#000;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 34px 0;
-      text-align:center;
-    }
-    .delivery h3{
-      margin:0 0 10px;
-      font-size: 22px;
-    }
-    .pillRow{
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 14px;
-    }
-    .pill{
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 10px 14px;
-      color: var(--muted);
-      font-size: 14px;
-      background: var(--panel2);
-    }
-    .pill b{ color: var(--green); }
-
-    /* Footer */
-    footer{
-      background:#000;
-      padding: 20px 16px;
-      text-align:center;
-      color: rgba(255,255,255,.6);
-      font-size: 13px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- TOP LOGO -->
-  <header class="header">
-    <img src="logo.png" class="logo" alt="משהו משהו לוגו">
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <h2>משלוחי אלכוהול עד הבית 🍾</h2>
-      <p>
-        קנייה מהירה ונקייה בלי עומס כפתורים. וויסקי | וודקה | יין | בירה —
-        משלוחים בקרית מוצקין והקריות.
      
