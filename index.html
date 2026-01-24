@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>משהו משהו | משלוחי אלכוהול בקריות</title>
-<meta name="description" content="משהו משהו – משלוחי אלכוהול בקריות. משלוח מהיר, מחירים מעולים, הזמנה פשוטה בוואטסאפ.">
+<title>משהו משהו|משלוחי אלכוהול בקריות</title>
 
 <style>
 :root{
@@ -105,7 +104,7 @@ h1{margin:0 0 10px;font-size:36px;line-height:1.15}
 .lead{margin:0;color:var(--muted);font-size:16px;line-height:1.75}
 .sideCard h3{margin:0 0 10px;font-size:18px}
 
-/* ✅ HERO IMAGE (fast loading) */
+/* ✅ HERO IMAGE (no tricks) */
 .heroCard{
   position:relative;
   border-radius:var(--radius);
@@ -119,10 +118,9 @@ h1{margin:0 0 10px;font-size:36px;line-height:1.15}
 .heroMedia{
   position:absolute;
   inset:0;
-  background: center/cover no-repeat;
+  background: url("Gemini_Generated_Image_exp657exp657exp6.png") center/cover no-repeat;
   transform: scale(1);
   animation: heroZoom 18s ease-in-out infinite alternate;
-  will-change: transform;
 }
 @keyframes heroZoom{
   from{ transform: scale(1); }
@@ -279,25 +277,6 @@ footer{
   flex:0 0 auto;
 }
 
-/* Floating WhatsApp Button */
-.wa-float{
-  position:fixed;
-  bottom:18px;
-  right:18px;
-  width:62px;
-  height:62px;
-  border-radius:50%;
-  background:#25D366;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.45);
-  z-index:998; /* toast is 999 */
-  transition:.2s;
-}
-.wa-float:hover{transform:scale(1.06)}
-.wa-float img{width:34px;height:34px;display:block}
-
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important; transition:none !important;}
   .toast{display:none;}
@@ -311,7 +290,7 @@ footer{
   <div class="container">
     <div class="topbarInner">
       <div class="brand">
-        <img src="logo.png" alt="לוגו משהו משהו">
+        <img src="logo,png.png" alt="לוגו משהו משהו">
         <div class="brandText">
           <b>משהו משהו</b>
           <span>קיוסק משלוחי אלכוהול • קריות</span>
@@ -326,6 +305,7 @@ footer{
   <div class="container">
     <div class="heroGrid">
 
+      <!-- ✅ Hero with image background -->
       <div class="heroCard">
         <div class="heroMedia" aria-hidden="true"></div>
         <div class="heroOverlay" aria-hidden="true"></div>
@@ -451,28 +431,19 @@ footer{
     <div class="footerInner">
       <span>© <span id="y"></span> משהו משהו • קיוסק משלוחי אלכוהול</span>
       <span>קרית מוצקין והקריות • הכי זול באזור</span>
-      <span>מכירה מגיל 18+ בלבד • בכפוף להצגת תעודה</span>
     </div>
   </div>
 </footer>
 
 <div class="toast" id="toast"><i></i><span id="toastText">פותח וואטסאפ…</span></div>
 
-<!-- Floating WhatsApp -->
-<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="צור קשר בוואטסאפ">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-</a>
-
 <script>
   // 🔴 שנה כאן למספר שלך בלבד (בלי +, בלי רווחים)
   const PHONE = "972505588809"; // לדוגמה: "972501234567"
 
   const waTop = document.getElementById("waTop");
-  const waFloat = document.getElementById("waFloat");
-
   const generalText = "שלום, אני רוצה לבצע הזמנה. אפשר מחירון מעודכן וזמן משלוח?";
-  waTop.href   = `https://wa.me/${PHONE}?text=${encodeURIComponent(generalText)}`;
-  waFloat.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(generalText)}`;
+  waTop.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(generalText)}`;
 
   const toast = document.getElementById("toast");
   const toastText = document.getElementById("toastText");
@@ -495,26 +466,17 @@ footer{
       `שם: \n` +
       `טלפון: `;
     const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
-    window.open(url, "_blank");
-  }
-
-  // ✅ Israel timezone Friday check
-  function isFridayInIsrael(){
-    const day = new Intl.DateTimeFormat("en-US", {
-      timeZone: "Asia/Jerusalem",
-      weekday: "short"
-    }).format(new Date());
-    return day.toLowerCase().startsWith("fri");
+    setTimeout(()=> window.open(url, "_blank"), 220);
   }
 
   // Friday promo
   const promoEl = document.getElementById("xlPromo");
   const promoBadge = document.getElementById("promoBadge");
   const promoStock = document.getElementById("promoStock");
+  const isFriday = (new Date()).getDay() === 5;
 
   function updatePromo(){
-    const friday = isFridayInIsrael();
-    if(friday){
+    if(isFriday){
       promoEl.classList.add("friday");
       promoBadge.textContent = "היום בלבד";
     }else{
@@ -528,8 +490,7 @@ footer{
     const max = 22;
 
     function setText(){
-      const friday = isFridayInIsrael();
-      if(friday){
+      if(isFriday){
         const left = Math.floor(Math.random() * (max - min + 1)) + min;
         promoStock.innerHTML = `⏳ <b>נותרו ${left} מארזים</b> למבצע שישי — הזמינו עכשיו`;
       }else{
@@ -538,17 +499,16 @@ footer{
     }
 
     setText();
-    setInterval(setText, isFridayInIsrael() ? 4500 : 6500);
+    setInterval(setText, isFriday ? 4500 : 6500);
   }
 
   function orderXL(){
     showToast("פותח וואטסאפ לפרטי מבצע שישי – מארז XL");
-    const friday = isFridayInIsrael();
-    const text = friday
+    const text = isFriday
       ? "שלום, אני רוצה להזמין את מבצע שישי – מארז XL. מה המחיר ומה הזמינות?"
       : "שלום, אני רוצה פרטים/לשמור מקום למבצע שישי – מארז XL. מה המחיר ומה השעות?";
     const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
-    window.open(url, "_blank");
+    setTimeout(()=> window.open(url, "_blank"), 220);
   }
 
   promoEl.addEventListener("click", orderXL);
@@ -561,27 +521,6 @@ footer{
 
   updatePromo();
   startStockTicker();
-  setInterval(updatePromo, 60_000);
-
-  // 🚀 Smart Hero Image Loader (mobile-first)
-  const heroMedia = document.querySelector(".heroMedia");
-
-  function loadHeroImage(){
-    const isMobile = window.innerWidth < 700;
-    const img = new Image();
-    img.src = isMobile
-      ? "Gemini_Generated_Image_exp657exp657exp6-mobile.jpg"
-      : "Gemini_Generated_Image_exp657exp657exp6.png";
-
-    img.onload = () => {
-      heroMedia.style.backgroundImage = `url('${img.src}')`;
-    };
-  }
-
-  window.addEventListener("load", () => {
-    // מציג את האתר מהר, ואז טוען תמונה כבדה
-    setTimeout(loadHeroImage, 200);
-  });
 
   document.getElementById('y').textContent = new Date().getFullYear();
 </script>
