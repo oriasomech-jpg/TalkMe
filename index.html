@@ -1,25 +1,16 @@
-<button id="talkBtn" style="font-size:20px;padding:12px 20px;">🎤 דברי איתי</button>
+</body>
+<button id="talkBtn" style="font-size:20px;padding:12px 20px;">
+🎤 דברי איתי
+</button>
 
-<script src="https://unpkg.com/@vapi-ai/web/dist/index.umd.js"></script>
-<script>
-  // בדיקה שהספרייה נטענה
-  console.log("Vapi global:", typeof Vapi);
+<script type="module">
+  import Vapi from "https://cdn.skypack.dev/@vapi-ai/web";
 
-  const PUBLIC_KEY = 2aebd1a2-cca0-4189-b999-32b0195636fc;
-  const ASSISTANT_ID = 635f21cd-7910-4713-979f-db2dce4f7086;
+  const vapi = new Vapi("2aebd1a2-cca0-4189-b999-32b0195636fc");
+  const assistantId = "635f21cd-7910-4713-979f-db2dce4f7086";
 
-
-  const vapi = new Vapi(PUBLIC_KEY);
-
-  document.getElementById("talkBtn").addEventListener("click", async () => {
-    console.log("Clicked. Starting...");
-    try {
-      await vapi.start(ASSISTANT_ID);
-      console.log("Started!");
-    } catch (e) {
-      console.error("Start error:", e);
-      alert("נכשלה התחלה. פתח Console ותראה שגיאה אדומה");
-    }
-  });
+  document.getElementById("talkBtn").onclick = async () => {
+    await vapi.start(assistantId);
+  };
 </script>
 
