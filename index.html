@@ -2,95 +2,71 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8" />
-  <title>נטליה – דברו איתי</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>דברו עם נטליה</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
       margin: 0;
-      font-family: Arial;
-      direction: rtl;
-      background: linear-gradient(180deg,#f5f7ff,#ffffff);
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f4f7ff, #ffffff);
       text-align: center;
-    }
-
-    .wrap {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 16px;
+      direction: rtl;
     }
 
     h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
+      margin-top: 40px;
+      font-size: 36px;
     }
 
-    .subtitle {
-      font-size: 18px;
-      color: #444;
+    p {
+      color: #555;
       margin-bottom: 30px;
     }
 
     .avatar {
-      width: 220px;
+      width: 260px;
+      height: 360px;
       border-radius: 50%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      margin-bottom: 20px;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin: 30px auto;
+      display: block;
     }
 
-    button {
-      padding: 14px 26px;
-      font-size: 16px;
-      border-radius: 14px;
-      border: none;
-      background: #4f46e5;
-      color: white;
-      cursor: pointer;
-    }
-
-    #retell-root {
+    #retell-widget {
       margin-top: 30px;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <h1>🎤 דברו עם נטליה</h1>
-    <div class="subtitle">לחצו על הכפתור ואשרו מיקרופון</div>
 
-    <!-- תמונה -->
-    <img class="avatar" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" />
+  <h1>🎤 דברו עם נטליה</h1>
+  <p>לחצו על הכפתור ודברו אל המיקרופון</p>
 
-    <br><br>
-    <button id="startBtn">התחל שיחה</button>
+  <!-- תמונה -->
+  <img 
+    class="avatar"
+    src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+  />
 
-    <div id="retell-root"></div>
-  </div>
+  <!-- ווידג׳ט -->
+  <div id="retell-widget"></div>
 
-  <script type="module">
-    const PUBLIC_KEY = "key_eb50e80f73b42fca72169e97cba4";
-    const AGENT_ID = "agent_4ab6d6d06eaa70b175e4202d0c";
+  <!-- הגדרות Retell -->
+  <script>
+    window.retellConfig = {
+      publicKey: "public_key_52f571f6b0b8a4f86812f"
 
-    const script = document.createElement("script");
-    script.type = "module";
-    script.src = "https://dashboard.retellai.com/retell-widget.js";
-    script.dataset.publicKey = PUBLIC_KEY;
-    script.dataset.agentId = AGENT_ID;
-    script.dataset.agentVersion = "0";
-    script.dataset.botName = "נטליה";
-    script.dataset.language = "he";
-    script.dataset.containerId = "retell-root";
-    document.head.appendChild(script);
-
-    document.getElementById("startBtn").addEventListener("click", async () => {
-      try {
-        await navigator.mediaDevices.getUserMedia({ audio: true });
-        alert("המיקרופון אושר ✅ פתחי את הבועה והתחילי לדבר");
-      } catch {
-        alert("המיקרופון חסום ❌ יש לאפשר מיקרופון בדפדפן");
-      }
-    });
+,
+      agentId: "agent_4ab6d6d06eaa70b175e4202d0c",
+      language: "he"
+    };
   </script>
+
+  <!-- טעינת הספרייה -->
+  <script src="https://cdn.retellai.com/widget.js"></script>
+
 </body>
 </html>
