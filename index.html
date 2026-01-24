@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>משהו משהו|משלוחי אלכוהול בקריות</title>
+<title>משהו משהו | משלוחי אלכוהול בקריות</title>
 
 <style>
 :root{
@@ -31,7 +31,7 @@ body{
 }
 .container{max-width:1120px;margin:0 auto;padding:0 16px}
 
-/* TOPBAR */
+/* ================= TOPBAR ================= */
 .topbar{
   position:sticky; top:0; z-index:50;
   background:rgba(0,0,0,.72);
@@ -49,308 +49,132 @@ body{
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand img{
   height:36px;
-  width:auto;
-  display:block;
   animation: glowPulse 2.8s ease-in-out infinite;
-  filter: drop-shadow(0 10px 24px rgba(0,0,0,.65));
 }
 @keyframes glowPulse{
-  0%{filter: drop-shadow(0 0 5px rgba(0,255,136,.20)); opacity:.92;}
-  50%{filter: drop-shadow(0 0 16px rgba(0,255,136,.60)); opacity:1;}
-  100%{filter: drop-shadow(0 0 5px rgba(0,255,136,.20)); opacity:.92;}
+  0%{filter: drop-shadow(0 0 5px rgba(0,255,136,.20));}
+  50%{filter: drop-shadow(0 0 16px rgba(0,255,136,.60));}
+  100%{filter: drop-shadow(0 0 5px rgba(0,255,136,.20));}
 }
-.brandText{display:flex;flex-direction:column;line-height:1.15;min-width:0}
-.brandText b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brandText span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brandText{display:flex;flex-direction:column}
+.brandText b{font-size:14px}
+.brandText span{font-size:12px;color:var(--muted)}
 
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
   padding:12px 16px;
   border-radius:14px;
-  text-decoration:none;
   font-weight:900;
-  border:1px solid transparent;
-  transition:.2s;
   background: linear-gradient(180deg,var(--green),var(--green2));
   color:#000;
-  box-shadow: 0 10px 26px rgba(0,255,136,.20);
+  text-decoration:none;
+  transition:.2s;
 }
 .btn:hover{transform:translateY(-1px)}
 
-/* HERO */
-.hero{padding:36px 0 22px}
-.heroGrid{
-  display:grid;
-  grid-template-columns:1.3fr .7fr;
-  gap:18px;
-  align-items:stretch;
-}
-@media (max-width:900px){ .heroGrid{grid-template-columns:1fr} }
-
-/* Cards */
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:26px;
-  position:relative;
-  overflow:hidden;
-}
-h1{margin:0 0 10px;font-size:36px;line-height:1.15}
-@media (max-width:520px){ h1{font-size:30px} }
-.lead{margin:0;color:var(--muted);font-size:16px;line-height:1.75}
-.sideCard h3{margin:0 0 10px;font-size:18px}
-
-/* ✅ HERO IMAGE (no tricks) */
-.heroCard{
-  position:relative;
-  border-radius:var(--radius);
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  overflow:hidden;
-  min-height: 220px;
-}
-@media (max-width:520px){ .heroCard{min-height: 210px;} }
-
-.heroMedia{
-  position:absolute;
-  inset:0;
-  background: url("Gemini_Generated_Image_exp657exp657exp6.png") center/cover no-repeat;
-  transform: scale(1);
-  animation: heroZoom 18s ease-in-out infinite alternate;
-}
-@keyframes heroZoom{
-  from{ transform: scale(1); }
-  to{ transform: scale(1.08); }
-}
-
-/* Dark overlay for readability */
-.heroOverlay{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.75)),
-    linear-gradient(120deg, rgba(0,255,136,.14), transparent 60%);
-}
-
-/* Content */
-.heroContent{
-  position:relative;
-  padding:30px;
-}
-@media (max-width:520px){ .heroContent{padding:22px;} }
-.heroContent h1, .heroContent p{ text-shadow: 0 10px 22px rgba(0,0,0,.55); }
-
-/* PROMO (Friday) */
-.promo{
-  margin-top:14px;
-  border:1px solid rgba(0,255,136,.35);
-  background: linear-gradient(180deg, rgba(0,255,136,.14), rgba(255,255,255,.02));
-  border-radius:14px;
-  padding:14px;
-  cursor:pointer;
-  transition:.2s;
-  outline:none;
-}
-.promo:hover{transform:translateY(-2px);border-color:rgba(0,255,136,.60)}
-.promo:focus-visible{box-shadow:0 0 0 4px rgba(0,255,136,.18)}
-.promoTop{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;flex-wrap:wrap;margin-bottom:8px
-}
-.promoTitle{font-weight:900;font-size:16px}
-.promoBadge{
-  font-size:12px;font-weight:900;color:#000;
-  background: rgba(255,255,255,.85);
-  padding:6px 10px;border-radius:999px;white-space:nowrap;
-  border:1px solid rgba(255,255,255,.12);
-}
-.promoText{font-size:13px;color:var(--muted);line-height:1.55}
-.promoStock{
-  margin-top:10px;font-size:12px;color:rgba(255,255,255,.80);
-  border-top:1px solid rgba(255,255,255,.10);
-  padding-top:10px;
-}
-.promo.friday{
-  border-color: rgba(0,255,136,.72);
-  background: linear-gradient(180deg, rgba(0,255,136,.22), rgba(255,255,255,.03));
-  animation: fridayPulse 2.6s ease-in-out infinite;
-}
-.promo.friday .promoBadge{ background: var(--green); color:#000; }
-@keyframes fridayPulse{
-  0%{box-shadow:0 0 0 0 rgba(0,255,136,0)}
-  50%{box-shadow:0 0 0 6px rgba(0,255,136,.10)}
-  100%{box-shadow:0 0 0 0 rgba(0,255,136,0)}
-}
-
-/* PRODUCTS */
-.section{padding:0 0 42px}
-.sectionHead{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:12px;margin: 8px 0 14px;flex-wrap:wrap;
-}
-.sectionHead h2{margin:0;font-size:20px}
-.sectionHead p{margin:0;color:var(--muted);font-size:13px}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-@media(max-width:980px){ .products{grid-template-columns:repeat(2,1fr)} }
-@media(max-width:520px){ .products{grid-template-columns:1fr} }
-
-.product{
-  background: rgba(255,255,255,.04);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:16px;
-  transition:.2s;
-  box-shadow: var(--shadow2);
-  cursor:pointer;
-  outline:none;
-}
-.product:hover{transform:translateY(-3px);border-color:rgba(0,255,136,.62)}
-.product:focus-visible{box-shadow:0 0 0 4px rgba(0,255,136,.16), var(--shadow2);border-color:rgba(0,255,136,.62)}
-.pTop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
-.pName{margin:0;font-size:15px;line-height:1.35;color:rgba(255,255,255,.92)}
-.pPrice{font-weight:900;color:var(--green);white-space:nowrap}
-.pMeta{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
-
-.strip{
-  margin-top:16px;
-  background:rgba(0,0,0,.45);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:14px;
-  color:var(--muted);
-  line-height:1.7;
-  text-align:center;
-}
-.strip b{color:var(--green)}
-
-footer{
-  border-top:1px solid var(--line);
-  background:rgba(0,0,0,.65);
-  padding:18px 0;
-  color:rgba(255,255,255,.6);
-  font-size:13px;
-}
-.footerInner{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;flex-wrap:wrap;
-}
-
-/* Toast */
-.toast{
-  position:fixed;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%) translateY(16px);
-  background:rgba(0,0,0,.72);
-  border:1px solid rgba(255,255,255,.14);
-  backdrop-filter: blur(10px);
-  border-radius:999px;
-  padding:10px 14px;
-  color:rgba(255,255,255,.88);
-  font-size:13px;
-  display:flex;align-items:center;gap:10px;
-  box-shadow:0 12px 30px rgba(0,0,0,.45);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s ease;
-  z-index:999;
-  white-space:nowrap;
-  max-width:calc(100vw - 24px);
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast i{
-  width:10px;height:10px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 0 6px rgba(0,255,136,.12);
-  display:inline-block;
-  flex:0 0 auto;
-}
-
-@media (prefers-reduced-motion: reduce){
-  *{animation:none !important; transition:none !important;}
-  .toast{display:none;}
-}
-
-/* ===========================
-   ✅ Added: 18+ notice + Open Now button
-   =========================== */
-
-/* 18+ Notice */
-.ageNotice{
-  position:sticky;
-  top:64px; /* מתחת לטופבר */
-  z-index:49;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-.ageNoticeInner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:10px 0;
-  color:rgba(255,255,255,.82);
-  font-size:13px;
-  line-height:1.4;
-}
-.ageNoticeInner b{color:var(--green)}
-.ageClose{
-  appearance:none;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.06);
-  color:rgba(255,255,255,.86);
-  border-radius:999px;
-  padding:8px 10px;
-  cursor:pointer;
-  transition:.2s;
-  font-weight:900;
-}
-.ageClose:hover{transform:translateY(-1px); border-color:rgba(0,255,136,.45)}
-.ageNotice[hidden]{display:none}
-
-/* Open Now button (status) */
+/* Status Button */
 .statusBtn{
   display:inline-flex;
   align-items:center;
   gap:10px;
   padding:10px 14px;
   border-radius:14px;
-  text-decoration:none;
-  font-weight:900;
   border:1px solid rgba(255,255,255,.18);
   background:rgba(255,255,255,.06);
-  color:rgba(255,255,255,.92);
+  color:#fff;
+  font-weight:900;
+  text-decoration:none;
   transition:.2s;
-  box-shadow: 0 10px 26px rgba(0,0,0,.25);
 }
-.statusBtn:hover{transform:translateY(-1px); border-color:rgba(0,255,136,.55)}
+.statusBtn:hover{transform:translateY(-1px)}
 .statusDot{
   width:10px;height:10px;border-radius:50%;
   background:var(--green);
   box-shadow:0 0 0 6px rgba(0,255,136,.10);
-  flex:0 0 auto;
 }
-.statusBtn.closed .statusDot{
-  background:rgba(255,255,255,.35);
-  box-shadow:none;
+.statusBtn.closed .statusDot{background:#777; box-shadow:none}
+
+/* Age Notice */
+.ageNotice{
+  position:sticky;
+  top:64px;
+  z-index:49;
+  background:rgba(0,0,0,.55);
+  border-bottom:1px solid rgba(255,255,255,.10);
 }
-.statusBtn small{
-  font-size:12px;
-  color:rgba(255,255,255,.72);
-  font-weight:800;
+.ageNoticeInner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  padding:10px 0;
 }
+.ageNoticeInner b{color:var(--green)}
+.ageClose{
+  background:none;
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;
+  border-radius:999px;
+  padding:6px 12px;
+  cursor:pointer;
+}
+.ageNotice[hidden]{display:none}
+
+/* HERO */
+.hero{padding:36px 0}
+.heroCard{
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  min-height:220px;
+  position:relative;
+  overflow:hidden;
+}
+.heroMedia{
+  position:absolute; inset:0;
+  background:url("Gemini_Generated_Image_exp657exp657exp6.png") center/cover no-repeat;
+  animation: heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{from{transform:scale(1)} to{transform:scale(1.08)}}
+.heroOverlay{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.3), rgba(0,0,0,.75));
+}
+.heroContent{position:relative;padding:30px}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+@media(max-width:900px){.products{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.products{grid-template-columns:1fr}}
+
+.product{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  transition:.2s;
+}
+.product:hover{transform:translateY(-3px);border-color:rgba(0,255,136,.6)}
+
+/* Toast */
+.toast{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.75);
+  padding:10px 14px;
+  border-radius:999px;
+  opacity:0;
+  transition:.25s;
+}
+.toast.show{opacity:1}
+
+/* ✨ Life Animations */
+.reveal{opacity:0; transform:translateY(10px); transition:.4s;}
+.reveal.show{opacity:1; transform:none;}
 </style>
 </head>
 
@@ -360,320 +184,118 @@ footer{
   <div class="container">
     <div class="topbarInner">
       <div class="brand">
-        <img src="logo,png.png" alt="לוגו משהו משהו">
+        <img src="logo,png.png">
         <div class="brandText">
           <b>משהו משהו</b>
           <span>קיוסק משלוחי אלכוהול • קריות</span>
         </div>
       </div>
 
-      <!-- ✅ Added: Open Now button ליד הלוגו -->
-      <a class="statusBtn" id="openNowBtn" href="#" role="button" aria-label="סטטוס פתוח עכשיו">
-        <span class="statusDot" aria-hidden="true"></span>
-        <span>
-          <span id="openNowText">פתוח עכשיו</span><br>
-          <small id="openNowSub">לחצו להזמנה</small>
-        </span>
+      <a class="statusBtn" id="openNowBtn" href="#">
+        <span class="statusDot"></span>
+        <span id="openNowText">פתוח עכשיו</span>
       </a>
 
-      <a class="btn" id="waTop" href="#" target="_blank" rel="noopener">להזמנה בוואצפ</a>
+      <a class="btn" id="waTop" href="#">להזמנה בוואצפ</a>
     </div>
   </div>
 </div>
 
-<!-- ✅ Added: הודעת גיל 18+ -->
 <div class="ageNotice" id="ageNotice">
   <div class="container">
     <div class="ageNoticeInner">
-      <div>מכירת אלכוהול <b>מגיל 18+</b> בלבד. שתייה מופרזת מסכנת חיים.</div>
-      <button class="ageClose" id="ageClose" type="button" aria-label="סגור הודעת גיל 18+">הבנתי</button>
+      <div>מכירת אלכוהול <b>מגיל 18+</b> בלבד</div>
+      <button class="ageClose" id="ageClose">הבנתי</button>
     </div>
   </div>
 </div>
 
-<section class="hero">
+<section class="hero reveal">
   <div class="container">
-    <div class="heroGrid">
-
-      <!-- ✅ Hero with image background -->
-      <div class="heroCard">
-        <div class="heroMedia" aria-hidden="true"></div>
-        <div class="heroOverlay" aria-hidden="true"></div>
-        <div class="heroContent">
-          <h1>אלכוהול עד הדלת</h1>
-          <p class="lead">המחירים הכי זולים בקריות · משלוח מהיר · הזמנה פשוטה בוואטסאפ</p>
-        </div>
+    <div class="heroCard">
+      <div class="heroMedia"></div>
+      <div class="heroOverlay"></div>
+      <div class="heroContent">
+        <h1>אלכוהול עד הדלת</h1>
+        <p>הזמנה מהירה בוואטסאפ</p>
       </div>
-
-      <div class="card sideCard">
-        <h3>מה תקבלו?</h3>
-        <p class="lead"> זול, וגם שירות מהיר וחוויית הזמנה פשוטה.</p>
-
-        <div class="promo" id="xlPromo" role="button" tabindex="0"
-             aria-label="פרטים והזמנה למבצע שישי מארז XL בוואטסאפ">
-          <div class="promoTop">
-            <div class="promoTitle">🔥 מבצע שישי – מארז XL</div>
-            <div class="promoBadge" id="promoBadge">שישי בלבד</div>
-          </div>
-
-          <div class="promoText">
-            מארז XL במחיר מיוחד לימי שישי בלבד.<br>
-            מושלם למסיבה, אירוח וסופ"ש.<br>
-            <b>לחצו לפרטים והזמנה בוואטסאפ.</b>
-          </div>
-
-          <div class="promoStock" id="promoStock">טוען זמינות…</div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="sectionHead">
-      <h2>המשקאות שלנו</h2>
-      <p>לחיצה על מוצר פותחת וואטסאפ עם הודעה מוכנה</p>
-    </div>
-
-    <div class="products">
-      <div class="product" tabindex="0" role="button"
-           onclick="order('גולדסטאר 500 מ״ל (בקבוק)', '₪12')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();order('גולדסטאר 500 מ״ל (בקבוק)', '₪12')}">
-        <div class="pTop">
-          <h3 class="pName">גולדסטאר 500 מ״ל (בקבוק)</h3>
-          <div class="pPrice">₪12</div>
-        </div>
-        <p class="pMeta">קר • זמין במלאי (לפי שעה)</p>
-      </div>
-
-      <div class="product" tabindex="0" role="button"
-           onclick="order('היינקן 330 מ״ל (פחית)', '₪10')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();order('היינקן 330 מ״ל (פחית)', '₪10')}">
-        <div class="pTop">
-          <h3 class="pName">היינקן 330 מ״ל (פחית)</h3>
-          <div class="pPrice">₪10</div>
-        </div>
-        <p class="pMeta">אפשר מארזים לפי בקשה</p>
-      </div>
-
-      <div class="product" tabindex="0" role="button"
-           onclick="order('אבסולוט וודקה 700 מ״ל', '₪89')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();order('אבסולוט וודקה 700 מ״ל', '₪89')}">
-        <div class="pTop">
-          <h3 class="pName">אבסולוט וודקה 700 מ״ל</h3>
-          <div class="pPrice">₪89</div>
-        </div>
-        <p class="pMeta">פופולרי למסיבה</p>
-      </div>
-
-      <div class="product" tabindex="0" role="button"
-           onclick="order('ג׳וני ווקר רד 700 מ״ל', '₪99')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();order('ג׳וני ווקר רד 700 מ״ל', '₪99')}">
-        <div class="pTop">
-          <h3 class="pName">ג׳וני ווקר רד 700 מ״ל</h3>
-          <div class="pPrice">₪99</div>
-        </div>
-        <p class="pMeta">וויסקי קלאסי לערב</p>
-      </div>
-
-      <div class="product" tabindex="0" role="button"
-           onclick="order('ג׳ים בים 700 מ״ל', '₪109')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();order('ג׳ים בים 700 מ״ל', '₪109')}">
-        <div class="pTop">
-          <h3 class="pName">ג׳ים בים 700 מ״ל</h3>
-          <div class="pPrice">₪109</div>
-        </div>
-        <p class="pMeta">בורבון איכותי במחיר טוב</p>
-      </div>
-
-      <div class="product" tabindex="0" role="button"
-           onclick="order('יין אדום 750 מ״ל', '₪45')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();order('יין אדום 750 מ״ל', '₪45')}">
-        <div class="pTop">
-          <h3 class="pName">יין אדום 750 מ״ל</h3>
-          <div class="pPrice">₪45</div>
-        </div>
-        <p class="pMeta">יבש/חצי יבש — לפי זמינות</p>
-      </div>
-
-      <div class="product" tabindex="0" role="button"
-           onclick="order('ערק 700 מ״ל', '₪69')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();order('ערק 700 מ״ל', '₪69')}">
-        <div class="pTop">
-          <h3 class="pName">ערק 700 מ״ל</h3>
-          <div class="pPrice">₪69</div>
-        </div>
-        <p class="pMeta">מומלץ עם קרח ולימון</p>
-      </div>
-    </div>
-
-    <div class="strip">
-      <b>אזורי משלוח:</b> קרית מוצקין • קרית ים • קרית ביאליק • קרית אתא • חיפה (לפי זמינות) <br>
-      <b>איך מזמינים?</b> לוחצים על מוצר או על הכפתור למעלה.
-    </div>
+<section class="container">
+  <div class="products">
+    <div class="product reveal">🍺 גולדסטאר – ₪12</div>
+    <div class="product reveal">🍺 היינקן – ₪10</div>
+    <div class="product reveal">🍸 אבסולוט – ₪89</div>
+    <div class="product reveal">🥃 ג׳וני ווקר – ₪99</div>
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="footerInner">
-      <span>© <span id="y"></span> משהו משהו • קיוסק משלוחי אלכוהול</span>
-      <span>קרית מוצקין והקריות • הכי זול באזור</span>
-    </div>
-  </div>
-</footer>
-
-<div class="toast" id="toast"><i></i><span id="toastText">פותח וואטסאפ…</span></div>
+<div class="toast" id="toast">פותח וואטסאפ…</div>
 
 <script>
-  // 🔴 שנה כאן למספר שלך בלבד (בלי +, בלי רווחים)
-  const PHONE = "972505588809"; // לדוגמה: "972501234567"
+/* SETTINGS */
+const PHONE = "972505588809";
+const OPEN_FROM_HOUR = 18;
+const OPEN_TO_HOUR = 2;
 
-  const waTop = document.getElementById("waTop");
-  const generalText = "שלום, אני רוצה לבצע הזמנה. אפשר מחירון מעודכן וזמן משלוח?";
-  waTop.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(generalText)}`;
+/* WhatsApp */
+const waTop = document.getElementById("waTop");
+waTop.href = `https://wa.me/${PHONE}`;
 
-  const toast = document.getElementById("toast");
-  const toastText = document.getElementById("toastText");
-  let toastTimer = null;
+/* Toast */
+const toast = document.getElementById("toast");
+function showToast(){
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1200);
+}
 
-  function showToast(msg){
-    toastText.textContent = msg;
-    toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=> toast.classList.remove("show"), 1200);
+/* Open Now */
+const openNowBtn = document.getElementById("openNowBtn");
+const openNowText = document.getElementById("openNowText");
+
+function isOpenNow(){
+  const h = new Date().getHours();
+  return OPEN_FROM_HOUR < OPEN_TO_HOUR
+    ? h >= OPEN_FROM_HOUR && h < OPEN_TO_HOUR
+    : h >= OPEN_FROM_HOUR || h < OPEN_TO_HOUR;
+}
+function updateOpen(){
+  if(isOpenNow()){
+    openNowText.textContent = "פתוח עכשיו";
+    openNowBtn.classList.remove("closed");
+  }else{
+    openNowText.textContent = "סגור עכשיו";
+    openNowBtn.classList.add("closed");
   }
+}
+updateOpen();
+setInterval(updateOpen,30000);
 
-  function order(productName, price){
-    showToast(`פותח וואטסאפ להזמנה: ${productName}`);
-    const text =
-      `שלום, אני רוצה להזמין:\n` +
-      `• ${productName}\n` +
-      `• מחיר באתר: ${price}\n\n` +
-      `כתובת למשלוח: \n` +
-      `שם: \n` +
-      `טלפון: `;
-    const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
-    setTimeout(()=> window.open(url, "_blank"), 220);
-  }
+/* Age Notice */
+const ageNotice = document.getElementById("ageNotice");
+const ageClose = document.getElementById("ageClose");
+if(localStorage.getItem("ageOK")) ageNotice.hidden = true;
+ageClose.onclick = ()=>{
+  ageNotice.hidden = true;
+  localStorage.setItem("ageOK","1");
+};
 
-  // Friday promo
-  const promoEl = document.getElementById("xlPromo");
-  const promoBadge = document.getElementById("promoBadge");
-  const promoStock = document.getElementById("promoStock");
-  const isFriday = (new Date()).getDay() === 5;
-
-  function updatePromo(){
-    if(isFriday){
-      promoEl.classList.add("friday");
-      promoBadge.textContent = "היום בלבד";
-    }else{
-      promoEl.classList.remove("friday");
-      promoBadge.textContent = "שישי בלבד";
-    }
-  }
-
-  function startStockTicker(){
-    const min = 6;
-    const max = 22;
-
-    function setText(){
-      if(isFriday){
-        const left = Math.floor(Math.random() * (max - min + 1)) + min;
-        promoStock.innerHTML = `⏳ <b>נותרו ${left} מארזים</b> למבצע שישי — הזמינו עכשיו`;
-      }else{
-        promoStock.innerHTML = `📅 מבצע פעיל <b>רק בימי שישי</b> — שלחו וואטסאפ לפרטים`;
-      }
-    }
-
-    setText();
-    setInterval(setText, isFriday ? 4500 : 6500);
-  }
-
-  function orderXL(){
-    showToast("פותח וואטסאפ לפרטי מבצע שישי – מארז XL");
-    const text = isFriday
-      ? "שלום, אני רוצה להזמין את מבצע שישי – מארז XL. מה המחיר ומה הזמינות?"
-      : "שלום, אני רוצה פרטים/לשמור מקום למבצע שישי – מארז XL. מה המחיר ומה השעות?";
-    const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
-    setTimeout(()=> window.open(url, "_blank"), 220);
-  }
-
-  promoEl.addEventListener("click", orderXL);
-  promoEl.addEventListener("keydown", (e)=>{
-    if(e.key === "Enter" || e.key === " "){
-      e.preventDefault();
-      orderXL();
-    }
+/* Reveal on scroll */
+const items = document.querySelectorAll(".reveal");
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("show");
   });
+});
+items.forEach(el=>io.observe(el));
 
-  updatePromo();
-  startStockTicker();
-
-  document.getElementById('y').textContent = new Date().getFullYear();
-
-  /* ===========================
-     ✅ Added: 18+ notice + Open Now button logic
-     =========================== */
-
-  // 18+ Notice dismiss
-  const ageNotice = document.getElementById("ageNotice");
-  const ageClose = document.getElementById("ageClose");
-  try{
-    if(localStorage.getItem("ageNoticeDismissed") === "1"){
-      ageNotice.hidden = true;
-    }
-  }catch(e){}
-  ageClose.addEventListener("click", ()=>{
-    ageNotice.hidden = true;
-    try{ localStorage.setItem("ageNoticeDismissed","1"); }catch(e){}
-  });
-
-  // Open Now button (editable hours)
-  // שנה כאן שעות פעילות (בפורמט 24 שעות). דוגמה: פתוח 18:00 עד 02:00 -> OPEN_FROM_HOUR=18, OPEN_TO_HOUR=2
-  const OPEN_FROM_HOUR = 18; // <- ערוך לפי העסק
-  const OPEN_TO_HOUR   = 2;  // <- ערוך לפי העסק
-
-  const openNowBtn = document.getElementById("openNowBtn");
-  const openNowText = document.getElementById("openNowText");
-  const openNowSub = document.getElementById("openNowSub");
-
-  function isOpenNow(){
-    const now = new Date();
-    const h = now.getHours();
-
-    // טווח רגיל (לדוגמה 10 עד 22)
-    if(OPEN_FROM_HOUR < OPEN_TO_HOUR){
-      return h >= OPEN_FROM_HOUR && h < OPEN_TO_HOUR;
-    }
-    // טווח שעובר חצות (לדוגמה 18 עד 2)
-    return (h >= OPEN_FROM_HOUR) || (h < OPEN_TO_HOUR);
-  }
-
-  function updateOpenNow(){
-    const open = isOpenNow();
-    if(open){
-      openNowBtn.classList.remove("closed");
-      openNowText.textContent = "פתוח עכשיו";
-      openNowSub.textContent = "לחצו להזמנה";
-    }else{
-      openNowBtn.classList.add("closed");
-      openNowText.textContent = "סגור עכשיו";
-      openNowSub.textContent = "לחצו לבדוק זמינות";
-    }
-  }
-
-  // לחיצה על הכפתור פותחת וואטסאפ כמו הכפתור הראשי
-  openNowBtn.addEventListener("click", (e)=>{
-    e.preventDefault();
-    showToast("פותח וואטסאפ…");
-    window.open(waTop.href, "_blank");
-  });
-
-  updateOpenNow();
-  setInterval(updateOpenNow, 30000);
+openNowBtn.onclick = (e)=>{
+  e.preventDefault();
+  showToast();
+  window.open(waTop.href,"_blank");
+};
 </script>
 
 </body>
