@@ -3,770 +3,381 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ORI FASHION | מותגים אונליין</title>
-  <meta name="description" content="בגדי מותגים אופנתיים לנשים ולגברים. קולקציות חדשות, משלוחים מהירים ושירות פרימיום." />
+  <title>משהו משהו | קיוסק</title>
+  <meta name="description" content="הזמנת משקאות בקלות – איסוף מהיר או משלוח. משהו משהו קיוסק." />
 
   <style>
     :root{
-      --bg:#07080c;
-      --panel:#0d0f16;
-      --card:#0f1320;
-      --line:rgba(255,255,255,.10);
-      --text:#f4f6ff;
-      --muted:rgba(244,246,255,.68);
-      --gold:#d7b45b;
-      --gold2:#f1e0a6;
+      --bg:#070a08;
+      --panel: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.10);
+      --text:#f3fff7;
+      --muted: rgba(243,255,247,.65);
+      --green:#26d07c;      /* ירוק לוגו */
+      --green2:#6dffb1;     /* ירוק בהיר */
       --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --r:18px;
-      --r2:26px;
+      --r: 18px;
+      --r2: 26px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(900px 500px at 85% 0%, rgba(215,180,91,.18), transparent 60%),
-        radial-gradient(700px 400px at 10% 10%, rgba(73,163,255,.12), transparent 60%),
-        linear-gradient(180deg, #05060a 0%, #07080c 40%, #05060a 100%);
+        radial-gradient(900px 500px at 80% 0%, rgba(38,208,124,.16), transparent 60%),
+        radial-gradient(700px 420px at 10% 10%, rgba(109,255,177,.10), transparent 62%),
+        linear-gradient(180deg, #040605 0%, var(--bg) 60%, #040605 100%);
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+    .wrap{max-width:980px;margin:0 auto;padding:0 18px}
 
-    /* NAV */
-    .nav{
+    /* Top bar */
+    .top{
       position:sticky; top:0; z-index:50;
-      background: rgba(7,8,12,.70);
       backdrop-filter: blur(10px);
+      background: rgba(7,10,8,.72);
       border-bottom:1px solid var(--line);
     }
-    .navRow{
+    .topRow{
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 0; gap:12px;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:.6px;
-    }
-    .mark{
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.2px}
+    .logo{
       width:38px; height:38px; border-radius:14px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      box-shadow: 0 14px 35px rgba(215,180,91,.18);
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      box-shadow: 0 16px 40px rgba(38,208,124,.22);
     }
-    .brandTitle{line-height:1.05}
-    .brandTitle b{display:block; font-size:14px}
-    .brandTitle span{display:block; font-size:12px; color:var(--muted); font-weight:700}
-    .links{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
-    .links a{color:var(--muted); font-weight:800; font-size:14px}
-    .links a:hover{color:var(--text)}
-    .right{
-      display:flex; gap:10px; align-items:center;
-    }
-    .search{
-      display:flex; align-items:center; gap:8px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      border-radius: 999px;
-      padding:10px 12px;
-      min-width: 320px;
-    }
-    .search input{
-      width:100%;
-      background:transparent;
-      border:none;
-      outline:none;
-      color:var(--text);
-      font-size:14px;
-    }
-    .iconBtn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color:var(--text);
-      border-radius: 16px;
-      padding:10px 12px;
-      cursor:pointer;
-      font-weight:900;
-      transition:.2s;
-    }
-    .iconBtn:hover{transform:translateY(-1px); background: rgba(255,255,255,.08)}
-    .cartBtn{
-      border:none;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color:#1a1407;
-      box-shadow: 0 16px 40px rgba(215,180,91,.20);
-    }
-
-    @media (max-width: 980px){
-      .search{min-width: 200px}
-    }
-    @media (max-width: 820px){
-      .links{display:none}
-      .search{min-width: 160px}
-    }
-
-    /* HERO */
-    .hero{
-      padding: 44px 0 24px;
-    }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){
-      .heroGrid{grid-template-columns:1fr}
-    }
-    .heroCard{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      border-radius: var(--r2);
-      box-shadow: var(--shadow);
-      padding:24px;
-      position:relative;
-      overflow:hidden;
-    }
-    .badge{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color:var(--muted);
-      font-weight:900;
-      font-size:13px;
-    }
-    .heroCard h1{
-      margin:14px 0 10px;
-      font-size:44px;
-      letter-spacing:-.5px;
-      line-height:1.08;
-    }
-    .heroCard p{
-      margin:0 0 16px;
-      color:var(--muted);
-      line-height:1.7;
-      max-width: 60ch;
-      font-size:16px;
-    }
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color:var(--text);
-      border-radius: 16px;
-      padding:12px 14px;
-      font-weight:900;
-      cursor:pointer;
-      transition:.2s;
-      display:inline-flex; gap:8px; align-items:center; justify-content:center;
-    }
-    .btn:hover{transform:translateY(-1px); background: rgba(255,255,255,.09)}
-    .btn.primary{
-      border:none;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color:#1a1407;
-      box-shadow: 0 16px 40px rgba(215,180,91,.20);
-    }
-    .miniRow{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      margin-top:14px;
-    }
-    @media (max-width: 620px){
-      .heroCard h1{font-size:36px}
-      .miniRow{grid-template-columns:1fr}
-    }
-    .mini{
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.20);
-      border-radius: 16px;
-      padding:12px;
-      color:var(--muted);
-      font-weight:900;
-      font-size:13px;
-    }
-    .mini b{color:var(--text)}
-    .lookCard{
-      border:1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(215,180,91,.12), rgba(255,255,255,.03)),
-        url("hero.jpg") center/cover no-repeat;
-      border-radius: var(--r2);
-      box-shadow: var(--shadow);
-      padding:22px;
-      min-height: 320px;
-      position:relative;
-      overflow:hidden;
-    }
-    .lookCard::before{
-      content:"";
-      position:absolute; inset:0;
-      background: rgba(0,0,0,.55);
-    }
-    .lookContent{position:relative; z-index:1}
-    .lookTop{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
+    .brand small{display:block; color:var(--muted); font-weight:800; letter-spacing:0; margin-top:2px}
     .pill{
-      font-weight:1000;
+      border:1px solid rgba(38,208,124,.35);
+      background: rgba(38,208,124,.10);
+      color: #c8ffe5;
       padding:8px 12px;
       border-radius:999px;
-      background: rgba(215,180,91,.18);
-      border: 1px solid rgba(215,180,91,.25);
-      color: #f5e8bf;
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .lookContent h2{
-      margin:14px 0 8px;
-      font-size:20px;
-      color:var(--text);
-    }
-    .lookContent p{
-      margin:0;
-      color:rgba(255,255,255,.75);
-      line-height:1.6;
-      font-size:14px;
-      max-width: 50ch;
-    }
-
-    /* SECTIONS */
-    section{padding: 18px 0}
-    .titleRow{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
-      margin: 10px 0 12px;
-    }
-    .titleRow h3{margin:0;font-size:20px}
-    .titleRow .muted{margin:0;color:var(--muted);font-weight:800;font-size:13px}
-
-    .cats{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 900px){ .cats{grid-template-columns:1fr} }
-    .cat{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      border-radius: var(--r2);
-      padding:18px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      cursor:pointer;
-      transition:.2s;
-    }
-    .cat:hover{transform:translateY(-2px); border-color: rgba(215,180,91,.35)}
-    .cat b{font-size:16px}
-    .cat span{display:block; color:var(--muted); font-weight:800; margin-top:3px; font-size:13px}
-    .cat .tag{
-      padding:8px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(215,180,91,.22);
-      background: rgba(215,180,91,.12);
-      color:#f5e8bf;
-      font-weight:1000;
+      font-weight:900;
       font-size:12px;
       white-space:nowrap;
     }
 
-    /* PRODUCTS */
-    .products{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 1020px){ .products{grid-template-columns: repeat(2, 1fr)} }
-    @media (max-width: 560px){ .products{grid-template-columns: 1fr} }
-
-    .p{
+    /* Hero */
+    .hero{padding:26px 0 12px}
+    .card{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: var(--panel);
       border-radius: var(--r2);
-      overflow:hidden;
-      box-shadow: 0 10px 35px rgba(0,0,0,.20);
-      transition:.2s;
-      display:flex; flex-direction:column;
-      min-height: 100%;
+      box-shadow: var(--shadow);
+      padding:18px;
     }
-    .p:hover{transform:translateY(-2px); border-color: rgba(215,180,91,.35)}
-    .pimg{
-      height: 220px;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.35)),
-        url("product-1.jpg") center/cover no-repeat;
-    }
-    .pBody{padding:14px; display:flex; flex-direction:column; gap:10px; flex:1}
-    .pTop{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
-    .pTop b{font-size:15px}
-    .brandTag{
-      font-size:11px;
-      font-weight:1000;
-      color:#e9ddba;
-      border:1px solid rgba(215,180,91,.22);
-      background: rgba(215,180,91,.10);
-      padding:6px 10px;
-      border-radius: 999px;
-      white-space:nowrap;
-    }
-    .pDesc{color:var(--muted); font-size:13px; line-height:1.55}
-    .pBottom{
-      display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:auto;
-    }
-    .price{font-weight:1000; font-size:16px}
-    .select{
+    h1{margin:0 0 8px; font-size:28px}
+    .sub{margin:0; color:var(--muted); line-height:1.6}
+    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .btn{
       border:1px solid var(--line);
-      background: rgba(0,0,0,.20);
+      background: rgba(255,255,255,.06);
       color:var(--text);
-      border-radius: 14px;
-      padding:10px 10px;
-      font-weight:900;
-      outline:none;
+      padding:12px 14px;
+      border-radius: 16px;
+      font-weight:1000;
+      cursor:pointer;
+      transition:.2s;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10)}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      color:#072012;
+      box-shadow: 0 16px 40px rgba(38,208,124,.22);
     }
 
-    /* DRAWER CART */
-    .overlay{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.60);
-      display:none;
-      z-index: 80;
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:12px;
+      margin-top:12px;
+      align-items:start;
     }
-    .drawer{
-      position:fixed;
-      top:0; left:0;
-      width: min(420px, 92vw);
-      height: 100%;
-      background: rgba(10,12,18,.92);
-      backdrop-filter: blur(12px);
-      border-right:1px solid var(--line);
-      box-shadow: var(--shadow);
-      transform: translateX(-110%);
-      transition: .25s;
-      z-index: 90;
-      display:flex; flex-direction:column;
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
     }
-    .drawer.open{transform: translateX(0)}
-    .overlay.show{display:block}
-    .dHead{
-      padding:16px;
-      border-bottom:1px solid var(--line);
-      display:flex; justify-content:space-between; align-items:center;
+
+    /* Menu */
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+      margin: 0 0 10px;
+    }
+    .sectionTitle b{font-size:16px}
+    .sectionTitle span{color:var(--muted); font-weight:900; font-size:12px}
+
+    .menu{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
       gap:10px;
     }
-    .dHead b{font-size:15px}
-    .dHead span{color:var(--muted); font-weight:900; font-size:12px}
-    .dBody{padding:12px; overflow:auto; flex:1}
+    @media (max-width: 520px){ .menu{grid-template-columns:1fr} }
+
     .item{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      border-radius: 18px;
+      background: rgba(0,0,0,.18);
+      border-radius: var(--r);
       padding:12px;
-      display:flex; gap:10px; align-items:flex-start;
-      margin-bottom:10px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
     }
-    .thumb{
-      width:54px; height:54px; border-radius:14px;
-      background: rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      flex: 0 0 auto;
-      background-size: cover;
-      background-position:center;
+    .item b{display:block; font-size:14px}
+    .item small{display:block; color:var(--muted); margin-top:3px; font-weight:800}
+    .price{font-weight:1000; white-space:nowrap}
+    .qty{
+      display:flex; align-items:center; gap:8px;
+      margin-top:10px;
     }
-    .iMeta{flex:1}
-    .iMeta b{display:block; font-size:14px}
-    .iMeta small{display:block; color:var(--muted); font-weight:800; margin-top:2px}
-    .qtyRow{
-      display:flex; gap:8px; align-items:center; margin-top:8px;
-    }
-    .qtyBtn{
-      width:34px;height:34px;border-radius:12px;
+    .qbtn{
+      width:34px; height:34px;
+      border-radius: 14px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.06);
       color:var(--text);
       font-weight:1000;
       cursor:pointer;
     }
-    .remove{
-      border:none; background:transparent; color: rgba(255,255,255,.65);
-      cursor:pointer; font-weight:900;
-    }
-    .dFoot{
-      border-top:1px solid var(--line);
-      padding:12px;
-      display:grid; gap:10px;
-    }
-    .totalRow{display:flex; justify-content:space-between; align-items:center; gap:10px}
-    .totalRow b{font-size:16px}
-    .smallNote{color:var(--muted); font-weight:800; font-size:12px; line-height:1.5}
-    .fullBtn{
-      width:100%;
-      border:none;
-      border-radius: 18px;
-      padding:13px 14px;
-      font-weight:1000;
-      cursor:pointer;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color:#1a1407;
-      box-shadow: 0 16px 40px rgba(215,180,91,.18);
-    }
+    .qval{min-width:22px; text-align:center; font-weight:1000}
 
-    /* FOOTER */
-    footer{
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      padding:22px 0 60px;
-      margin-top: 14px;
+    /* Order box */
+    .field{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+      margin-top:10px;
     }
-    .footRow{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+    textarea.field{min-height:90px; resize:vertical}
+    .note{color:var(--muted); font-size:12px; line-height:1.6; margin:10px 0 0}
+    .totRow{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      gap:10px;
+    }
+    .totRow b{font-size:16px}
+    .footer{
+      padding:18px 0 40px;
+      color:var(--muted);
+      text-align:center;
+      font-size:12px;
+    }
+    .age{
+      display:flex; gap:10px; align-items:flex-start;
+      margin-top:10px;
+      color:rgba(243,255,247,.75);
+      font-weight:900;
+      font-size:12px;
+    }
+    .age input{transform: scale(1.2); margin-top:2px}
   </style>
 </head>
 
 <body>
-  <!-- NAV -->
-  <div class="nav">
+  <div class="top">
     <div class="wrap">
-      <div class="navRow">
-        <a class="brand" href="#" onclick="scrollToTop(); return false;">
-          <div class="mark"></div>
-          <div class="brandTitle">
-            <b>ORI FASHION</b>
-            <span>מותגים • קולקציות חדשות • פרימיום</span>
+      <div class="topRow">
+        <div class="brand">
+          <div class="logo"></div>
+          <div>
+            <div>משהו משהו</div>
+            <small>קיוסק • הזמנה מהירה</small>
           </div>
-        </a>
-
-        <div class="links">
-          <a href="#new">חדש</a>
-          <a href="#women">נשים</a>
-          <a href="#men">גברים</a>
-          <a href="#access">אקססוריז</a>
         </div>
-
-        <div class="right">
-          <div class="search" title="חיפוש">
-            🔎
-            <input id="q" placeholder="חיפוש מוצר / מותג…" />
-          </div>
-          <button class="iconBtn cartBtn" id="openCart">🛍️ עגלה (<span id="cartCount">0</span>)</button>
-        </div>
+        <div class="pill">איסוף / משלוח</div>
       </div>
     </div>
   </div>
 
-  <!-- HERO -->
   <div class="wrap hero">
-    <div class="heroGrid">
-      <div class="heroCard">
-        <div class="badge">✨ משלוח מהיר • 🔁 החלפה קלה • 💬 שירות בוואטסאפ</div>
-        <h1>סטייל של מותגים. חוויית בוטיק אונליין.</h1>
-        <p>
-          קולקציות נבחרות לנשים ולגברים – חולצות, מכנסיים, שמלות, נעליים ואקססוריז.
-          איכות גבוהה, לוק יוקרתי, ושירות אישי שמרגיש כמו חנות אמיתית.
+    <div class="card">
+      <h1>מזמינים בקלות. מגיעים מהר.</h1>
+      <p class="sub">בחר מהתפריט, הוסף כמות, כתוב כתובת/הערות — ולחץ “שלח הזמנה בוואטסאפ”.</p>
+      <div class="row">
+        <button class="btn primary" onclick="document.getElementById('orderBox').scrollIntoView({behavior:'smooth'})">🛒 להזמנה</button>
+        <a class="btn" href="tel:+9725XXXXXXXX">📞 להתקשר</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- MENU -->
+      <div class="card">
+        <div class="sectionTitle">
+          <b>תפריט אלכוהול</b>
+          <span>מחירים לדוגמה — תשנה מה שתרצה</span>
+        </div>
+
+        <div class="menu" id="menu"></div>
+
+        <p class="note">* אלכוהול מגיל 18+. ייתכן שתידרש הצגת ת״ז בעת מסירה/איסוף.</p>
+      </div>
+
+      <!-- ORDER -->
+      <div class="card" id="orderBox">
+        <div class="sectionTitle">
+          <b>פרטי הזמנה</b>
+          <span>פחות לחצנים, הכי פשוט</span>
+        </div>
+
+        <input class="field" id="fullName" placeholder="שם מלא" />
+        <input class="field" id="phone" placeholder="טלפון" />
+        <select class="field" id="fulfillment">
+          <option value="איסוף מהקיוסק">איסוף מהקיוסק</option>
+          <option value="משלוח">משלוח</option>
+        </select>
+        <input class="field" id="address" placeholder="כתובת למשלוח (אם משלוח)" />
+        <textarea class="field" id="notes" placeholder="הערות (קומה/קוד/קרח/כוסות וכו׳)"></textarea>
+
+        <label class="age">
+          <input type="checkbox" id="ageConfirm" />
+          אני מאשר/ת שאני מעל גיל 18 ורשאי/ת לרכוש אלכוהול.
+        </label>
+
+        <div class="totRow">
+          <div>סה״כ</div>
+          <b>₪ <span id="total">0</span></b>
+        </div>
+
+        <button class="btn primary" style="width:100%; margin-top:12px;" onclick="sendWhatsApp()">
+          💬 שלח הזמנה בוואטסאפ
+        </button>
+
+        <p class="note">
+          שעות פעילות לדוגמה: א׳–ה׳ 10:00–02:00, ו׳ 10:00–04:00, שבת 12:00–04:00<br/>
+          כתובת לדוגמה: רחוב ___, עיר ___
         </p>
-        <div class="ctaRow">
-          <button class="btn primary" onclick="document.getElementById('new').scrollIntoView({behavior:'smooth'})">🖤 לצפייה בקולקציה החדשה</button>
-          <a class="btn" target="_blank" rel="noopener"
-             href="https://wa.me/9725XXXXXXXX?text=%D7%94%D7%99%D7%99%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F/%D7%AA%20%D7%91%D7%A4%D7%A8%D7%99%D7%98%D7%99%D7%9D%20%D7%95%D7%9E%D7%99%D7%93%D7%95%D7%AA%20%D7%9C%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D%20%D7%91%D7%90%D7%AA%D7%A8">
-            💬 ייעוץ מידות בוואטסאפ
-          </a>
-        </div>
-
-        <div class="miniRow">
-          <div class="mini"><b>איכות פרימיום</b><br>בדים נעימים וגימור יוקרתי</div>
-          <div class="mini"><b>סטייל עדכני</b><br>לוקים שמצטלמים מושלם</div>
-          <div class="mini"><b>שירות אישי</b><br>מענה מהיר לכל שאלה</div>
-        </div>
       </div>
+    </div>
 
-      <!-- Right card with background image -->
-      <div class="lookCard">
-        <div class="lookContent">
-          <div class="lookTop">
-            <div>
-              <div style="font-weight:1000;font-size:14px;color:rgba(255,255,255,.9)">הקולקציה החדשה</div>
-              <div style="color:rgba(255,255,255,.65); font-weight:800; font-size:12px;margin-top:2px">Drops • Limited • Premium</div>
-            </div>
-            <div class="pill">NEW SEASON</div>
-          </div>
-          <h2>לוק יוקרתי שמרים את כל ההופעה</h2>
-          <p>
-            החלף את התמונת רקע הזו לקובץ שלך בשם <b>hero.jpg</b> (למשל: צילום חנות/דוגמן/בוטיק).
-          </p>
-        </div>
-      </div>
+    <div class="footer">
+      © <span id="year"></span> משהו משהו • קיוסק
     </div>
   </div>
-
-  <!-- CATEGORIES -->
-  <section class="wrap">
-    <div class="titleRow">
-      <h3>קטגוריות</h3>
-      <p class="muted">לחץ כדי לסנן מוצרים</p>
-    </div>
-
-    <div class="cats">
-      <div class="cat" onclick="setFilter('נשים')">
-        <div><b>נשים</b><span>שמלות, חולצות, מכנסיים, סטים</span></div>
-        <div class="tag">WOMEN</div>
-      </div>
-      <div class="cat" onclick="setFilter('גברים')">
-        <div><b>גברים</b><span>טישרטים, מכנסיים, ג׳קטים, סטים</span></div>
-        <div class="tag">MEN</div>
-      </div>
-      <div class="cat" onclick="setFilter('אקססוריז')">
-        <div><b>אקססוריז</b><span>כובעים, תיקים, נעליים, תוספות</span></div>
-        <div class="tag">ACCESS</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTS -->
-  <section class="wrap" id="new">
-    <div class="titleRow">
-      <h3>מומלצים היום</h3>
-      <p class="muted">מחירים לדוגמה — תוכל לשנות הכל בקלות</p>
-    </div>
-    <div class="products" id="products"></div>
-  </section>
-
-  <footer>
-    <div class="wrap">
-      <div class="footRow">
-        <div>© <span id="year"></span> ORI FASHION — כל הזכויות שמורות</div>
-        <div>משלוחים • החזרות • שירות בוואטסאפ</div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- CART DRAWER -->
-  <div class="overlay" id="overlay"></div>
-  <aside class="drawer" id="drawer" aria-label="עגלת קניות">
-    <div class="dHead">
-      <div>
-        <b>🛍️ העגלה שלך</b><br/>
-        <span id="cartMeta">0 פריטים</span>
-      </div>
-      <button class="iconBtn" id="closeCart">סגור ✕</button>
-    </div>
-
-    <div class="dBody" id="cartItems"></div>
-
-    <div class="dFoot">
-      <div class="totalRow">
-        <div>סה״כ</div>
-        <b>₪ <span id="total">0</span></b>
-      </div>
-      <button class="fullBtn" id="checkoutBtn">סגירה בוואטסאפ</button>
-      <div class="smallNote">
-        טיפ: אם תרצה סליקה אמיתית (כרטיס/ביט/פייפאל) — אפשר לחבר אחרי שהעיצוב סגור.
-      </div>
-    </div>
-  </aside>
 
   <script>
-    // --- CONFIG ---
-    // החלף למספר וואטסאפ שלך בפורמט בינלאומי (ישראל): 9725XXXXXXXX
+    // ✅ החלף למספר הוואטסאפ שלך בפורמט בינלאומי: 9725XXXXXXXX
     const WHATSAPP_NUMBER = "9725XXXXXXXX";
 
-    // תמונות: אם אין לך עדיין תמונות, זה עדיין יעבוד.
-    // כדי לראות תמונות, העלה לריפו קבצים בשם:
-    // hero.jpg, product-1.jpg, product-2.jpg, product-3.jpg, product-4.jpg
-    // או החלף בקוד את img לכל מוצר.
-
-    const PRODUCTS = [
-      { id: 1, cat: "נשים", brand:"PREMIUM", name:"שמלת ערב סאטן", price: 349, sizes:["XS","S","M","L"], img:"product-1.jpg", desc:"גזרה יוקרתית, בד סאטן נעים, לוק מושלם לאירוע." },
-      { id: 2, cat: "נשים", brand:"DESIGN", name:"סט טופ + מכנס מחויט", price: 399, sizes:["S","M","L"], img:"product-2.jpg", desc:"מראה נקי ואלגנטי — בוטיק סטייל." },
-      { id: 3, cat: "גברים", brand:"URBAN", name:"טישרט פרימיום", price: 179, sizes:["S","M","L","XL"], img:"product-3.jpg", desc:"בד עבה איכותי, יושב מדויק, מתאים לכל לוק." },
-      { id: 4, cat: "גברים", brand:"SIGNATURE", name:"מכנס קארגו מעוצב", price: 289, sizes:["30","32","34","36"], img:"product-4.jpg", desc:"נוח, אופנתי, עם גימורים פרימיום." },
-      { id: 5, cat: "אקססוריז", brand:"LUX", name:"תיק צד מינימליסטי", price: 229, sizes:["ONE"], img:"product-2.jpg", desc:"תיק קטן-גדול: נכנס הכל, נראה יוקרתי." },
-      { id: 6, cat: "אקססוריז", brand:"LUX", name:"כובע קלאסי", price: 119, sizes:["ONE"], img:"product-1.jpg", desc:"טאץ' אחרון ללוק — נקי וממותג." },
-      { id: 7, cat: "נשים", brand:"PREMIUM", name:"חולצת בייסיק פרימיום", price: 149, sizes:["XS","S","M","L"], img:"product-3.jpg", desc:"בייסיק אבל יוקרתי — יושב בול ומצטלם." },
-      { id: 8, cat: "גברים", brand:"DESIGN", name:"ג׳קט קליל לערב", price: 449, sizes:["M","L","XL"], img:"product-4.jpg", desc:"שדרוג מיידי לכל הופעה — ערב/יציאה." },
+    // מוצרים לדוגמה (תוכל לערוך/להוסיף)
+    const ITEMS = [
+      { id: 1, name: "וודקה 700ml", price: 89 },
+      { id: 2, name: "וויסקי 700ml", price: 149 },
+      { id: 3, name: "ג׳ין 700ml", price: 139 },
+      { id: 4, name: "טקילה 700ml", price: 159 },
+      { id: 5, name: "בירה שישייה", price: 42 },
+      { id: 6, name: "יין אדום", price: 59 },
     ];
 
-    // --- STATE ---
-    let filterCat = "";
-    let query = "";
-    // cart item: {id, size, qty}
-    let cart = [];
+    const state = {
+      qty: Object.fromEntries(ITEMS.map(i => [i.id, 0]))
+    };
 
-    // --- DOM ---
-    const productsEl = document.getElementById("products");
-    const qEl = document.getElementById("q");
-    const cartCountEl = document.getElementById("cartCount");
-    const cartItemsEl = document.getElementById("cartItems");
+    const menuEl = document.getElementById("menu");
     const totalEl = document.getElementById("total");
-    const cartMetaEl = document.getElementById("cartMeta");
-
-    const overlay = document.getElementById("overlay");
-    const drawer = document.getElementById("drawer");
-    const openCartBtn = document.getElementById("openCart");
-    const closeCartBtn = document.getElementById("closeCart");
-    const checkoutBtn = document.getElementById("checkoutBtn");
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    function scrollToTop(){ window.scrollTo({top:0, behavior:"smooth"}); }
-
-    function setFilter(cat){
-      filterCat = cat;
-      renderProducts();
-      document.getElementById("new").scrollIntoView({behavior:"smooth"});
-    }
-
-    qEl.addEventListener("input", () => {
-      query = qEl.value.trim().toLowerCase();
-      renderProducts();
-    });
-
     function money(n){ return Number(n).toFixed(0); }
 
-    function productCard(p){
-      const imgStyle = `background-image:
-        linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.38)),
-        url('${p.img}')`;
-      return `
-        <div class="p">
-          <div class="pimg" style="${imgStyle}"></div>
-          <div class="pBody">
-            <div class="pTop">
-              <div>
-                <b>${p.name}</b>
-                <div class="pDesc">${p.desc}</div>
-              </div>
-              <div class="brandTag">${p.brand}</div>
-            </div>
-
-            <div class="pBottom">
-              <div class="price">₪ ${money(p.price)}</div>
-              <div style="display:flex; gap:8px; align-items:center;">
-                <select class="select" id="size-${p.id}">
-                  ${p.sizes.map(s => `<option value="${s}">${s}</option>`).join("")}
-                </select>
-                <button class="btn primary" onclick="addToCart(${p.id})">הוסף</button>
-              </div>
+    function render(){
+      menuEl.innerHTML = ITEMS.map(i => `
+        <div class="item">
+          <div>
+            <b>${i.name}</b>
+            <small>מחיר: ₪ ${money(i.price)}</small>
+            <div class="qty">
+              <button class="qbtn" onclick="changeQty(${i.id}, -1)">−</button>
+              <div class="qval" id="q-${i.id}">${state.qty[i.id]}</div>
+              <button class="qbtn" onclick="changeQty(${i.id}, 1)">+</button>
             </div>
           </div>
+          <div class="price">₪ ${money(i.price)}</div>
         </div>
-      `;
+      `).join("");
+
+      totalEl.textContent = money(calcTotal());
     }
 
-    function renderProducts(){
-      const list = PRODUCTS.filter(p => {
-        const matchCat = !filterCat || p.cat === filterCat;
-        const matchQ = !query || (p.name + " " + p.brand + " " + p.cat).toLowerCase().includes(query);
-        return matchCat && matchQ;
-      });
-      productsEl.innerHTML = list.map(productCard).join("");
+    function changeQty(id, delta){
+      state.qty[id] = Math.max(0, (state.qty[id] || 0) + delta);
+      const q = document.getElementById(`q-${id}`);
+      if(q) q.textContent = state.qty[id];
+      totalEl.textContent = money(calcTotal());
     }
 
-    function addToCart(id){
-      const p = PRODUCTS.find(x => x.id === id);
-      const size = document.getElementById(`size-${id}`).value;
-      const existing = cart.find(x => x.id === id && x.size === size);
-      if(existing) existing.qty += 1;
-      else cart.push({id, size, qty: 1});
-
-      renderCart();
-      openCart();
-    }
-
-    function cartTotals(){
-      let count = 0;
-      let total = 0;
-      for(const it of cart){
-        const p = PRODUCTS.find(x => x.id === it.id);
-        count += it.qty;
-        total += p.price * it.qty;
+    function calcTotal(){
+      let sum = 0;
+      for(const i of ITEMS){
+        sum += i.price * (state.qty[i.id] || 0);
       }
-      return {count, total};
+      return sum;
     }
 
-    function renderCart(){
-      const {count, total} = cartTotals();
-      cartCountEl.textContent = count;
-      cartMetaEl.textContent = `${count} פריטים`;
+    function buildOrderLines(){
+      const lines = [];
+      for(const i of ITEMS){
+        const q = state.qty[i.id] || 0;
+        if(q > 0){
+          lines.push(`• ${i.name} × ${q} = ₪ ${money(i.price * q)}`);
+        }
+      }
+      return lines;
+    }
 
-      if(cart.length === 0){
-        cartItemsEl.innerHTML = `<div style="color:rgba(255,255,255,.75); font-weight:900; padding:10px;">
-          העגלה ריקה. בוא/י לבחור משהו 🔥
-        </div>`;
-      } else {
-        cartItemsEl.innerHTML = cart.map(it => {
-          const p = PRODUCTS.find(x => x.id === it.id);
-          const thumbStyle = `background-image:url('${p.img}')`;
-          return `
-            <div class="item">
-              <div class="thumb" style="${thumbStyle}"></div>
-              <div class="iMeta">
-                <b>${p.name}</b>
-                <small>${p.brand} • מידה: ${it.size} • ₪ ${money(p.price)}</small>
-                <div class="qtyRow">
-                  <button class="qtyBtn" onclick="decQty(${it.id}, '${it.size}')">−</button>
-                  <b style="min-width:22px; text-align:center;">${it.qty}</b>
-                  <button class="qtyBtn" onclick="incQty(${it.id}, '${it.size}')">+</button>
-                  <button class="remove" onclick="removeItem(${it.id}, '${it.size}')">הסר</button>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join("");
+    function sendWhatsApp(){
+      const ageOk = document.getElementById("ageConfirm").checked;
+      if(!ageOk){
+        alert("כדי לבצע הזמנה של אלכוהול צריך לאשר גיל 18+.");
+        return;
       }
 
-      totalEl.textContent = money(total);
-    }
+      const lines = buildOrderLines();
+      if(lines.length === 0){
+        alert("בחר לפחות פריט אחד להזמנה 🙂");
+        return;
+      }
 
-    function incQty(id, size){
-      const it = cart.find(x => x.id === id && x.size === size);
-      if(it){ it.qty += 1; renderCart(); }
-    }
-    function decQty(id, size){
-      const it = cart.find(x => x.id === id && x.size === size);
-      if(!it) return;
-      it.qty -= 1;
-      if(it.qty <= 0) cart = cart.filter(x => !(x.id === id && x.size === size));
-      renderCart();
-    }
-    function removeItem(id, size){
-      cart = cart.filter(x => !(x.id === id && x.size === size));
-      renderCart();
-    }
-
-    function openCart(){
-      overlay.classList.add("show");
-      drawer.classList.add("open");
-    }
-    function closeCart(){
-      overlay.classList.remove("show");
-      drawer.classList.remove("open");
-    }
-
-    openCartBtn.addEventListener("click", openCart);
-    closeCartBtn.addEventListener("click", closeCart);
-    overlay.addEventListener("click", closeCart);
-
-    checkoutBtn.addEventListener("click", () => {
-      const {count, total} = cartTotals();
-      if(count === 0){ alert("העגלה ריקה 🙂"); return; }
-
-      const lines = cart.map(it => {
-        const p = PRODUCTS.find(x => x.id === it.id);
-        return `• ${p.name} (${p.brand}) | מידה: ${it.size} | כמות: ${it.qty} | ₪ ${money(p.price * it.qty)}`;
-      }).join("\n");
+      const name = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const fulfillment = document.getElementById("fulfillment").value;
+      const address = document.getElementById("address").value.trim();
+      const notes = document.getElementById("notes").value.trim();
+      const total = calcTotal();
 
       const msg =
-        `היי, אני רוצה לבצע הזמנה מהאתר:\n\n` +
-        `${lines}\n\n` +
-        `סה״כ: ₪ ${money(total)}\n` +
-        `שם מלא: \nטלפון: \nעיר/כתובת למשלוח: \n`;
+`היי, אני רוצה להזמין מהאתר (משהו משהו):
+
+${lines.join("\n")}
+
+סה״כ: ₪ ${money(total)}
+
+שם: ${name || "-"}
+טלפון: ${phone || "-"}
+סוג: ${fulfillment}
+כתובת: ${address || "-"}
+
+הערות: ${notes || "-"}
+
+* מאשר/ת גיל 18+`;
 
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank");
-    });
+    }
 
-    // init
-    renderProducts();
-    renderCart();
+    render();
   </script>
 </body>
 </html>
