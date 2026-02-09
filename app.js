@@ -42,6 +42,7 @@
 
   // ---------- Demo data ----------
   const state = {
+    currentUser: null,
     connected: false,
     server: { url: '' },
     agentName: 'אוריה (דמו)',
@@ -53,6 +54,53 @@
     ],
     proposals: []
   };
+  // ---------- AUTH (Local demo users; can be moved to Google Sheets later) ----------
+  const USERS = [
+    { username:'admin', password:'3316', role:'admin', displayName:'מנהל מערכת' },
+    { username:'agent1', password:'1111', role:'agent', displayName:'אוריה (דמו)' },
+    { username:'agent2', password:'2222', role:'agent', displayName:'סתיו' },
+    { username:'agent3', password:'3333', role:'agent', displayName:'דוד' },
+  ];
+
+  function getSessionUser_(){
+    try{
+      const raw = sessionStorage.getItem('gemel_user');
+      return raw ? JSON.parse(raw) : null;
+    }catch(_){ return null; }
+  }
+  function setSessionUser_(u){
+    sessionStorage.setItem('gemel_user', JSON.stringify(u));
+  }
+  function clearSessionUser_(){
+    sessionStorage.removeItem('gemel_user');
+  }
+  function isAdmin_(){ return !!(state.currentUser && state.currentUser.role === 'admin'); }
+
+  function applyPermissions_(){
+    // update badge name
+    const badgeNameEl = document.getElementById('agentName');
+    if(badgeNameEl){
+      badgeNameEl.textContent = 'נציג: ' + (state.agentName || 'אורח');
+    }
+    // hide settings for agents
+    const settingsBtn = document.querySelector('.navItem[data-route="settings"]');
+    if(settingsBtn){
+      settingsBtn.style.display = isAdmin_() ? '' : 'none';
+    }
+  }
+  function visibleCustomers_(){
+    if(isAdmin_()) return state.customers;
+    const me = state.agentName;
+    return state.customers.filter(c => (c.assignedAgent || '') === me);
+  }
+  function visibleProposals_(){
+    if(isAdmin_()) return state.proposals;
+    const me = state.agentName;
+    return state.proposals.filter(p => (p.assignedAgent || p.agentName || '') === me);
+  }
+
+
+
   // Questionnaire mapping (DEFAULT: Medical form for each insured)
     const questionnaires = {
     'DEFAULT|MEDICAL': {
@@ -102,6 +150,12 @@
 
   // ---------- UI references ----------
   const agentNameEl = $('#agentName');
+  const loginOverlay = $('#loginOverlay');
+  const loginForm = $('#loginForm');
+  const loginUser = $('#loginUser');
+  const loginPass = $('#loginPass');
+  const loginError = $('#loginError');
+  const logoutBtn = $('#logoutBtn');
   const kpisEl = $('#kpis');
   const tabsEl = $('#tabs');
   const viewEl = $('#view');
@@ -113,6 +167,7 @@
 
   // Wizard
   const wizardOverlay = $('#wizardOverlay');
+  const wizardCloseBtn = $('#wizardCloseBtn');
   const statusSelect = $('#statusSelect');
 
   const wizardMain = $('#wizardMain');
@@ -129,6 +184,61 @@
 
   const toastHost = $('#toastHost');
 
+  // ---------- Login UI ----------
+  function showLogin_(){
+    document.body.classList.add('isLoggedOut');
+    if(loginOverlay) loginOverlay.classList.remove('hidden');
+    if(loginError) { loginError.textContent = ''; loginError.classList.add('hidden'); }
+    if(loginUser) loginUser.focus();
+    applyPermissions_();
+  }
+  function hideLogin_(){
+    document.body.classList.remove('isLoggedOut');
+    if(loginOverlay) loginOverlay.classList.add('hidden');
+    applyPermissions_();
+  }
+
+  function tryLogin_(username, password){
+    const u = USERS.find(x => x.username === username && x.password === password);
+    if(!u) return { ok:false, msg:'שם משתמש או סיסמה שגויים' };
+    const safe = { username:u.username, role:u.role, displayName:u.displayName };
+    state.currentUser = safe;
+    state.agentName = u.displayName;
+    setSessionUser_(safe);
+    hideLogin_();
+    // After login, always route to customers
+    setRoute('customers');
+    return { ok:true };
+  }
+
+  function doLogout_(){
+    clearSessionUser_();
+    state.currentUser = null;
+    state.agentName = 'אורח';
+    showLogin_();
+  }
+
+  if(logoutBtn){
+    logoutBtn.addEventListener('click', doLogout_);
+  }
+
+  if(loginForm){
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = String(loginUser?.value || '').trim();
+      const password = String(loginPass?.value || '').trim();
+      const res = tryLogin_(username, password);
+      if(!res.ok){
+        if(loginError){
+          loginError.textContent = res.msg || 'שגיאה בהתחברות';
+          loginError.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
+
+
   // ---------- Routing ----------
   let route = 'customers';
   let tab = 'table';
@@ -141,6 +251,19 @@
 
   $$('.navItem').forEach(b => b.addEventListener('click', () => setRoute(b.dataset.route)));
 
+  // ---------- Boot: restore session or require login ----------
+  (function bootAuth_(){
+    const u = getSessionUser_();
+    if(u){
+      state.currentUser = u;
+      state.agentName = u.displayName || state.agentName;
+      hideLogin_();
+    }else{
+      showLogin_();
+    }
+  })();
+
+
   // ---------- Render ----------
   function render(){
     agentNameEl.textContent = 'נציג: ' + state.agentName;
@@ -150,7 +273,7 @@
       crumbEl.textContent = 'Overview';
       renderKpisCustomers();
       renderTabs(['table','segments'], { table:'רשימה', segments:'סגמנטים' });
-      renderCustomersTable(state.customers);
+      renderCustomersTable(visibleCustomers_());
     }
     if(route === 'my'){
       pageTitleEl.textContent = 'התהליכים שלי';
@@ -164,7 +287,7 @@
       crumbEl.textContent = 'Overview';
       renderKpisProposals();
       renderTabs(['table'], { table:'רשימה' });
-      renderProposalsTable(state.proposals);
+      renderProposalsTable(visibleProposals_());
     }
     if(route === 'settings'){
       pageTitleEl.textContent = 'הגדרות';
@@ -462,7 +585,7 @@ function renderKpisSettings(){
       toast('חיפוש', 'הכנס שם / ת״ז / טלפון');
       return;
     }
-    const found = state.customers.filter(c =>
+    const found = visibleCustomers_().filter(c =>
       (c.fullName||'').toLowerCase().includes(q) ||
       (c.tz||'').toLowerCase().includes(q) ||
       (c.phone||'').toLowerCase().includes(q)
@@ -1933,7 +2056,13 @@ function renderNewPoliciesStep(){
     `;
   }
 
-  function setSelectValue(id, value){
+  
+  function setSelect(id, value){
+    // Backward compatible alias (older code used setSelect)
+    setSelectValue(id, value);
+  }
+
+function setSelectValue(id, value){
     const el = document.getElementById(id);
     if(!el) return;
     if(value && Array.from(el.options).some(o => o.value === value)){
@@ -2188,11 +2317,3 @@ function renderNewPoliciesStep(){
   })();
 
 })();
-
-
-  // ---- Silent Fields Sync ----
-  function syncInternalStatus(p){
-    if(['נסגר','בוטל'].includes(p.status)) p.internalStatus = 'נסגר';
-    else if(p.status === 'ממתין למסמכים') p.internalStatus = 'ממתין להצעה';
-    else p.internalStatus = 'פתוח';
-  }
