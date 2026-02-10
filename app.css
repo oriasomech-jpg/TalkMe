@@ -1,0 +1,89 @@
+* { box-sizing: border-box; font-family: "Noto Sans Hebrew", Arial, sans-serif; }
+
+body {
+  margin: 0;
+  background: #f7f6f2;
+  color: #1a1a1a;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #ffffff;
+  border-left: 1px solid #e6e2d8;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.logo span {
+  color: #c8a94a;
+  font-size: 14px;
+}
+
+.nav {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: none;
+  border: 1px solid #e6e2d8;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.nav.active {
+  background: #f1ebd6;
+  border-color: #c8a94a;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+.step {
+  display: none;
+}
+.step.active {
+  display: block;
+}
+
+.actions button,
+#wizard button,
+button {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #c8a94a;
+  background: #fff;
+  cursor: pointer;
+}
+
+.card {
+  border: 1px solid #e6e2d8;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background: #fff;
+}
+
+.card input, .card select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+}
+
+.wizard-nav {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
