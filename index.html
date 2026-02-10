@@ -3,66 +3,169 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>גמל איבנטס • מערכת הצעות</title>
-
+  <title>GEMEL EVENTS • מערכת הצעות</title>
+  <meta name="theme-color" content="#0b0f1a"/>
   <link rel="stylesheet" href="app.css"/>
 </head>
-<body>
 
+<body>
 <div class="app">
 
-  <!-- תפריט צד ימין -->
+  <!-- Sidebar ימין -->
   <aside class="sidebar">
-    <div class="logo">GEMEL<br><span>EVENTS</span></div>
+    <div class="brand">
+      <div class="brandMark"></div>
+      <div class="brandText">
+        <div class="brandName">GEMEL EVENTS</div>
+        <div class="brandSub">Internal CRM • Insurance</div>
+      </div>
+    </div>
 
-    <nav>
-      <button class="nav active" data-step="0">פרטי מבוטחים</button>
-      <button class="nav" data-step="1">פוליסות קיימות</button>
-      <button class="nav" data-step="2">פוליסות חדשות</button>
-      <button class="nav" data-step="3">סיכום</button>
+    <nav class="nav">
+      <button class="navBtn active" data-step="0">
+        <span class="dot"></span>
+        <span>פרטי מבוטחים</span>
+      </button>
+      <button class="navBtn" data-step="1">
+        <span class="dot"></span>
+        <span>פוליסות קיימות</span>
+      </button>
+      <button class="navBtn" data-step="2">
+        <span class="dot"></span>
+        <span>פוליסות חדשות</span>
+      </button>
+      <button class="navBtn" data-step="3">
+        <span class="dot"></span>
+        <span>סיכום</span>
+      </button>
     </nav>
+
+    <div class="sidebarFoot">
+      <div class="hint">
+        <div class="hintTitle">מצב מערכת</div>
+        <div class="hintText">שלד פרודקשן • מוכן להרחבה לשאלון רפואי / PDF / Google Sheets</div>
+      </div>
+    </div>
   </aside>
 
-  <!-- תוכן -->
-  <main class="content">
+  <!-- Main -->
+  <main class="main">
 
-    <!-- שלב 0 -->
-    <section class="step active" data-step="0">
-      <h2>מבוטחים</h2>
-
-      <div id="insuredList"></div>
-
-      <div class="actions">
-        <button id="addMain">➕ מבוטח ראשי</button>
-        <button id="addSecondary">➕ מבוטח משני</button>
-        <button id="addChild">➕ הוסף ילד</button>
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topLeft">
+        <div class="titleBlock">
+          <div class="pageTitle" id="pageTitle">פרטי מבוטחים</div>
+          <div class="pageSub" id="pageSub">הגדרת מבוטח ראשי/משני/ילדים בצורה מופרדת לחלוטין</div>
+        </div>
       </div>
+
+      <div class="topRight">
+        <div class="pill">
+          <span class="pillDot"></span>
+          <span>פרימיום • כחול</span>
+        </div>
+        <button class="ghostBtn" id="resetAll" title="איפוס שלד (לבדיקות)">איפוס</button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <section class="content">
+
+      <!-- STEP 0 -->
+      <section class="step active" data-step="0">
+        <div class="grid2">
+          <div class="panel">
+            <div class="panelHead">
+              <div>
+                <div class="panelTitle">מבוטחים</div>
+                <div class="panelDesc">כל מבוטח הוא כרטיסייה נפרדת. אין ערבוב נתונים.</div>
+              </div>
+              <div class="panelActions">
+                <button class="btn" id="addMain">+ מבוטח ראשי</button>
+                <button class="btn" id="addSecondary">+ מבוטח משני</button>
+                <button class="btn" id="addChild">+ הוסף ילד</button>
+              </div>
+            </div>
+
+            <div id="insuredTabs"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panelHead">
+              <div>
+                <div class="panelTitle">עריכת מבוטח</div>
+                <div class="panelDesc">ממלאים פרטים למבוטח הנבחר בלבד.</div>
+              </div>
+            </div>
+
+            <div id="insuredEditor" class="emptyState">
+              בחר מבוטח כדי להתחיל.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 1 -->
+      <section class="step" data-step="1">
+        <div class="panel">
+          <div class="panelHead">
+            <div>
+              <div class="panelTitle">פוליסות קיימות</div>
+              <div class="panelDesc">לכל מבוטח רשימת פוליסות קיימות משלו (כולל סטטוס טיפול).</div>
+            </div>
+            <div class="panelActions">
+              <button class="btn" id="addExistingPolicy">+ הוסף פוליסה קיימת</button>
+            </div>
+          </div>
+
+          <div id="existingPolicies" class="list"></div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" data-step="2">
+        <div class="panel">
+          <div class="panelHead">
+            <div>
+              <div class="panelTitle">פוליסות חדשות</div>
+              <div class="panelDesc">כולל הנחות (אחוז / סכום / דירוג) וחישוב אוטומטי לפרמיה אחרי הנחה.</div>
+            </div>
+            <div class="panelActions">
+              <button class="btn" id="addNewPolicy">+ הוסף פוליסה חדשה</button>
+            </div>
+          </div>
+
+          <div id="newPolicies" class="list"></div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" data-step="3">
+        <div class="panel">
+          <div class="panelHead">
+            <div>
+              <div class="panelTitle">סיכום (דיבוג)</div>
+              <div class="panelDesc">כאן רואים שה־state לא מתערבב בין מבוטחים ופוליסות.</div>
+            </div>
+          </div>
+
+          <pre id="summary" class="codeBox"></pre>
+        </div>
+      </section>
+
     </section>
 
-    <!-- שלב 1 -->
-    <section class="step" data-step="1">
-      <h2>פוליסות קיימות</h2>
-      <div id="existingPolicies"></div>
-      <button id="addExistingPolicy">➕ הוסף פוליסה קיימת</button>
-    </section>
-
-    <!-- שלב 2 -->
-    <section class="step" data-step="2">
-      <h2>פוליסות חדשות</h2>
-      <div id="newPolicies"></div>
-      <button id="addNewPolicy">➕ הוסף פוליסה חדשה</button>
-    </section>
-
-    <!-- שלב 3 -->
-    <section class="step" data-step="3">
-      <h2>סיכום</h2>
-      <pre id="summary"></pre>
-    </section>
-
-    <div class="wizard-nav">
-      <button id="prev">⬅ הקודם</button>
-      <button id="next">הבא ➡</button>
-    </div>
+    <!-- Wizard Footer -->
+    <footer class="wizard">
+      <div class="wizardLeft">
+        <div class="stepper" id="stepper"></div>
+      </div>
+      <div class="wizardRight">
+        <button class="btnSecondary" id="prev">הקודם</button>
+        <button class="btnPrimary" id="next">הבא</button>
+      </div>
+    </footer>
 
   </main>
 </div>
@@ -70,4 +173,3 @@
 <script src="app.js"></script>
 </body>
 </html>
-
