@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>גמל איבנטס • מערכת הצעות</title>
+
+  <link rel="stylesheet" href="app.css"/>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- תפריט צד ימין -->
+  <aside class="sidebar">
+    <div class="logo">GEMEL<br><span>EVENTS</span></div>
+
+    <nav>
+      <button class="nav active" data-step="0">פרטי מבוטחים</button>
+      <button class="nav" data-step="1">פוליסות קיימות</button>
+      <button class="nav" data-step="2">פוליסות חדשות</button>
+      <button class="nav" data-step="3">סיכום</button>
+    </nav>
+  </aside>
+
+  <!-- תוכן -->
+  <main class="content">
+
+    <!-- שלב 0 -->
+    <section class="step active" data-step="0">
+      <h2>מבוטחים</h2>
+
+      <div id="insuredList"></div>
+
+      <div class="actions">
+        <button id="addMain">➕ מבוטח ראשי</button>
+        <button id="addSecondary">➕ מבוטח משני</button>
+        <button id="addChild">➕ הוסף ילד</button>
+      </div>
+    </section>
+
+    <!-- שלב 1 -->
+    <section class="step" data-step="1">
+      <h2>פוליסות קיימות</h2>
+      <div id="existingPolicies"></div>
+      <button id="addExistingPolicy">➕ הוסף פוליסה קיימת</button>
+    </section>
+
+    <!-- שלב 2 -->
+    <section class="step" data-step="2">
+      <h2>פוליסות חדשות</h2>
+      <div id="newPolicies"></div>
+      <button id="addNewPolicy">➕ הוסף פוליסה חדשה</button>
+    </section>
+
+    <!-- שלב 3 -->
+    <section class="step" data-step="3">
+      <h2>סיכום</h2>
+      <pre id="summary"></pre>
+    </section>
+
+    <div class="wizard-nav">
+      <button id="prev">⬅ הקודם</button>
+      <button id="next">הבא ➡</button>
+    </div>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
+
