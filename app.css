@@ -1,0 +1,538 @@
+/* GEMEL INVEST • Premium Light (Cream+Gold) */
+:root{
+  /* Base palette (keep Cream + Soft Gold) */
+  --bg:#F6F2EA;              /* slightly deeper cream to reduce glare */
+  --panel:#FFFFFF;
+  --panel2:#FFFEFB;          /* warm-white for inputs/panels */
+  --line:rgba(15,15,20,.11); /* stronger separators for large screens */
+  --text:#0F1116;
+  --muted:rgba(15,17,22,.78);
+  --muted2:rgba(15,17,22,.60);
+
+  --heading:#1D1A14;          /* deeper warm heading for large screens */
+  --label:rgba(29,26,20,.78); /* labels slightly darker */
+  --fieldLine:rgba(15,17,22,.18);
+  --fieldLineHover:rgba(15,17,22,.26);
+
+  --gold:#D6B25E;            /* gold weak */
+  --goldSoft:rgba(214,178,94,.18);
+
+  --shadow:0 18px 45px rgba(18,19,25,.09);
+  --shadow2:0 8px 22px rgba(18,19,25,.07);
+  --radius:18px;
+  --radius2:14px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Noto Sans Hebrew", "Heebo", Arial;
+}
+
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  background:radial-gradient(1200px 700px at 35% 0%, #FFFEF8 0%, var(--bg) 58%, #EFE9DD 100%);
+  background-color:var(--bg);
+  color:var(--text);
+}
+
+.app{
+  height:100%;
+  display:grid;
+  grid-template-columns: 260px 1fr;
+}
+
+/* Sidebar */
+
+
+.sidebar{
+  position:relative;
+  /* Frosted glass - brighter */
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  border-left:1px solid rgba(214,178,94,.16);
+  box-shadow:
+    inset -1px 0 0 rgba(255,255,255,.65),
+    0 12px 30px rgba(18,19,25,.06);
+
+  /* pin to top */
+  padding:4px 14px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+
+.sidebar::after{
+  content:"";
+  position:absolute;
+  top:18px; bottom:18px;
+  left:0;
+  width:2px;
+  background:linear-gradient(to bottom, transparent, var(--gold), transparent);
+  opacity:.55;
+  border-radius:2px;
+}
+
+
+.brand{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  /* drop slightly for visual alignment */
+  padding:0 6px 6px;
+  margin-top:-2px; /* was -10px, now lowered */
+  border:none;
+  box-shadow:none;
+}
+
+
+/* Logo capsule (GEMEL INVEST) */
+
+
+.logoBox{
+  width: 280px;
+  height: 92px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  box-sizing: border-box;
+
+  /* blended frosted capsule */
+  background: linear-gradient(180deg, rgba(255,255,255,.74), rgba(246,242,234,.60));
+  backdrop-filter: blur(18px) saturate(135%);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  border-radius: 22px;
+
+  border: 1px solid rgba(214,178,94,.22);
+  box-shadow:
+    0 12px 28px rgba(18,19,25,.07),
+    inset 0 1px 0 rgba(255,255,255,.74),
+    inset 0 -10px 22px rgba(214,178,94,.06);
+  overflow:hidden;
+}
+
+
+.logoBox img{
+  width:100%;
+  height:100%;
+  object-fit: contain;
+  display:block;
+  transform: translateY(-4px); /* was -10px, now visually centered */
+  filter: saturate(103%) contrast(103%);
+}
+
+
+/* Login logo (image) */
+.logoDot{
+  width:34px; height:34px;
+  border-radius:14px;
+  background: radial-gradient(circle at 30% 30%, rgba(214,178,94,.35), rgba(214,178,94,.10));
+  border:1px solid rgba(214,178,94,.30);
+}
+.brandText{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+  direction:rtl;
+  text-align:right;
+}
+
+.brandName{
+  font-weight:900;
+  font-size:18px;
+  letter-spacing:0;
+  color:var(--heading);
+  position:relative;
+  display:inline-block;
+}
+.brandName::after{
+  content:"";
+  display:block;
+  height:2px;
+  width:44px;
+  margin-top:7px;
+  background:linear-gradient(90deg, var(--gold), var(--goldSoft));
+  border-radius:999px;
+  opacity:.95;
+}
+.brandSub{font-size:12px; color:var(--muted2); margin-top:2px}
+
+.nav{display:flex; flex-direction:column; gap:6px; margin-top:6px}
+
+/* ===== Sidebar Menu: premium polish (scoped) ===== */
+
+.brandDivider{
+  width:100%;
+  max-width: 284px;
+  height:1px;
+  margin-top:10px;
+  border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(214,178,94,.55), transparent);
+  opacity:.85;
+  position:relative;
+  overflow:hidden;
+}
+.brandDivider::after{
+  content:"";
+  position:absolute;
+  top:-2px; bottom:-2px;
+  left:-30%;
+  width:30%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+  filter: blur(.2px);
+  opacity:.55;
+  animation: brandDividerSweep 7.2s ease-in-out infinite;
+}
+@keyframes brandDividerSweep{
+  0%, 40%{transform: translateX(0)}
+  70%{transform: translateX(260%)}
+  100%{transform: translateX(260%)}
+}
+
+.navItem{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  justify-content:flex-start;
+  padding:11px 12px;
+  border-radius:16px;
+  border:1px solid rgba(214,178,94,.14);
+  background: rgba(255,255,255,.52);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color:var(--text);
+  cursor:pointer;
+  transition: box-shadow .15s ease, background .15s ease, border-color .15s ease, transform .05s ease;
+}
+
+/* Override/upgrade the existing nav styles without touching global UI */
+.sidebar .navItem{
+  position:relative;
+  justify-content:flex-start;
+  gap:12px;
+  padding:12px 12px;
+  border-radius:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(246,242,234,.48));
+  border:1px solid rgba(214,178,94,.16);
+  box-shadow:
+    0 10px 22px rgba(18,19,25,.06),
+    inset 0 1px 0 rgba(255,255,255,.72);
+  transition:
+    transform .14s ease,
+    box-shadow .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease;
+}
+
+.sidebar .navItem::before{
+  content:"";
+  position:absolute;
+  right:10px;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(214,178,94,.10), rgba(214,178,94,.95), rgba(214,178,94,.18));
+  opacity:0;
+  transform: scaleY(.75);
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.sidebar .navItem:hover{
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(246,242,234,.56));
+  border-color: rgba(214,178,94,.26);
+  box-shadow:
+    0 14px 30px rgba(18,19,25,.08),
+    0 0 0 3px rgba(214,178,94,.10),
+    inset 0 1px 0 rgba(255,255,255,.78);
+}
+
+.sidebar .navItem:active{
+  transform: translateY(0);
+}
+
+.sidebar .navItem.active{
+  background: linear-gradient(180deg, rgba(255,255,255,.84), rgba(246,242,234,.66));
+  border-color: rgba(214,178,94,.36);
+  box-shadow:
+    0 18px 40px rgba(214,178,94,.12),
+    0 0 0 3px rgba(214,178,94,.10),
+    inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+.sidebar .navItem.active::before{
+  opacity:1;
+  transform: scaleY(1);
+}
+
+.sidebar .navItem .ico{
+  width:28px;
+  height:28px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background: rgba(214,178,94,.08);
+  border: 1px solid rgba(214,178,94,.14);
+  color: rgba(32,45,56,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+}
+
+.sidebar .navItem .ico svg{
+  width:18px;
+  height:18px;
+}
+
+.sidebar .navItem.active .ico{
+  background: rgba(214,178,94,.14);
+  border-color: rgba(214,178,94,.26);
+  color: rgba(214,178,94,.95);
+}
+
+.sidebar .navItem span:last-child{
+  font-weight: 700;
+  letter-spacing: .1px;
+}
+.navItem:hover{
+  background: rgba(255,255,255,.70);
+  border-color: rgba(214,178,94,.28);
+  box-shadow: 0 0 0 3px rgba(214,178,94,.12);
+}
+.navItem.active{
+  background: rgba(255,255,255,.86);
+  border-color: rgba(214,178,94,.40);
+  box-shadow: 0 8px 22px rgba(214,178,94,.16);
+}
+
+.navItem .ico{width:22px; text-align:center; opacity:.85}
+.navItem:hover{
+  border-color:rgba(214,178,94,.28);
+  box-shadow:0 0 0 3px var(--goldSoft);
+}
+.navItem.active{
+  background:rgba(214,178,94,.08);
+  border-color:rgba(214,178,94,.26);
+}
+
+.sidebarFooter{margin-top:auto}
+.agentBadge{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 10px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
+}
+.dotOnline{
+  width:10px; height:10px; border-radius:50%;
+  background:#18c47d;
+  box-shadow:0 0 0 3px rgba(24,196,125,.18);
+}
+.agentName{font-weight:700}
+
+/* Main */
+.main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:rgba(246,242,234,.92);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+.pageTitle{margin:0; font-size:21px; font-weight:900; letter-spacing:.2px; color:var(--heading)}
+.crumb{color:rgba(15,17,22,.62); font-size:12.5px; margin-top:4px}
+.topbarLeft{display:flex; flex-direction:column}
+.topbarRight{display:flex; align-items:center; gap:10px; min-width:0}
+
+.searchWrap{
+  display:flex; align-items:center; gap:10px;
+  background:var(--panel2);
+  border:1px solid rgba(15,17,22,.12);
+  border-radius:999px;
+  padding:8px 10px;
+  box-shadow:var(--shadow2);
+  min-width: 420px;
+  max-width: 52vw;
+}
+.searchIco{opacity:.55}
+.searchInput{
+  border:0;
+  outline:none;
+  background:transparent;
+  flex:1;
+  min-width:0;
+  font-size:14px;
+}
+
+.content{
+  padding:16px 18px 22px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.kpis{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:12px;
+}
+.kpi{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:14px 14px;
+  box-shadow:var(--shadow2);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.kpi:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(18,19,25,.10);
+  border-color:rgba(214,178,94,.28);
+}
+.kpiLabel{
+  color:var(--muted2);
+  font-size:12px;
+  align-self:flex-end;
+}
+.kpiValue{
+  align-self:center;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:52px;
+  height:40px;
+  padding:0 14px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(214,178,94,.18), rgba(214,178,94,.10));
+  border:1px solid rgba(214,178,94,.22);
+  color:var(--heading);
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+.kpiHint{
+  color:var(--muted);
+  font-size:12px;
+  align-self:flex-end;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.panelHead{
+  padding:12px 12px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(246,242,234,.78), rgba(255,255,255,.96));
+}
+.tabs{display:flex; gap:10px; flex-wrap:wrap}
+.tab{
+  background:transparent;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  color:var(--muted);
+}
+.tab.active{
+  color:var(--text);
+  border-color:rgba(214,178,94,.35);
+  box-shadow:0 0 0 3px var(--goldSoft);
+}
+.panelBody{padding:12px}
+
+/* Table */
+.tableWrap{overflow:auto; border:1px solid var(--line); border-radius:14px}
+table{width:100%; border-collapse:separate; border-spacing:0}
+th,td{padding:12px 12px; text-align:right; font-size:14px; border-bottom:1px solid var(--line)}
+th{color:rgba(15,17,22,.68); font-size:12.5px; font-weight:800; background:rgba(246,242,234,.78)}
+tr:hover td{background:rgba(214,178,94,.075)}
+.chip{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  border:1px solid var(--line);
+  background:var(--panel2);
+}
+.chip.ok{border-color:rgba(24,196,125,.25); box-shadow:0 0 0 3px rgba(24,196,125,.10)}
+.chip.warn{border-color:rgba(214,178,94,.35); box-shadow:0 0 0 3px rgba(214,178,94,.12)}
+
+.btn{
+  border:1px solid transparent;
+  border-radius:999px;
+  padding:11px 14px;
+  cursor:pointer;
+  font-weight:850;
+  font-size:14.5px;
+  transition: box-shadow .15s ease, border-color .15s ease, transform .05s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btnPrimary{
+  background:rgba(214,178,94,.22);
+  border-color:rgba(214,178,94,.42);
+  color:var(--text);
+}
+.btnSoft{
+  background:var(--panel2);
+  border-color:rgba(15,17,22,.12);
+  color:var(--text);
+}
+.btn:hover{
+  box-shadow:0 0 0 3px var(--goldSoft);
+  border-color:rgba(214,178,94,.28);
+}
+.w100{width:100%}
+
+
+/* subtle vignette + micro-grain feel (pattern-free) */
+/* Premium focus ring (gold-cream) */
+/* Login button: cream-gold gradient + premium hover */
+/* Forgot password link: clean + premium hover */
+.loginHint .linkBtn{
+  color: rgba(18,19,25,.62);
+  font-weight: 850;
+}
+.loginHint .linkBtn:hover{
+  color: rgba(214,178,94,.88);
+}
+
+/* Animations */
+@keyframes giLoginPop{
+  from{ opacity:0; transform: translateY(10px) scale(.99); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+@keyframes giLoginFade{
+  from{ opacity:0; transform: translateY(6px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes giLogoBreath{
+  0%,100%{ transform: translateY(0) scale(1); filter:
+    drop-shadow(0 14px 34px rgba(18,19,25,.10))
+    drop-shadow(0 0 14px rgba(214,178,94,.08)); }
+  50%{ transform: translateY(-2px) scale(1.01); filter:
+    drop-shadow(0 16px 40px rgba(18,19,25,.12))
+    drop-shadow(0 0 20px rgba(214,178,94,.12)); }
+}
+
