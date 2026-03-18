@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadFlow • מערכת יצירת ליד</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="lead-app-shell">
+    <div class="lead-bg-orb orb-a"></div>
+    <div class="lead-bg-orb orb-b"></div>
+
+    <main class="lead-card" aria-labelledby="leadTitle">
+      <div class="lead-topbar">
+        <div>
+          <span class="lead-chip">מערכת חכמה</span>
+          <h1 id="leadTitle">יצירת ליד חדש</h1>
+          <p class="lead-subtitle">שליפת מספר טלפון ישראלי אקראי עם מניעת כפילויות מקומית</p>
+        </div>
+        <div class="lead-status-pill" id="leadStatusPill">מוכן להתחלה</div>
+      </div>
+
+      <section class="lead-stage" id="leadStageIdle">
+        <div class="hero-visual">
+          <div class="radar-ring ring-1"></div>
+          <div class="radar-ring ring-2"></div>
+          <div class="radar-ring ring-3"></div>
+          <div class="radar-core">
+            <span>Lead</span>
+          </div>
+          <div class="radar-sweep"></div>
+        </div>
+
+        <div class="lead-copy-block">
+          <h2>מנוע יצירת הלידים מוכן</h2>
+          <p>
+            בלחיצה על <strong>התחל חיפוש</strong> המערכת תפעיל תהליך חכם של שליפת ליד,
+            תבצע יצירת מספר ישראלי רנדומלי ותציג תוצאה לאחר 8 שניות.
+          </p>
+        </div>
+
+        <div class="lead-actions">
+          <button class="btn btn-primary" id="leadStartBtn" type="button">התחל חיפוש</button>
+        </div>
+      </section>
+
+      <section class="lead-stage hidden" id="leadStageLoading" aria-live="polite">
+        <div class="scan-panel">
+          <div class="scan-visual">
+            <div class="scan-ring"></div>
+            <div class="scan-ring scan-ring-delay"></div>
+            <div class="scan-ring scan-ring-delay-2"></div>
+            <div class="scan-center">
+              <div class="signal-bars">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="scan-beam"></div>
+          </div>
+
+          <div class="loading-copy">
+            <h2>אנא המתן, המערכת שולפת לך ליד</h2>
+            <p id="leadLoadingStatus">מאתר התאמה...</p>
+          </div>
+
+          <div class="digits-stream" id="digitsStream" aria-hidden="true">
+            <span>05</span><span>2</span><span>7</span><span>4</span><span>8</span><span>3</span><span>1</span><span>6</span><span>0</span><span>9</span>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-bar">
+              <div class="progress-fill" id="leadProgressFill"></div>
+            </div>
+            <div class="progress-meta">
+              <span>תהליך יצירת ליד</span>
+              <span id="leadCountdown">8 שניות</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lead-stage hidden" id="leadStageResult">
+        <div class="result-badge">הליד מוכן</div>
+        <div class="result-number-wrap">
+          <div class="result-label">מספר הטלפון שנוצר</div>
+          <div class="result-number" id="leadResultNumber">0500000000</div>
+        </div>
+
+        <div class="result-note">
+          המספר נוצר אקראית ונבדק מול מאגר מקומי בדפדפן כדי למנוע כפילויות.
+        </div>
+
+        <div class="lead-actions result-actions">
+          <button class="btn btn-primary" id="leadCopyBtn" type="button">העתק מספר</button>
+          <button class="btn btn-secondary" id="leadRetryBtn" type="button">צור מספר חדש</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
