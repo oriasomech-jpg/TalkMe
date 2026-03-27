@@ -1,0 +1,44 @@
+from __future__ import annotations
+
+import io
+import shutil
+from typing import Iterable
+
+import fitz
+import pytesseract
+from PIL import Image
+
+
+def _ensure_tesseract() -> None:
+    if shutil.which("tesseract"):
+        return
+    raise RuntimeError(
+        "Tesseract OCR לא מותקן על השרת. הרץ דרך Dockerfile של הפרויקט או התקן tesseract + tesseract-ocr-heb."
+    )
+
+
+def _ocr_image(image: Image.Image) -> str:
+    last_error: Exception | None = None
+    for lang in ("heb+eng", "Hebrew+eng", "heb", "eng"):
+        try:
+            return pytesseract.image_to_string(image, lang=lang)
+        except Exception as exc:  # pragma: no cover - fallback path
+            last_error = exc
+    if last_error:
+        raise RuntimeError(f"OCR נכשל: {last_error}") from last_error
+    raise RuntimeError("OCR נכשל ללא פרטים נוספים")
+
+
+def ocr_pdf_pages(pdf_bytes: bytes, pages: Iterable[int] | None = None, zoom: float = 2.2) -> dict[int, str]:
+    _ensure_tesseract()
+    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    if pages is None:
+        pages = range(doc.page_count)
+    result: dict[int, str] = {}
+    for page_number in pages:
+        page = doc[page_number]
+        pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+        image = Image.open(io.BytesIO(pix.tobytes("png")))
+        text = _ocr_image(image)
+        result[page_number + 1] = text
+    return result
