@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מנוע מילוי טופס הפניקס</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+  <script defer src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">GitHub Pages Ready</p>
+        <h1>מנוע מילוי טופס הצעה — הפניקס</h1>
+        <p class="sub">ממלא אוטומטית את מה שקיים בדוח התפעולי, ומשאיר שדות חסרים פתוחים לעריכה בתוך ה־PDF.</p>
+      </div>
+      <div class="hero-actions">
+        <button id="loadSampleBtn" class="ghost-btn">טען דוגמת נתונים</button>
+        <a class="ghost-btn" href="./templates/GetPDF.pdf" target="_blank" rel="noopener">פתח את הטופס המקורי</a>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>1. מקור נתונים</h2>
+        <p class="muted">אפשר להדביק JSON, או לטעון קובץ JSON.</p>
+        <div class="field-block">
+          <label for="jsonFile">טעינת קובץ JSON</label>
+          <input id="jsonFile" type="file" accept="application/json,.json" />
+        </div>
+        <div class="field-block">
+          <label for="jsonInput">JSON לדוח התפעולי</label>
+          <textarea id="jsonInput" spellcheck="false"></textarea>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. פעולות</h2>
+        <div class="actions">
+          <button id="generateBtn" class="primary-btn">הפק PDF ממולא</button>
+          <button id="downloadSampleBtn" class="ghost-btn">הורד JSON לדוגמה</button>
+        </div>
+        <div id="status" class="status">מוכן לעבודה.</div>
+
+        <div class="notes">
+          <h3>מה המנוע עושה כרגע</h3>
+          <ul>
+            <li>ממלא אוטומטית פרטי מבוטח ראשי ומשני.</li>
+            <li>ממלא גובה, משקל, כתובת, אמצעי קשר והעדפת דיוור.</li>
+            <li>מסמן חלק משאלות הבריאות הבסיסיות.</li>
+            <li>יוצר שדות Editable לשדות חסרים כמו מוטבים, חתימות ופירוט רפואי.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card full-span">
+        <h2>מבנה JSON צפוי</h2>
+        <pre id="jsonShape"></pre>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
