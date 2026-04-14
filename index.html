@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEMEL INVEST | הורדה</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1f3a" />
+  <link rel="icon" href="./gemel-invest-icon.ico" />
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:#0b1f3a;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh}
+    .box{background:rgba(255,255,255,0.10);padding:40px;border-radius:20px;text-align:center;width:min(92vw,560px);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+    h1{margin-top:0}
+    p{opacity:.95;line-height:1.6}
+    .btn{display:block;margin-top:16px;padding:15px 20px;background:#8fc5ff;color:#000;border:none;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px;cursor:pointer;width:100%;box-sizing:border-box}
+    .btn.secondary{background:#fff}
+    .btn[disabled]{opacity:.65;cursor:not-allowed}
+    .note{margin-top:16px;font-size:14px;color:rgba(255,255,255,.88)}
+    .success{margin-top:16px;font-size:15px;color:#b9ffd0;display:none}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>הורדת מערכת GEMEL INVEST</h1>
+    <p>בחר כיצד להפעיל את המערכת במחשב</p>
+
+    <a class="btn" href="https://github.com/oriasomech-jpg/TalkMe/releases/latest/download/GEMEL.INVEST.CRM.Setup.1.0.0.exe">
+      הורד קובץ התקנה
+    </a>
+
+    <button id="installBtn" class="btn secondary" disabled>
+      התקנת המערכת באפליקציה החדשה
+    </button>
+
+    <div id="note" class="note">טוען אפשרות התקנה...</div>
+    <div id="success" class="success">ההתקנה הופעלה. אשר את חלון ההתקנה שייפתח בדפדפן.</div>
+  </div>
+
+  <script>
+    let deferredPrompt = null;
+    const installBtn = document.getElementById("installBtn");
+    const note = document.getElementById("note");
+    const success = document.getElementById("success");
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
+        try {
+          await navigator.serviceWorker.register("./service-worker.js");
+        } catch (err) {
+          console.error("SW registration failed:", err);
+        }
+      });
+    }
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.disabled = false;
+      note.textContent = "אפשר להתקין את המערכת ישירות למחשב בלחיצה על הכפתור.";
+    });
+
+    installBtn.addEventListener("click", async () => {
+      if (!deferredPrompt) {
+        note.textContent = "אם לא הופיע חלון התקנה, פתח את הדף ב-Chrome או Edge ולחץ על סמל ההתקנה בשורת הכתובת.";
+        return;
+      }
+
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      if (choice && choice.outcome === "accepted") {
+        success.style.display = "block";
+        note.textContent = "המערכת אושרה להתקנה.";
+      } else {
+        note.textContent = "ההתקנה בוטלה. ניתן ללחוץ שוב כדי לנסות מחדש.";
+      }
+      deferredPrompt = null;
+      installBtn.disabled = true;
+    });
+
+    window.addEventListener("appinstalled", () => {
+      success.style.display = "block";
+      note.textContent = "המערכת הותקנה בהצלחה.";
+    });
+  </script>
+</body>
+</html>
