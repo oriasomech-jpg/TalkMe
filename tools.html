@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>כלים – GEMEL INVEST</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f3f4f7;
+    --surface: #ffffff;
+    --surface2: #f8f9fb;
+    --border: #e4e7ed;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff4ff;
+    --text: #111827;
+    --text-2: #4b5563;
+    --text-3: #9ca3af;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+    --shadow-hover: 0 4px 12px rgba(37,99,235,.18), 0 1px 3px rgba(0,0,0,.08);
+  }
+
+  body {
+    font-family: 'Rubik', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 28px 24px;
+  }
+
+  /* ─── Header ─── */
+  .pageHeader {
+    margin-bottom: 28px;
+  }
+  .pageHeader__kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .pageHeader__title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .pageHeader__sub {
+    font-size: 13px;
+    color: var(--text-2);
+    margin-top: 4px;
+  }
+
+  /* ─── Section ─── */
+  .section {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .section__head {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section__headIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section__headIcon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--primary);
+  }
+  .section__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .section__sub {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 1px;
+  }
+  .section__body {
+    padding: 16px 20px;
+  }
+
+  /* ─── Company Grid ─── */
+  .companyGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .companyCard {
+    position: relative;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px 14px;
+    cursor: pointer;
+    transition: border-color .18s, box-shadow .18s, transform .14s, background .18s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    text-align: center;
+  }
+  .companyCard:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .companyCard:active {
+    transform: translateY(0);
+  }
+
+  .companyCard__logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .companyCard__logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 4px;
+  }
+
+  .companyCard__name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .companyCard__badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 2px 5px;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .companyCard:hover .companyCard__badge {
+    opacity: 1;
+  }
+
+  /* ─── PDF Viewer ─── */
+  .pdfViewer {
+    display: none;
+    margin-top: 16px;
+  }
+  .pdfViewer.is-open {
+    display: block;
+  }
+  .pdfViewer__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .pdfViewer__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pdfViewer__title svg {
+    width: 15px;
+    height: 15px;
+    stroke: var(--primary);
+  }
+  .pdfViewer__actions {
+    display: flex;
+    gap: 8px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 7px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-2);
+    cursor: pointer;
+    transition: border-color .15s, background .15s, color .15s;
+  }
+  .btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+  .btn--primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+  .btn--primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: #fff;
+  }
+  .btn svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .pdfViewer__frame {
+    width: 100%;
+    height: 600px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: #f0f0f0;
+  }
+
+  /* ─── Empty state ─── */
+  .emptyState {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--text-3);
+    font-size: 13px;
+  }
+  .emptyState svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--border);
+    margin-bottom: 8px;
+    display: block;
+    margin-inline: auto;
+  }
+
+  /* ─── Coming soon sections ─── */
+  .toolsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .toolItem {
+    background: var(--surface);
+    border: 1.5px dashed var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-3);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .toolItem__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .toolItem__icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--text-3);
+  }
+  .toolItem__label { flex: 1; }
+  .toolItem__soon {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-3);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp .25s ease both; }
+  .companyCard { animation: fadeUp .22s ease both; }
+  .companyCard:nth-child(1) { animation-delay: .03s; }
+  .companyCard:nth-child(2) { animation-delay: .06s; }
+  .companyCard:nth-child(3) { animation-delay: .09s; }
+  .companyCard:nth-child(4) { animation-delay: .12s; }
+  .companyCard:nth-child(5) { animation-delay: .15s; }
+  .companyCard:nth-child(6) { animation-delay: .18s; }
+</style>
+</head>
+<body>
+
+<div class="pageHeader">
+  <div class="pageHeader__kicker">GEMEL INVEST · מרכז כלים</div>
+  <div class="pageHeader__title">כלים מקצועיים</div>
+  <div class="pageHeader__sub">טבלאות חיתום, מחשבונים ומסמכים לנציגים</div>
+</div>
+
+<!-- ─── טבלאות חיתום ─── -->
+<div class="section">
+  <div class="section__head">
+    <div class="section__headIcon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 4.75h6.5l4 4V18a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2V6.75a2 2 0 0 1 2-2Z"/>
+        <path d="M14.5 4.75v4h4"/>
+        <path d="M9 12h6"/><path d="M9 15.5h4"/>
+      </svg>
+    </div>
+    <div>
+      <div class="section__title">טבלאות חיתום</div>
+      <div class="section__sub">בחר חברה לצפייה בטבלת החיתום שלה</div>
+    </div>
+  </div>
+  <div class="section__body">
+    <div class="companyGrid" id="companyGrid">
+
+      <div class="companyCard" data-company="איילון" data-pdf="./איילון.pdf">
+        <div class="companyCard__badge">פתח PDF</div>
+        <div class="companyCard__logo">א</div>
+        <div class="companyCard__name">איילון</div>
+      </div>
+
+      <div class="companyCard" data-company="הכשרה" data-pdf="./הכשרה (2).pdf">
+        <div class="companyCard__badge">פתח PDF</div>
+        <div class="companyCard__logo">ה</div>
+        <div class="companyCard__name">הכשרה</div>
+      </div>
+
+      <div class="companyCard" data-company="כלל" data-pdf="./כלל.pdf">
+        <div class="companyCard__badge">פתח PDF</div>
+        <div class="companyCard__logo">כ</div>
+        <div class="companyCard__name">כלל</div>
+      </div>
+
+      <div class="companyCard" data-company="מגדל" data-pdf="./מגדל.pdf">
+        <div class="companyCard__badge">פתח PDF</div>
+        <div class="companyCard__logo">מ</div>
+        <div class="companyCard__name">מגדל</div>
+      </div>
+
+      <div class="companyCard" data-company="מנורה" data-pdf="./מנורה.pdf">
+        <div class="companyCard__badge">פתח PDF</div>
+        <div class="companyCard__logo">מנ</div>
+        <div class="companyCard__name">מנורה</div>
+      </div>
+
+      <div class="companyCard" data-company="פניקס" data-pdf="./פניקס.pdf">
+        <div class="companyCard__badge">פתח PDF</div>
+        <div class="companyCard__logo">פ</div>
+        <div class="companyCard__name">פניקס</div>
+      </div>
+
+    </div>
+
+    <!-- PDF viewer -->
+    <div class="pdfViewer" id="pdfViewer">
+      <div class="pdfViewer__head">
+        <div class="pdfViewer__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 4.75h6.5l4 4V18a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2V6.75a2 2 0 0 1 2-2Z"/>
+          </svg>
+          <span id="pdfViewerTitle">טבלת חיתום</span>
+        </div>
+        <div class="pdfViewer__actions">
+          <a class="btn btn--primary" id="pdfDownloadBtn" href="#" target="_blank" download>
+            <svg viewBox="0 0 24 24"><path d="M12 3v13"/><path d="m6 11 6 6 6-6"/><path d="M3 20h18"/></svg>
+            הורד PDF
+          </a>
+          <button class="btn" id="pdfCloseBtn" type="button">
+            <svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+            סגור
+          </button>
+        </div>
+      </div>
+      <iframe class="pdfViewer__frame" id="pdfFrame" title="טבלת חיתום"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ─── כלים נוספים (בקרוב) ─── -->
+<div class="toolsList">
+  <div class="toolItem">
+    <div class="toolItem__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 7h6M9 12h6M9 17h4"/>
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+      </svg>
+    </div>
+    <span class="toolItem__label">מחשבון פרמיה</span>
+    <span class="toolItem__soon">בקרוב</span>
+  </div>
+  <div class="toolItem">
+    <div class="toolItem__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 3"/>
+      </svg>
+    </div>
+    <span class="toolItem__label">טבלאות גיל ותשואה</span>
+    <span class="toolItem__soon">בקרוב</span>
+  </div>
+</div>
+
+<script>
+  const grid = document.getElementById('companyGrid');
+  const viewer = document.getElementById('pdfViewer');
+  const frame = document.getElementById('pdfFrame');
+  const titleEl = document.getElementById('pdfViewerTitle');
+  const downloadBtn = document.getElementById('pdfDownloadBtn');
+  const closeBtn = document.getElementById('pdfCloseBtn');
+
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.companyCard');
+    if (!card) return;
+
+    const company = card.dataset.company;
+    const pdf = card.dataset.pdf;
+
+    // highlight active card
+    document.querySelectorAll('.companyCard').forEach(c => c.style.borderColor = '');
+    card.style.borderColor = 'var(--primary)';
+
+    titleEl.textContent = 'טבלת חיתום – ' + company;
+    frame.src = pdf;
+    downloadBtn.href = pdf;
+    downloadBtn.download = 'חיתום_' + company + '.pdf';
+
+    viewer.classList.add('is-open');
+    viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    viewer.classList.remove('is-open');
+    frame.src = '';
+    document.querySelectorAll('.companyCard').forEach(c => c.style.borderColor = '');
+  });
+</script>
+</body>
+</html>
